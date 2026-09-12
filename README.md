@@ -48,9 +48,11 @@ Tests are public pedagogical examples. Passing them earns **practice** credit, n
 
 There is no account system, synchronization, production backend, real code judge, Java runtime, subscription billing, provider-backed AI voice, multiplayer arena, hackathon marketplace, or live deployment yet. Three.js/Anime.js and actual microphone services require a connected environment and device-specific verification. See [QA](docs/QA.md).
 
-## Publish a new public GitHub repository
+## Public GitHub repository
 
-This source package was prepared locally. A public repository was **not created by the preparation environment**, because its connected GitHub actions did not include repository creation. No public URL is implied by this README.
+This project is published at [github.com/Bembaby/tracecraft](https://github.com/Bembaby/tracecraft). The repository is public and the default branch is `main`.
+
+To publish a fork or a new copy under another authenticated GitHub account:
 
 On your own computer, install and authenticate GitHub CLI, then run:
 

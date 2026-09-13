@@ -7,6 +7,8 @@ A local-first visual learning and interview-practice **alpha**, designed around 
 
 The ambition is a beginner-to-specialist curriculum that connects programming, algorithms, databases, infrastructure, and AI systems. The current implementation is a small, working starting point—not a complete LeetCode replacement or a guarantee of employment.
 
+The next increment focuses on real Python execution and tracing, plus a verified lesson-authoring contract.
+
 ## Start in one command
 
 Requires Node.js 22 or newer. There are **no npm dependencies to download**.

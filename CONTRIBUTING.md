@@ -2,7 +2,15 @@
 
 Start with a small issue that has observable acceptance criteria. A contribution should improve understanding, not just add screens.
 
-Use Node 22+, run `npm test`, and build with `npm run build`. No npm dependency install is needed for the current core. Browser tests require Python Playwright and Chromium; see tests/browser_smoke.py.
+Use Node 22+. No npm dependency install is needed for the current core. Run these checks before submitting a change:
+
+```bash
+npm run check   # JavaScript syntax checks
+npm test        # Interpreter and exercise tests
+npm run build   # Static build and portable HTML preview
+```
+
+Browser tests require Python Playwright and Chromium; see the [QA reproduction instructions](docs/QA.md#reproduce) for setup and the test command.
 
 For an exercise, supply: original prompt; prerequisites; input/output contract; worked explanation; an invariant where relevant; trace interpretation; at least one revealing edge case; deliberate failing implementation; reference implementation; complexity; explanation rubric; source links and license status. All public tests must pass on the reference and at least one must fail on the deliberate bug.
 

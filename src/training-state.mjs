@@ -1,3 +1,4 @@
+import { CURRICULUM_MODULES } from './curriculum.mjs';
 // Portable local evidence. Completion is self-reported; checks are practice evidence.
 import { CONTENT_REVISION, RUNTIME_VERSIONS, attemptVersions } from './practice-versions.mjs';
 export const TRAINING_KEY = 'tracecraft:training:v1';
@@ -10,7 +11,7 @@ export function afterDays(key, count) {
   return dayKey(new Date(year, month - 1, day + count, 12));
 }
 export function freshTraining() {
-  return {version:1, selectedDay:'w1d1', done:[], blocks:{}, drafts:{}, explanations:{}, help:{}, fresh:{}, attempts:[], reviews:{}, notes:{}, session:{date:dayKey(), remaining:SESSION_SECONDS}};
+  return {version:1, selectedDay:'w1d1', done:[], blocks:{}, drafts:{}, explanations:{}, milestones:{}, help:{}, fresh:{}, attempts:[], reviews:{}, notes:{}, session:{date:dayKey(), remaining:SESSION_SECONDS}};
 }
 const safeKey = /^[a-zA-Z0-9:_-]{1,120}$/;
 const dateKey = /^\d{4}-\d{2}-\d{2}$/;
@@ -31,6 +32,7 @@ export function validateTraining(raw) {
   state.explanations=textMap(raw.explanations,6000);
   state.notes=textMap(raw.notes,6000);
   state.fresh=Object.fromEntries(Object.entries(textMap(raw.fresh,10)).filter(([,date])=>dateKey.test(date)));
+  if(raw.milestones && typeof raw.milestones==='object')for(const module of CURRICULUM_MODULES){const key='week'+module.week,checks=raw.milestones[key];if(Array.isArray(checks))state.milestones[key]=[...new Set(checks.filter(id=>module.checks.some(([known])=>id===known)))];}
   state.help=Object.fromEntries(Object.entries(textMap(raw.help,20)).filter(([,value])=>['hint','solution'].includes(value)));
   if(raw.blocks && typeof raw.blocks==='object') {
     for(const [key,value] of Object.entries(raw.blocks).slice(-56)) if(/^w[1-8]d[1-7]$/.test(key)&&Array.isArray(value)) state.blocks[key]=[...new Set(value.filter(id=>typeof id==='string'&&safeKey.test(id)))].slice(0,7);

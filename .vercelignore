@@ -1,0 +1,10 @@
+.git
+.env*
+.tracecraft
+.agents
+skills-lock.json
+node_modules
+dist
+docs
+tests
+preview

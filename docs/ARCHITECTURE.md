@@ -1,6 +1,14 @@
 # Architecture: the v0.3 practice app and its boundaries
 
-TraceCraft remains a static, local-first **alpha**. Version 0.3 adds an editable system-design graph, deterministic flow checks, and a redesigned workspace to the real browser SQL/Python execution and daily learning routine. The next alpha increment adds an optional same-origin Node account API and SQLite progress store. Static local mode and all worker execution boundaries remain intact. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for the complete account contract.
+TraceCraft remains a local-first **alpha**. Vercel serves the static browser app plus a same-origin Node account function. Better Auth verifies email codes; Resend delivers transactional sign-in messages; Neon Postgres stores verified users, sessions and reviewed progress. The separate Node/GitHub/SQLite adapter is retained for local operators. All learner SQL/Python execution remains in browser workers. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for the account contract.
+
+## Hosted account boundary
+
+`api/index.mjs` exports a Web Request/Response handler. `server/hosted-api.mjs` allows only email-code send, verify and sign-out auth routes. It strips opaque session tokens from JSON, preserves HttpOnly cookies and requires the exact configured Origin plus a custom header for mutations. Accounts must have verified email before progress access. User ownership comes from the validated session, never a request owner field.
+
+`server/runtime.mjs` reuses a small Postgres pool registered with Vercel's pool lifecycle. `server/postgres-store.mjs` validates snapshots, enforces 4 MB and compares revisions in the same SQL write. `server/email.mjs` applies atomic daily/address quotas and bounded retries with a stable idempotency key. Codes are hashed in the auth database, expire in five minutes and allow three wrong guesses. The database is not a program runner.
+
+Schema changes run explicitly through `npm run db:migrate`, never inside a user request. Hosted configuration fails closed when incomplete. The static build excludes server files and credentials. Vercel bundles the function separately; `vercel.json` supplies routing and browser security headers. The ignored environment files are excluded from deployment uploads as well as Git.
 
 ## Implemented system
 
@@ -24,8 +32,8 @@ The Node server serves files; it never executes learner Python or SQL. SQLite ru
 | `src/design.css` / `src/system-design.css` | Redesigned shared workspace and system-design canvas/inspector/table layouts |
 | `src/training.mjs` | Daily workspace, SQL/Python editors and worker lifecycle, architecture prompts, evidence UI, backup controls |
 | `src/training-state.mjs` | State validation, day keys, help records, checked attempts, and review scheduling |
-| `src/training-content.mjs` | Versioned-in-Git session blocks, 56 assignments, six Python drills, six architecture scenarios |
-| `src/sql-content.mjs` | Ten SQL exercises, seeds, changed fixtures, contracts, reference solutions, and deliberate bugs |
+| `src/training-content.mjs`, `src/curriculum.mjs` | 56 assignments, eight Python drills, six architecture scenarios and eight milestone guides with saved self-assessment |
+| `src/sql-content.mjs` | Twelve SQL exercises, seeds, changed fixtures, contracts, reference solutions, and deliberate bugs |
 | `src/sql-runtime.mjs` / `src/sql-worker.js` | SQL controller deadlines, worker protocol, disposable databases, execution and fixture checks |
 | `src/python-runtime.mjs` / `src/python-worker.js` | Python controller, Pyodide initialization, CPython harness, assertions, traces and cancellation |
 | `src/system-design.mjs` | Graph editing, inspector, canvas/table views, simulation controls, checks, assistance, notes, and import review |
@@ -102,7 +110,7 @@ The build copies the source and assets into `dist/` without installing npm depen
 
 The generated `_headers` file expresses intended static-host security headers, but whether a host applies it must be verified on the deployed site. WebAssembly requires the appropriate WASM CSP permission; it does not require general JavaScript `unsafe-eval`. Hosting policy and worker responses are part of browser QA.
 
-A local display name is not authentication. A private hosting access gate, when deployed and verified, controls who can load that hosted app; it does not create a cloud progress database. The Sites deployment record is the authority for the current private publication state. No provider account is required for local mode. Optional account sync requires a configured GitHub OAuth app and a persistent private server volume; no paid service is provisioned by this repository.
+A local display name is not authentication. The earlier private Site's hosting gate is separate from the new public Vercel edition and its account ownership. No provider account is required for local practice. Hosted email sync requires the configured Postgres and sending service; the legacy local GitHub adapter instead requires an OAuth app and persistent SQLite volume. Neither the build nor tests provision paid services.
 
 ## Future execution and tutor architecture: not implemented
 

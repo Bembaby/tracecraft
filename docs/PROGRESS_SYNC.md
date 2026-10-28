@@ -1,54 +1,80 @@
-# Optional GitHub sign-in and progress sync
+# Verified accounts and reviewed progress sync
 
-This alpha adds an opt-in Node account API and a durable SQLite file. Local practice still works without an account, configuration, or npm dependencies. The existing static Site does not gain an API merely by receiving these browser files. This source change does not provision or deploy a service.
+TraceCraft is an alpha with local practice and optional accounts. The hosted edition uses Vercel Functions, Better Auth, Neon Postgres and Resend. Email codes verify inbox access. They do not certify legal identity or skill. The older local GitHub/SQLite adapter remains available separately.
 
-## Run the account server
+## Hosted setup
 
-Use Node.js 22.13 or later. Node 24.15 was used for local verification. The account store uses the built-in `node:sqlite` API, which can print an experimental warning on supported older Node releases. There are no new third-party dependencies or licenses.
+Use Node 24 on Vercel and run `npm ci` from the lockfile. The linked project builds `dist/` with `npm run build` and bundles `api/index.mjs` as a Node function. The function never executes learner programs. `vercel.json` routes `/api/*` to it and applies browser security headers. Plain `npm start` serves local mode; it does not emulate the hosted function.
 
-1. Register a GitHub OAuth app under an account you control. Set its callback URL to `http://127.0.0.1:3000/api/auth/github/callback` for local development, or your exact HTTPS origin followed by `/api/auth/github/callback` for hosting. Use separate OAuth apps for local and hosted environments.
-2. Copy `.env.example` to an ignored `.env`, fill the client ID and secret, and set `TRACECRAFT_ORIGIN` to the exact origin without a trailing slash. Keep the secret on the server. Do not paste it into the browser, source, progress JSON, or a support message.
-3. Start with `node --env-file=.env scripts/serve.mjs`. To serve the directory build, add `--dist`. Plain `npm start` uses exported environment variables and does not automatically load `.env`.
-4. Open **Progress sync**, choose **Continue with GitHub**, then **Review sync**. Choose which copy to save or restore. On another browser, use the same host and GitHub account to restore its saved copy.
+Configure these server-only variables in the intended Vercel environment:
 
-With all three account environment variables absent, `npm start` serves local mode. Partial configuration fails at startup. HTTP is permitted only on loopback; a hosted account origin must use HTTPS. Do not enable charges or provision paid infrastructure without an explicit budget decision.
+| Variable | Purpose |
+|---|---|
+| `DATABASE_URL` | Pooled Postgres connection; provision through the Marketplace |
+| `DATABASE_URL_UNPOOLED` | Optional direct connection for explicit migrations |
+| `AUTH_URL` | Exact public HTTPS origin, no trailing slash |
+| `AUTH_SECRET` | Random secret of at least 32 characters; use a Secret variable |
+| `RESEND_API_KEY` | Sending-only key restricted to the verified sending domain; use a Secret variable |
+| `EMAIL_FROM` | Sender on that verified domain |
 
-`TRACECRAFT_DB` defaults to `.tracecraft/progress.sqlite`. Mount a private durable volume there when hosting. A process restart preserves progress; an ephemeral deployment filesystem does not. Use one service instance and one durable SQLite volume for this alpha. Do not place the database or its backups in `src/`, `public/`, `dist/`, a shared static directory, or a public repository. The asset server rejects database file extensions and never serves the default private directory. Operators remain responsible for disk permissions, encrypted storage if required, backups, retention, and restore drills. SQLite writes here are metadata persistence, never learner-program execution.
+Use an ignored `.env.local` for operator commands. Never paste credentials into browser source, progress files, shell arguments or logs. Incomplete hosted configuration fails closed. Production uses its own exact origin; an unconfigured preview must not borrow production credentials or send users to another environment.
 
-## Identity and ownership
+Before deployment, run the explicit schema operation:
 
-GitHub's authorization-code flow uses a random state, a separate browser-binding cookie, a server-held PKCE verifier, an S256 challenge, a ten-minute deadline, and single-use callback consumption. The server exchanges the code and reads the authenticated GitHub user. Identity is keyed by the immutable numeric GitHub user ID, not a mutable display name. No repository or email scope is requested.
+```bash
+npm run db:migrate
+node --env-file=.env.local scripts/verify-postgres.mjs
+```
 
-The GitHub token is used only for the identity request and is not persisted or returned to JavaScript. App sessions are random opaque tokens with a seven-day absolute lifetime. Only their SHA-256 hashes are stored in SQLite. The browser transports the opaque session in an HttpOnly, SameSite=Lax cookie scoped to `/api`, with Secure enabled on HTTPS. JavaScript, localStorage, progress records, and backups contain no session tokens or provider credentials. Signing out revokes the current session; deleting account data revokes every session for that identity. This is not a browser password or API-key vault.
+Migration creates the Better Auth tables plus `tc_progress` and `tc_email_limits`. It runs outside request handling and rejects unexpected schema changes for review. The optional verification script creates disposable synthetic identities, verifies real auth/database operations and cleans its own records. It sends no email. It is not part of `npm test` and requires an intentional database target.
 
-Every progress operation derives its owner from the validated session. Requests never select an owner through a URL, JSON field, or display name. Mutations require the configured Origin; account writes also require a custom same-origin header. Account responses use `no-store`. Cross-user access, expired sessions, state replay, absent headers, and foreign Origins are tested. This remains alpha account infrastructure, without a production security audit or public-service abuse/load qualification.
+Connect the web domain and verify the separate sending subdomain with DKIM and SPF records from Resend. Publish DMARC and inspect its policy as delivery matures. This deployment starts at `p=none`; tracking is disabled and sending TLS is enforced. Receiving email is not enabled. Domain registration and provider upgrades require explicit user approval. The initial deployment uses the Neon free plan and caps requested codes below the existing Resend daily allowance.
 
-## Records and content versions
+## Identity and account access
 
-The `users`, `sessions`, `oauth`, and `progress` tables separate identity, expiring authorization state, and learner data. A progress record contains a monotonically increasing revision, server timestamp, and a version-1 `tracecraft-progress` snapshot with three separate workspaces:
+1. Request a six-digit code in **Account & sync**.
+2. Enter it in the browser. The newest code expires after five minutes and works once. Three wrong guesses invalidate it.
+3. The server verifies the code and creates a verified account/session. Unverified accounts cannot access progress.
+4. Choose **Review sync** before saving or restoring work.
 
-- Training: drafts, checked-attempt code snapshots, in-app assistance events, explanations, review schedule, journal entries, self-reported completion, and paused timer.
-- System design: graph drafts, settings, explanation notes, assistance level, and bounded checked graph snapshots.
-- Original tools: visual-lab drafts, practice records, interview text, and preferences.
+Passwords and OAuth are disabled in the hosted flow. The public auth gateway permits only code send, code sign-in and sign-out. It strips session tokens from JSON. Better Auth transports the opaque session through an HttpOnly cookie, Secure on HTTPS, with a seven-day lifetime. Browser progress and exports contain no credentials, codes or session tokens. Codes are hashed in the auth database. Sign-in email/code form state is memory-only and is cleared on route departure.
 
-Training and design attempts now include `contentRevision` and `runtimeVersion`. Older imported attempts are labeled `historical-unversioned`; they are not retroactively attributed to a runtime. Existing retention bounds remain 500 training checks and 100 design checks. SQL database bytes, Python interpreter memory, and session undo/redo stacks are excluded. These records remain client-authored practice evidence, never trusted grading or hiring scores.
+Mutations require the exact configured Origin and `X-TraceCraft-Sync: 1`. Account responses use `no-store`. Owner identity always comes from the validated session; URL or JSON owner fields cannot select another account. Better Auth rate limits code requests per IP and verification attempts. Atomic database counters also cap sending at three messages per address per UTC hour and fifty per UTC day for this alpha. Transient delivery retries use the same idempotency key and stop after two attempts. No code or email address is written to application error logs.
 
-Only supported fields cross the account boundary. The server validates the snapshot again and bounds HTTP request bodies to 16 MB. Complete local backups have the same limit. Legacy workspace backup formats remain supported through their existing importers; use **Import complete backup** for the new all-workspace format.
+## Records, limits and conflicts
 
-## Conflicts, recovery, and shared devices
+Auth tables hold account email, verified status, expiring sessions and verification records. `tc_progress` contains one owner-scoped, revisioned JSON snapshot. Its user foreign key cascades on deletion. The snapshot keeps three existing workspaces separate:
 
-Sync is explicit, not automatic. Signing in, practicing, and opening the review do not upload drafts. **Save browser copy to account** replaces the complete account snapshot only if the reviewed revision is still current. SQLite performs the comparison and write in one transaction. A stale write returns HTTP 409 and asks for another review. There is no silent last-writer-wins behavior and no automatic field merge.
+- Training: SQL/Python drafts, checked code snapshots, assistance, explanations, review schedule, journal, paused timer, milestone self-checks and evidence notes.
+- System design: graphs, settings, explanations, help levels and bounded checked graph snapshots.
+- Original tools: visual-lab drafts, practice records, interview text and preferences.
 
-**Restore account copy** rechecks the remote revision and refuses if local work changed after review. It keeps one validated local recovery snapshot before replacement, rolls back partial writes on a storage error, then reloads the app. Other open tabs on that origin reload after a completed restore, preventing them from continuing with an older in-memory workspace. If quota prevents creating recovery, replacement does not start. If even rollback fails because storage has become unavailable, export the recovery copy before closing.
+Attempts retain content/runtime versions. Historical imported attempts remain `historical-unversioned`. Retention remains the latest 500 training checks and 100 design checks. SQL database bytes, Python memory and session undo/redo stacks are excluded. Everything is client-authored practice evidence, not trusted grading.
 
-Export both copies before replacing them when each has work you need. Counts in the review help compare scope; they cannot tell whether two explanations or drafts contain the same text. Manually combine work using the exported JSON if necessary. Complete backups and recovery copies can themselves be imported with the same replacement review.
+Hosted account requests/snapshots are bounded to 4 MB to fit the function request limit. Complete local backups retain the 16 MB contract; legacy importers keep their own documented limits. Export older histories when a hosted snapshot becomes too large. The complete local backup does not need an account.
 
-Signing out leaves the local browser copy available for offline practice. On a shared browser, the next visitor can see it. Account switching never automatically uploads that copy to another identity. To clear the complete browser copy, export it first, then import a deliberately empty complete backup through the replacement review or clear this origin's site data yourself. The original Settings reset affects original tools only. Recovery copies and downloads may still contain personal notes.
+Sync is explicit. Sign-in and ordinary practice do not upload drafts. Saving replaces the whole account copy only if its reviewed revision is still current. The INSERT or UPDATE compares ownership and revision in the same database operation. A concurrent stale save gets HTTP 409 and requires another review. There is no automatic merge or background upload.
 
-**Delete account data** requires typing DELETE and removes the saved snapshot, identity link, and all sessions. Other devices must sign in again. This does not revoke GitHub's OAuth-app grant, remove browser copies, purge downloads, or erase operator backups. Account deletion is logical deletion from the active database, not a forensic disk-erasure claim; operators must document backup retention.
+Restoring rechecks the account revision and refuses if local work changed after review. It first keeps one validated local recovery copy, rolls back partial storage writes on error and reloads other tabs after success. If recovery cannot fit, replacement does not start. Export both copies before replacing them if they each contain useful work. Counts cannot identify identical text.
 
-## Evidence and remaining setup
+## Privacy, shared devices and deletion
 
-Automated tests exercise the actual HTTP API with a mocked GitHub token/user exchange, two independent app sessions for one identity, a second identity, conflicts, durable reopen, export, logout, and deletion. Browser checks cover the real local-mode UI and complete backup round-trip, plus save/restore using a synthetic session against the actual local account API. These are separate from a live GitHub consent/callback verification, which requires an operator's registered OAuth app credentials. No live hosted-account success is claimed.
+Signing in shares an email address with the account service and its delivery provider. Saving shares the reviewed code, diagrams and personal notes with the hosted account database. Do not put production secrets or private customer data in practice work. No analytics or marketing mailing list is installed. Provider operational logs and database backups have their own retention; this alpha makes no guaranteed backup retention or forensic erasure claim.
 
-Reviewed October 28, 2026: [GitHub authorization-code and PKCE documentation](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps), [GitHub API terms](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#h-api-terms), and [Node SQLite API](https://nodejs.org/api/sqlite.html). Follow provider terms and rate limits. The GitHub name is used to identify the provider; no brand assets were copied. Existing vendored runtime versions and licenses are unchanged.
+Signing out revokes the active session but keeps the local workspace. The next visitor to a shared browser can see that browser copy. Account switching never uploads it automatically. Export what you need, then clear this origin's site data yourself to remove all browser stores and recovery copies. The original Settings reset affects original tools only.
+
+**Delete account data** requires typing DELETE and removes the active account, progress and all sessions through database cascades. Other devices must verify again. Browser copies, downloaded exports, provider delivery history and operator backups are separate. Account deletion is not a provider-log purge.
+
+## Legacy local GitHub adapter
+
+This retained adapter uses `scripts/serve.mjs`, not the hosted function. Register your own GitHub OAuth app, set its callback to the exact local origin plus `/api/auth/github/callback`, and configure `TRACECRAFT_ORIGIN`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` and optional `TRACECRAFT_DB`. Use Node 22.13 or newer:
+
+```bash
+node --env-file=.env scripts/serve.mjs
+```
+
+The default private SQLite path is `.tracecraft/progress.sqlite`. Hosted use of this adapter would require a persistent private volume and a single service instance. Do not use Vercel's ephemeral filesystem for SQLite. The adapter preserves PKCE, single-use browser-bound state, hashed sessions, owner-scoped writes and the 16 MB local API limit. Live GitHub consent is separate from the verified email deployment and is not claimed as tested here.
+
+## Provider references
+
+Reviewed October 28, 2026: [Better Auth email OTP](https://www.better-auth.com/docs/plugins/email-otp), [Vercel Functions](https://vercel.com/docs/functions), [Vercel request limits](https://vercel.com/docs/functions/limitations), [Neon plans](https://neon.com/pricing), [Resend test addresses](https://resend.com/docs/dashboard/emails/send-test-emails), [Resend terms](https://resend.com/legal/terms-of-service) and [Vercel terms](https://vercel.com/legal/terms). Pinned packages retain their MIT/Apache notices. Provider limits and terms may change; verify before increasing quotas or enabling charges. See [QA.md](QA.md) for observed coverage and remaining limits.

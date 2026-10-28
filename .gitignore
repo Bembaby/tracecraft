@@ -14,3 +14,10 @@ tracecraft-progress-*.json
 *.sqlite-shm
 tracecraft-account-*.json
 tracecraft-local-recovery-*.json
+.vercel/
+.agents/skills/neon/
+.agents/skills/neon-postgres/
+skills-lock.json
+
+.vercel
+.env*

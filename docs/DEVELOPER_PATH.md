@@ -4,6 +4,8 @@ Use this route to practice producing code, operating a relational database, buil
 
 ## Pace and evidence
 
+The browser now groups these 56 assignments into eight milestone guides in `src/curriculum.mjs`. Each names its environment, prerequisites, linked runnable lessons, evidence and counterexamples. Saved milestone checkboxes and notes are self-assessment; they never add a passed code check or certify external project work. `npm run check` validates the authoring contract and lesson links.
+
 Eight suggested weeks at two hours per day total 112 scheduled hours, including breaks. Repeat a gate when needed; finishing a date does not establish mastery.
 
 Use the [two-hour session](DAILY_PLAN.md) each day. The first week prioritizes a SQL query from a blank editor and a compact Python refresher. The longer project uses Java/Spring and a local MySQL database; keeping one familiar backend stack limits unnecessary context switching. For a Python-oriented opportunity, continue practicing the six Python drills alongside that project instead of changing every tool at once.

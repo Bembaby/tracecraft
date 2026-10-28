@@ -1,4 +1,18 @@
-# Current increment: optional account sync and backend practice
+# Current increment: verified email, Vercel and curriculum
+
+October 28, 2026. `npm run check`, `npm test`, `npm run build` and `npm audit --omit=dev` pass. There are **224 passing tests, 0 failures, 0 skips**, and no known production dependency vulnerabilities in that audit. CI now installs the pinned dependencies before checks on Ubuntu/Node 22 and Windows/Node 24.
+
+The added tests use real Better Auth with an in-memory SQLite database, hashed one-time codes and actual session cookies. They cover expiry, three wrong guesses, resend throttling, unverified-user denial, cross-user isolation, token-free JSON, Origin/header enforcement, route allowlisting and account deletion. Sender tests cover bounded retry with one idempotency key. Curriculum tests reject missing lesson contracts, invalid prerequisites and dangling lesson references; saved self-checks remain separate from code passes.
+
+An explicit `scripts/verify-postgres.mjs` run passed against the provisioned Neon database. Disposable synthetic accounts exercised the actual email-code auth handler without sending mail, concurrent inserts produced one success and one conflict, a new store instance read the saved revision, a second owner could not read it, concurrent quotas stayed bounded, and deletion cascaded to sessions/progress. The script cleaned its records.
+
+Local browser observations: requested a synthetic code through the normal form, verified it, observed the verified account and sync controls, changed to week 6, saved a self-check and note, reloaded and recovered both. At 390px, document client/scroll widths were both 375px and the new mobile menu exposed all core workspaces. Desktop and narrow curriculum layouts were inspected. The design detector found no regex findings in the five changed UI files; parsed-page contrast rules did not run, so that is not a full accessibility pass.
+
+Domain registration, DNS attachment, sending-domain verification and a passing local check do not establish a successful live deployment or real-recipient inbox delivery. The live deployment evidence will be recorded after observation. Screen-reader studies, a full device matrix, provider-backup restoration, sustained load and adversarial security qualification remain separate gates.
+
+## Earlier increment: optional GitHub sync and backend practice
+
+The following is historical evidence for the preceding source increment. Its deployment limitations do not describe the new email account adapter.
 
 Verified locally on October 28, 2026 from the updated feature-branch source. This is alpha source evidence, not a deployed account service, live GitHub consent result, security audit, or accessibility certification.
 

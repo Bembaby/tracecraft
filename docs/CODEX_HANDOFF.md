@@ -1,14 +1,15 @@
 # TraceCraft: continue in Codex
 
-This checkout contains the daily developer-practice app, real browser SQL/Python labs, a redesigned workspace, and an original interactive system design lab. It is an alpha with local browser progress and an optional GitHub-authenticated Node/SQLite progress API. The account UI supports explicit sync and complete backup review; static hosting still uses local mode. The immediate goal is a dependable app someone can use for two hours a day while building independent SQL, coding, debugging, and system-design skills.
+This checkout contains the daily practice alpha, real browser SQL/Python labs, and interactive system design. The current feature branch adds Vercel email-code accounts with Better Auth, Resend and Neon Postgres, reviewed whole-snapshot sync, a mobile menu, and eight evidence-based curriculum milestones. The earlier local GitHub/SQLite adapter remains optional. The user requested deployment from the feature branch and explicitly said not to merge PR #2.
 
 ## Start here
 
 Read `AGENTS.md`, `README.md`, `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`, and `docs/QA.md` before editing. Preserve the existing SQL/Python behavior, original learning content, progress migration boundaries, keyboard access, and honest model labels.
 
-Requirements: Node.js 22 or newer. No npm dependency installation is needed for the current app.
+Requirements: Node.js 22.13 or newer and `npm ci`. Vercel uses Node 24. Plain local startup does not enable hosted accounts; follow [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for migrations and hosted configuration. Never print or commit `.env.local`.
 
 ```bash
+npm ci
 npm start
 ```
 
@@ -39,6 +40,11 @@ Stop an existing server on the same port first. The alternate `tracecraft-previe
 | `src/styles.css`, `src/design.css`, `src/system-design.css` | Existing component styles, redesigned workspace, and system-design canvas/inspector/table layouts |
 | `src/training.mjs`, `src/training-state.mjs` | Daily session, SQL/Python workbenches, reviews, help records, and training backup behavior |
 | `src/training-content.mjs` | 56-day sequence, full-Python drills, and architecture prompts |
+| `src/curriculum.mjs` | Eight milestone guides, prerequisites, evidence, reflection prompts and runnable lesson links |
+| `src/progress.mjs`, `src/email-signin.mjs` | Email-code forms, account review, explicit save/restore, complete backups and deletion |
+| `api/index.mjs`, `server/` | Vercel Web handler, verified sessions, bounded email delivery, owner-scoped Postgres snapshots |
+| `scripts/migrate-accounts.mjs`, `scripts/verify-postgres.mjs` | Explicit schema provisioning and disposable synthetic database verification; neither sends email |
+| `scripts/validate-content.mjs` | Executable lesson and curriculum authoring contract, also run by `npm run check` |
 | `src/sql-content.mjs`, `src/sql-runtime.mjs`, `src/sql-worker.js` | Real SQLite exercises, fixture checks, and worker lifecycle |
 | `src/python-runtime.mjs`, `src/python-worker.js` | Pinned Pyodide loading, real Python execution, assertions, traces, and cancellation |
 | `src/system-design.mjs` | Graph editing, controls, simulation presentation, challenge checks, explanations, and imports |
@@ -60,7 +66,7 @@ Read [SYSTEM_DESIGN_LAB.md](SYSTEM_DESIGN_LAB.md) for the learner and authoring 
 | Python | Real CPython in a browser worker after a pinned runtime download; not a full desktop environment |
 | System design | Editable graph and deterministic capacity/flow estimates with changed workload checks; not a real deployment simulator |
 | Progress | Three local stores, complete backups/recovery, and optional account snapshots with explicit conflict review |
-| Login | Optional GitHub OAuth with server-managed sessions; requires an operator OAuth app and persistent server volume. A local display name is still a preference |
+| Login | Hosted single-use email codes with verified inbox access and HttpOnly sessions. No OAuth provider needed. The local GitHub adapter remains separate. A display name is still a preference |
 | Java/MySQL project work | Assigned in the curriculum and performed in a separate local backend project |
 | AI tutor | Not implemented; no paid model, voice, or execution service is required |
 
@@ -76,7 +82,7 @@ Acceptance: a learner can start a session, complete an actual SQL/Python attempt
 
 ### 2. Verify configured account deployment and deepen sync
 
-The source now implements optional GitHub sign-in, owner-scoped SQLite snapshots, transactional revision checks, exports, deletion, and local recovery. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for setup and exact boundaries. Live GitHub consent and hosted durable-volume restoration still need configured verification. Preserve explicit sync review and local mode. Do not infer a configured backend from the private static Site URL.
+The current hosted adapter implements verified email accounts and Postgres snapshots. Preserve explicit sync review and local mode. Follow [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for setup and exact boundaries. Operational database backup/restore and a real recipient's inbox placement remain separate release checks; synthetic delivery tests do not prove inbox placement. Keep the legacy local adapter's tests passing.
 
 Separate at least: user identity, content revision, draft workspace, attempt snapshot, assistance events, explanation, review state, and journal entry. Persist the runtime/model version with checked attempts. Define conflict behavior for two devices instead of silently overwriting newer work.
 
@@ -96,7 +102,7 @@ Acceptance: each new behavior changes calculated results for the right reason, c
 
 ### 5. Improve lesson authoring and review
 
-Add a content validator covering identifiers, prerequisites, source links, runtime compatibility, contracts, changed inputs, deliberate bugs, and worked explanations. Keep source material original or appropriately licensed. Version content so an old attempt can still be interpreted after a lesson changes.
+The current validator covers lesson identifiers, prerequisites, HTTPS primary-source links, contracts, fixtures, bugs, solutions and explanations. Runtime suites execute solutions and reject deliberate bugs. Extend this contract when adding new lesson types. Keep source material original or appropriately licensed and version content so an old attempt remains interpretable.
 
 Acceptance: every new exercise's solution passes, its bug fails for the intended reason, and delayed practice can hide an earlier answer without losing the attempt history.
 

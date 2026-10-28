@@ -2,11 +2,13 @@
 
 Updated October 28, 2026 for the **v0.3 alpha**. This roadmap distinguishes implemented source, observed verification, and proposed work. The public [Bembaby/tracecraft](https://github.com/Bembaby/tracecraft) repository exists. A source change, a saved hosting version, a successful deployment, and a passing remote CI run are separate events; none should be inferred from another.
 
-## Current source increment: optional accounts and backend practice
+## Current source increment: verified accounts and a mature backend path
 
-Implemented locally on the feature branch: GitHub authorization-code sign-in with PKCE, server-managed sessions, owner-scoped SQLite progress snapshots, explicit save/restore review, revision-conflict rejection, complete export/import, local recovery, and account-data deletion. Local mode remains the default. New checked attempts carry content/runtime versions; historical attempts remain labeled unversioned. Two SQL and two Python exercises add retry-safe writes, cursor pagination, payload validation, and owner-scoped reads.
+Implemented on the feature branch: verified email-code login, Better Auth HttpOnly sessions, owner-scoped Postgres snapshots, atomic revision conflicts, explicit save/restore, complete backups, recovery and deletion. Vercel hosts the API; Neon free storage and a verified Resend sending subdomain are provisioned. Local mode and the earlier GitHub/SQLite adapter remain available. Two SQL and two Python exercises add retry-safe writes, cursor pagination, payload validation and owner-scoped reads.
 
-The account API has HTTP integration tests with mocked GitHub responses, including cross-user denial and two sessions for one identity. Live GitHub consent/callback and hosted durable-volume recovery require operator configuration and remain deployment acceptance gates. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md). No new deployment is claimed.
+Eight milestone guides add prerequisite evidence, explicit practice environments, linked executable lessons, 56 sessions, changed-requirement gates, saved notes and self-assessments. The authoring validator rejects incomplete runnable lesson contracts and broken curriculum links. The mobile menu makes core workspaces reachable without horizontal navigation.
+
+The local suite has 224 passing tests. A real Postgres check verifies ownership, concurrent-save conflicts, durable reads, atomic quotas and cascading deletion using disposable synthetic records. Deployment, delivery, desktop and narrow-screen observations are recorded separately in [QA.md](QA.md). Inbox access is not identity certification. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md).
 
 ## Milestone 0: Original visual learning alpha: retained
 
@@ -74,11 +76,11 @@ The static directory must be served over HTTP(S). The retained `tracecraft-previ
 
 **Gate:** a learner can resume after interruptions, recover from runtime errors, move progress with a tested backup, and complete an unfamiliar variation without the prior answer visible.
 
-## Next product milestone: Accounts and durable progress
+## Account milestone: implemented source, ongoing operations
 
-Private hosting access does not itself synchronize learning data. A custom account/progress service is **not implemented** in v0.3. This is the next product capability needed to carry the same daily workspace across devices.
+The current feature branch implements verified email accounts and durable reviewed progress. Preserve this boundary and finish operational qualification before broad public-service claims:
 
-- Add a supported authentication flow only with a clear data model and authorization boundary.
+- Keep a supported authentication flow with a clear data model and authorization boundary.
 - Persist attempts, assistance, explanations, reviews, and content/runtime versions under the correct owner.
 - Test cross-user denial, export, deletion, synchronization conflicts, and local-only use.
 - Avoid an anonymous writable shared database.

@@ -1,3 +1,35 @@
+# Current increment: optional account sync and backend practice
+
+Verified locally on October 28, 2026 from the updated feature-branch source. This is alpha source evidence, not a deployed account service, live GitHub consent result, security audit, or accessibility certification.
+
+## Automated checks
+
+`npm run check`, `npm test`, and `npm run build` pass on Windows with Node 24.15. The final local suite has **216 passing tests, 0 failed, 0 skipped**. All 12 SQL reference solutions pass changed fixtures and all deliberate bugs fail. All 8 Python solutions pass their exact harness assertions in local CPython; all deliberate bugs fail. The system design engine arithmetic and all six challenges remain unchanged and pass the retained suite.
+
+Baseline inspection preceded edits. Syntax and build passed, but the SQL suite failed on Windows because URL.pathname duplicated the drive prefix in the WASM filename. `fileURLToPath` fixes this. The local Python test executable now defaults to `python` on Windows, avoiding false coverage through skipped `python3` tests. CI now includes Ubuntu/Node 22 and Windows/Node 24. Remote CI status must be observed separately.
+
+The new progress suite verifies configuration, supported snapshot schemas, credential-field allowlisting, runtime/content metadata, recovery backups, local-change conflicts, storage-quota abort/rollback, durable SQLite reopen, owner scoping, single-use browser-bound expiring OAuth state, hashed/expired sessions, Secure/HttpOnly cookies, failed provider exchange, foreign-Origin denial, required request headers, malformed/oversized bodies, and stale revision rejection. A real HTTP server with mocked GitHub token/user responses exercises two app sessions for one identity and another independent identity, export, logout, and account-data deletion including all sessions. These tests do not contact GitHub.
+
+## Observed browser checks
+
+| Area | Observed result |
+|---|---|
+| Before edits | Inspected daily, SQL, Python and design workspaces; real SQLite initialized; design starter completed 300 of 1,000 req/s |
+| New SQL lesson | Retry-safe insert solution passed all three fresh fixtures in SQLite 3.54.0; loading the deliberate overwrite bug failed the existing-result fixture |
+| New Python lesson | Owner-scoped lookup passed the actual browser CPython assertions with 36 source-linked frames; no browser console errors observed |
+| Complete backups | Downloaded native JSON, selected that file through the browser file picker, reviewed replacement counts, restored, reloaded, and retained the saved SQL draft; invalid JSON was rejected before replacement |
+| Authenticated review UI | An isolated loopback-only test harness seeded a synthetic account session against the real API. Saving a journal, editing the local copy, then restoring recovered the saved text. No real GitHub login was used for this UI check |
+| Narrow review | At 390px, document client/scroll widths were both 375px after the scrollbar. Copy comparisons stack vertically, actions remain reachable, and Tab moves from local export to account restore |
+| Narrow SQL | At 390px, document client/scroll widths were both 375px; the new exercise ran and checked successfully |
+| Desktop review | Inspected at 1440px; saved screenshots use a synthetic identity and contain no personal progress |
+| Design and daily regression | At 390px, an 80% cache hit rate completed all 1,000 req/s and passed 57/57 checks. Failure invalidated the pass; undo and reload restored 80%. Graph keyboard movement and the table view worked. The daily timer paused when navigating to sync; new backend links were visible in Developer path |
+
+Screenshots: [desktop account review](screenshots/tracecraft-progress-sync-desktop.jpg) and [narrow account review](screenshots/tracecraft-progress-sync-narrow.jpg). The temporary synthetic-session harness is ignored, is not a production authentication route, and is not part of the shipped build. The design detector reported no findings for the changed UI. Both prohibited dash characters were removed from remaining authored UI/documentation text.
+
+## Remaining deployment and broader gates
+
+Live GitHub consent/callback verification requires a registered OAuth app, server-side client credentials, an exact configured origin, and a private durable server volume. None was provisioned or deployed in this increment. The existing static Site still uses local mode. The account service remains a single-instance SQLite alpha with explicit whole-snapshot synchronization, no automatic merging, and no background upload. Full browser matrices, screen-reader study, adversarial/public-service hardening, hosted backup restoration, and operator backup retention remain separate work. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md).
+
 # Quality report: v0.3 alpha
 
 Updated October 28, 2026. This release adds the redesigned workspace and interactive system design lab to the existing SQL/Python app. Evidence below describes the tested source, not a security or accessibility certification.

@@ -2,6 +2,12 @@
 
 Updated October 28, 2026 for the **v0.3 alpha**. This roadmap distinguishes implemented source, observed verification, and proposed work. The public [Bembaby/tracecraft](https://github.com/Bembaby/tracecraft) repository exists. A source change, a saved hosting version, a successful deployment, and a passing remote CI run are separate events; none should be inferred from another.
 
+## Current source increment: optional accounts and backend practice
+
+Implemented locally on the feature branch: GitHub authorization-code sign-in with PKCE, server-managed sessions, owner-scoped SQLite progress snapshots, explicit save/restore review, revision-conflict rejection, complete export/import, local recovery, and account-data deletion. Local mode remains the default. New checked attempts carry content/runtime versions; historical attempts remain labeled unversioned. Two SQL and two Python exercises add retry-safe writes, cursor pagination, payload validation, and owner-scoped reads.
+
+The account API has HTTP integration tests with mocked GitHub responses, including cross-user denial and two sessions for one identity. Live GitHub consent/callback and hosted durable-volume recovery require operator configuration and remain deployment acceptance gates. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md). No new deployment is claimed.
+
 ## Milestone 0: Original visual learning alpha: retained
 
 Eight original numeric Mini-Python exercises, public fixtures and deliberate bugs, source-linked post-operation traces, line-block reordering, 13-stage topic map, three systems concept demos, reading links, four interview prompts, optional browser voice, optional visual libraries, and original local progress remain available under separate navigation links.

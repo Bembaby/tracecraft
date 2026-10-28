@@ -8,3 +8,9 @@ test-results/
 *.log
 tracecraft-progress-*.json
 *.bundle
+.tracecraft/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+tracecraft-account-*.json
+tracecraft-local-recovery-*.json

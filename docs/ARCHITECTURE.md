@@ -1,6 +1,6 @@
 # Architecture: the v0.3 practice app and its boundaries
 
-TraceCraft remains a static, local-first **alpha**. Version 0.3 adds an editable system-design graph, deterministic flow checks, and a redesigned workspace to the real browser SQL/Python execution and daily learning routine. It does not add an application server, cloud progress synchronization, or a custom account API.
+TraceCraft remains a static, local-first **alpha**. Version 0.3 adds an editable system-design graph, deterministic flow checks, and a redesigned workspace to the real browser SQL/Python execution and daily learning routine. The next alpha increment adds an optional same-origin Node account API and SQLite progress store. Static local mode and all worker execution boundaries remain intact. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for the complete account contract.
 
 ## Implemented system
 
@@ -33,6 +33,9 @@ The Node server serves files; it never executes learner Python or SQL. SQLite ru
 | `src/system-design-engine.mjs` | Pure bounded graph validation, deterministic flow calculation, and public requirement evaluation |
 | `src/system-design-content.mjs` | Six original challenge contracts, baseline and changed workloads, reference graphs, and deliberate bugs |
 | `public/vendor/sqljs/` | Pinned sql.js/SQLite distribution and license |
+| `scripts/progress-api.mjs` / `scripts/progress-store.mjs` | Optional GitHub OAuth, app sessions, authorized SQLite snapshots, revision conflicts, and account deletion |
+| `src/progress*.mjs` | Validated complete backups, manual sync review, restore recovery, and browser account UI |
+| `src/backend-content.mjs` / `src/practice-versions.mjs` | Four original backend exercises and version labels retained on checked attempts |
 | `scripts/serve.mjs` / `scripts/build.mjs` | Local static serving and directory build; neither runs learner submissions |
 
 ## Execution boundaries
@@ -79,7 +82,7 @@ The UI displays the same calculated results on its diagram and tables. Pointer d
 
 ## Progress and assessment model
 
-Training progress uses `tracecraft:training:v1`; the original visual/studio state remains under `tracecraft:v1`. System-design work has its own `tracecraft:system-design:v1` record. These stores preserve their separate schemas and are not encrypted services or cross-device synchronization systems.
+Training progress uses `tracecraft:training:v1`; the original visual/studio state remains under `tracecraft:v1`. System-design work has its own `tracecraft:system-design:v1` record. These stores preserve their separate schemas. The optional account API synchronizes a validated snapshot containing all three workspaces, with explicit whole-snapshot conflict review. Browser copies remain local and unencrypted.
 
 Training records include the selected assignment, self-reported block/day completion, drafts, explanations, help views, checked attempts with source text and time, review state, reflection notes, and remaining session time. Validation bounds imported fields and collections. Export produces a JSON training backup; validated import replaces that training workspace while preserving the original visual/studio store. SQL database bytes and the Python interpreter state are not part of the backup.
 
@@ -99,11 +102,11 @@ The build copies the source and assets into `dist/` without installing npm depen
 
 The generated `_headers` file expresses intended static-host security headers, but whether a host applies it must be verified on the deployed site. WebAssembly requires the appropriate WASM CSP permission; it does not require general JavaScript `unsafe-eval`. Hosting policy and worker responses are part of browser QA.
 
-A local display name is not authentication. A private hosting access gate, when deployed and verified, controls who can load that hosted app; it does not create a cloud progress database. The Sites deployment record is the authority for the current private publication state. No paid infrastructure or provider account is required for this version.
+A local display name is not authentication. A private hosting access gate, when deployed and verified, controls who can load that hosted app; it does not create a cloud progress database. The Sites deployment record is the authority for the current private publication state. No provider account is required for local mode. Optional account sync requires a configured GitHub OAuth app and a persistent private server volume; no paid service is provisioned by this repository.
 
-## Future server architecture: not implemented
+## Future execution and tutor architecture: not implemented
 
-A future durable progress service can begin as a modular application. Separate the security boundary for server-side untrusted execution from the beginning rather than running submissions inside an API process.
+The implemented account service is a small same-origin Node API. The broader execution and tutor service architecture below remains future work. Separate the security boundary for server-side untrusted execution from the beginning rather than running submissions inside an API process.
 
 ```mermaid
 flowchart TD

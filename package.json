@@ -5,7 +5,7 @@
   "description": "Daily developer practice with real SQL, Python, and an interactive system design lab",
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.13"
   },
   "scripts": {
     "dev": "node scripts/serve.mjs",

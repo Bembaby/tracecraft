@@ -82,9 +82,9 @@ Validation creates a normalized copy and never mutates the submitted graph. Unkn
 - No self-loops, duplicate edges, duplicate IDs, missing endpoints, or directed cycles.
 - Only load balancers may have more than one outgoing edge.
 - At most one queue; queued descendants cannot merge with synchronous traffic.
-- IDs are 1–64 ASCII letters, numbers, underscores, or hyphens; labels are bounded to 60 characters and must be escaped by the UI.
-- Capacity and rate limit: 0–1,000,000 per second. Replicas: integer 1–16. Service latency: 0–60,000 ms. Hit rate: 0–100%. Queue buffer: 0–100,000,000 messages.
-- Offered load: 0–1,000,000 requests/second. Duration: 1–3,600 seconds. Coordinates are bounded data, not executable content.
+- IDs are 1-64 ASCII letters, numbers, underscores, or hyphens; labels are bounded to 60 characters and must be escaped by the UI.
+- Capacity and rate limit: 0-1,000,000 per second. Replicas: integer 1-16. Service latency: 0-60,000 ms. Hit rate: 0-100%. Queue buffer: 0-100,000,000 messages.
+- Offered load: 0-1,000,000 requests/second. Duration: 1-3,600 seconds. Coordinates are bounded data, not executable content.
 
 The simulator traverses a directed acyclic graph using topological flow propagation. A full queue needs a second pass and, only when uneven downstream branches require it, at most 52 binary-search passes. It does not materialize individual requests, so load magnitude does not determine loop count. Validation and reachability are bounded by the small graph limits.
 

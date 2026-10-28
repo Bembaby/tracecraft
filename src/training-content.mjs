@@ -1,3 +1,4 @@
+import { PYTHON_BACKEND_DRILLS } from './backend-content.mjs';
 // Original practice assignments. A checked box is self-reported evidence, not certification.
 // Runtime-specific tasks identify their environment; the Mini-Python interpreter cannot run these Python drills.
 export const SESSION_BLOCKS = [
@@ -292,7 +293,8 @@ export const PYTHON_DRILLS = [
     complexity:'Parsing cost grows with the length and magnitude of the number; stripping also scans text. For ordinary short duration input this is small, but the algorithm is not constant-time for unbounded strings. Python may reject extremely long integer strings according to its configured limits.',
     fixtures:[{label:'Whitespace and sign',assertion:'" 25 " and "+7" parse successfully.'},{label:'Zero boundary',assertion:'"0" returns 0, not None.'},{label:'Invalid text',assertion:'Empty, decimal, and nonnumeric text return None.'}],
     sources:[pythonErrors]
-  }
+  },
+  ...PYTHON_BACKEND_DRILLS
 ];
 
 export const TRAINING_LIMITS = {

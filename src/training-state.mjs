@@ -1,4 +1,5 @@
 // Portable local evidence. Completion is self-reported; checks are practice evidence.
+import { CONTENT_REVISION, RUNTIME_VERSIONS, attemptVersions } from './practice-versions.mjs';
 export const TRAINING_KEY = 'tracecraft:training:v1';
 export const SESSION_SECONDS = 120 * 60;
 export function dayKey(date = new Date()) {
@@ -34,7 +35,7 @@ export function validateTraining(raw) {
   if(raw.blocks && typeof raw.blocks==='object') {
     for(const [key,value] of Object.entries(raw.blocks).slice(-56)) if(/^w[1-8]d[1-7]$/.test(key)&&Array.isArray(value)) state.blocks[key]=[...new Set(value.filter(id=>typeof id==='string'&&safeKey.test(id)))].slice(0,7);
   }
-  if(Array.isArray(raw.attempts)) state.attempts=raw.attempts.slice(-500).filter(a=>a&&['sql','python'].includes(a.type)&&typeof a.exercise==='string'&&safeKey.test(a.exercise)&&typeof a.at==='string'&&Number.isFinite(Date.parse(a.at))).map(a=>({type:a.type,exercise:a.exercise,at:a.at,passed:a.passed===true,help:['hint','solution','continued'].includes(a.help)?a.help:'independent',code:typeof a.code==='string'?a.code.slice(0,20000):''}));
+  if(Array.isArray(raw.attempts)) state.attempts=raw.attempts.slice(-500).filter(a=>a&&['sql','python'].includes(a.type)&&typeof a.exercise==='string'&&safeKey.test(a.exercise)&&typeof a.at==='string'&&Number.isFinite(Date.parse(a.at))).map(a=>({...attemptVersions(a),type:a.type,exercise:a.exercise,at:a.at,passed:a.passed===true,help:['hint','solution','continued'].includes(a.help)?a.help:'independent',code:typeof a.code==='string'?a.code.slice(0,20000):''}));
   if(raw.reviews&&typeof raw.reviews==='object') for(const [key,value] of Object.entries(raw.reviews).slice(0,100)) {
     if(safeKey.test(key)&&!['__proto__','constructor','prototype'].includes(key)&&value&&dateKey.test(value.due)) state.reviews[key]={due:value.due,stage:Math.max(0,Math.min(4,Math.floor(Number(value.stage)||0))),lastIndependentDay:dateKey.test(value.lastIndependentDay)?value.lastIndependentDay:null};
   }
@@ -51,7 +52,7 @@ export function recordAttempt(state,{type,exercise,passed,code},now=new Date()) 
   let help=helpFor(state,key,today);
   const previousPass=state.attempts.some(a=>a.type===type&&a.exercise===exercise&&a.passed&&dayKey(new Date(a.at))!==today);
   if(help==='independent' && previousPass && state.fresh[key]!==today) help='continued';
-  const attempt={type,exercise,passed:passed===true,code:code.slice(0,20000),at:now.toISOString(),help};
+  const attempt={type,exercise,passed:passed===true,code:code.slice(0,20000),at:now.toISOString(),help,contentRevision:CONTENT_REVISION,runtimeVersion:RUNTIME_VERSIONS[type]};
   state.attempts.push(attempt);state.attempts=state.attempts.slice(-500);
   const old=state.reviews[key];
   if(passed && help==='independent') {

@@ -1,0 +1,56 @@
+import { captureProgress, workspaceFingerprint, restoreProgress, progressRequest, RECOVERY_KEY } from './progress-client.mjs';
+import { progressSummary, validateProgress, PROGRESS_LIMIT } from './progress-contract.mjs';
+const html=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let root=null,session=null,review=null,busy=false,message='',generation=0;
+const button=(action,label,kind='ghost',disabled=false)=>`<button class="${kind}" data-progress="${action}" ${busy||disabled?'disabled':''}>${label}</button>`;
+export function progressView(){return `<div class="progress-wrap" data-progress-root>${content()}</div>`;}
+function summary(snapshot){const s=progressSummary(snapshot);return `<dl class="sync-summary"><div><dt>Recorded days</dt><dd>${s.days}</dd></div><div><dt>Saved drafts</dt><dd>${s.drafts}</dd></div><div><dt>Code and design checks</dt><dd>${s.checks}</dd></div><div><dt>Explanations</dt><dd>${s.explanations}</dd></div><div><dt>Journal entries</dt><dd>${s.journal}</dd></div></dl>`;}
+function content(){return `<header class="section-intro"><h1>Pick up where you left off.</h1><p>Keep practicing locally, or use your GitHub account to carry code, diagrams, and reflections between browsers.</p></header>
+  <section class="panel sync-account"><div><h2>${session?.user?'Signed in as '+html(session.user.login):'Your progress, your choice.'}</h2><p>${!session?'Checking account availability.':session.user?'Review both copies before saving or restoring. Sync runs only when you choose.':session.enabled?'Sign in with GitHub to use account storage on this host. Your existing work stays local until you choose to save it.':'Local mode is ready. Account sync has not been configured on this host.'}</p></div><div class="training-actions">${session?.user?button('review','Review sync','primary')+button('logout','Sign out'):session?.enabled?'<form action="/api/auth/github/start" method="post"><button class="primary" type="submit">Continue with GitHub</button></form>':''}${button('refresh','Check connection')}</div><p class="small-note">GitHub identifies your account. No repository access is requested. Code and notes are stored by this TraceCraft host, never in a GitHub repository.</p></section>
+  <p class="sync-message" role="status" aria-live="polite">${html(busy?'Working. Keep this page open.':message)}</p>
+  ${review?`<section class="panel sync-review" aria-labelledby="sync-review-title"><h2 id="sync-review-title">Choose the copy to keep.</h2><p>${review.source==='file'?'Restoring this backup replaces all three browser workspaces.':'Saving replaces the account snapshot. Restoring replaces all three browser workspaces.'} Counts describe practice records, not verified skill.</p><div class="sync-copies"><section><h3>This browser</h3>${summary(review.local)}${review.source!=='file'?button('push','Save browser copy to account','primary'):''}${button('export-local','Export browser copy')}</section><section><h3>${review.source==='file'?'Backup file':'Account copy'}</h3><p>${review.source==='file'?'Validated complete backup.':review.remote.snapshot?'Revision '+review.remote.revision+' · Saved '+html(new Date(review.remote.updatedAt).toLocaleString()):'No account snapshot yet.'}</p>${summary(review.remote.snapshot)}${button('pull',review.source==='file'?'Restore backup':'Restore account copy','ghost',!review.remote.snapshot)}${button('export-account',review.source==='file'?'Export reviewed backup':'Export account copy','ghost',!review.remote.snapshot)}</section></div><p class="small-note">A newer save from another browser stops replacement and asks you to review again. Before restoring, this browser keeps one local recovery copy. Export both copies if you need to combine work manually.</p></section>`:''}
+  <section class="panel"><h2>Keep a copy you control.</h2><p>One JSON file includes daily training, SQL and Python drafts, design graphs, explanations, and original tools. Exports contain personal notes and code.</p><div class="training-actions">${button('export-local','Export all local progress')}${button('export-recovery','Export local recovery copy')}${button('import','Import complete backup')}<input class="sr-only" id="progress-import" type="file" accept="application/json,.json" aria-label="Choose a complete progress backup"></div><p><a href="#today">Return to your daily session</a> or <a href="#settings">manage workspace preferences</a>.</p></section>
+  ${session?.user?`<section class="panel sync-delete"><h2>Delete account data</h2><p>Delete this host's saved progress, GitHub identity link, and every active session for your account. Browser copies and downloaded backups remain. The host's backup retention policy still applies.</p><label for="delete-account-confirm">Type DELETE to confirm</label><input id="delete-account-confirm" autocomplete="off" maxlength="6"><div>${button('delete','Delete account data','ghost danger')}</div></section>`:''}`;}
+function paint(){if(!root)return;const focus=document.activeElement?.dataset?.progress;root.innerHTML=progressView();if(focus){const next=root.querySelector(`[data-progress="${focus}"]:not(:disabled)`);if(next)next.focus();}}
+function download(data,label){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`tracecraft-${label}-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+async function refresh(){const gen=generation;const next=await progressRequest('/api/session');if(gen!==generation)return;session=next;review=null;message=session.user?'Ready to review your saved progress.':session.enabled?'Local work is available before sign-in.':'Set up the optional account server to enable GitHub sign-in. Local practice and exports work now.';}
+async function onClick(event){const target=event.target.closest('[data-progress]');if(!target||busy)return;const action=target.dataset.progress;
+  if(action==='import'){root.querySelector('#progress-import')?.click();return;}
+  const confirmation=root.querySelector('#delete-account-confirm')?.value;
+  const gen=generation;busy=true;paint();
+  try {
+    if(action==='refresh')await refresh();
+    if(action==='review'){
+      const remote=await progressRequest('/api/progress');
+      if(gen!==generation)return;
+      if(remote.snapshot)remote.snapshot=validateProgress(remote.snapshot);
+      review={remote,local:captureProgress(localStorage),fingerprint:workspaceFingerprint(localStorage)};
+      message='Review both copies below. Nothing has been replaced.';
+    }
+    if(action==='push'){
+      if(!review)throw new Error('Review both copies first.');
+      if(workspaceFingerprint(localStorage)!==review.fingerprint)throw new Error('Local work changed. Review both copies again before saving.');
+      if(review.source==='file')throw new Error('This review is a backup import. Review sync before saving to the account.');
+      await progressRequest('/api/progress',{method:'PUT',data:{revision:review.remote.revision,snapshot:review.local}});
+      if(gen!==generation)return;
+      review=null;message='Account copy saved. On another browser, sign in and choose Review sync to restore it.';
+    }
+    if(action==='pull'){
+      if(!review?.remote.snapshot)throw new Error('Review an account snapshot first.');
+      // Recheck the remote revision before touching local data.
+      const latest=review.source==='file'?review.remote:await progressRequest('/api/progress');
+      if(gen!==generation)return;
+      if(latest.revision!==review.remote.revision)throw new Error('The account copy changed. Review both copies again.');
+      restoreProgress(localStorage,review.remote.snapshot,review.fingerprint);location.reload();return;
+    }
+    if(action==='export-local'){download(captureProgress(localStorage),'account-local');message='Local progress exported.';}
+    if(action==='export-account'&&review?.remote.snapshot){download(review.remote.snapshot,'account-saved');message='Account progress exported.';}
+    if(action==='export-recovery'){const saved=localStorage.getItem(RECOVERY_KEY);if(!saved)throw new Error('No recovery copy yet. One is kept before restoring account progress.');download(validateProgress(JSON.parse(saved)),'local-recovery');message='Recovery copy exported. Use Import complete backup to review and restore it.';}
+    if(action==='logout'){await progressRequest('/api/logout',{method:'POST'});if(gen!==generation)return;await refresh();message='Signed out. This browser still contains its local work. On a shared device, export and clear it in workspace settings.';}
+    if(action==='delete'){if(confirmation!=='DELETE')throw new Error('Type DELETE to confirm account-data deletion.');await progressRequest('/api/account',{method:'DELETE',data:{confirm:'DELETE'}});if(gen!==generation)return;await refresh();message='Account data deleted and all sessions ended. Local copies remain.';}
+  }catch(error){if(gen!==generation)return;message=error.message;if(error.status===401){session={enabled:true,user:null};review=null;}if(error.status===409)review=null;}
+  finally {if(gen===generation){busy=false;paint();}}
+}
+async function onImport(event){const file=event.target.id==='progress-import'&&event.target.files?.[0];if(!file||busy)return;const gen=generation;busy=true;review=null;paint();try{if(file.size>PROGRESS_LIMIT)throw new Error('Choose a complete backup smaller than 16 MB.');const snapshot=validateProgress(JSON.parse(await file.text()));if(gen!==generation)return;review={source:'file',local:captureProgress(localStorage),fingerprint:workspaceFingerprint(localStorage),remote:{revision:0,snapshot,updatedAt:null}};message='Backup validated. Review the copies, then choose Restore backup to replace browser progress.';}catch(error){if(gen===generation)message=error instanceof SyntaxError?'Choose a valid complete backup JSON file. Your local work has not changed.':error.message;}finally{if(gen===generation){busy=false;paint();}}}
+export function mountProgress(element){root=element;root.addEventListener('click',onClick);root.addEventListener('change',onImport);const gen=generation;busy=true;paint();refresh().catch(error=>{if(gen===generation)message=error.message;}).finally(()=>{if(gen===generation){if(location.hash.endsWith('/signin-failed'))message='GitHub sign-in did not finish. Try again; your local work is safe.';busy=false;paint();}});}
+export function unmountProgress(){root?.removeEventListener('click',onClick);root?.removeEventListener('change',onImport);root=null;review=null;generation++;busy=false;}

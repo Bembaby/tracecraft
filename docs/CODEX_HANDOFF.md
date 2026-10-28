@@ -1,6 +1,6 @@
 # TraceCraft: continue in Codex
 
-This checkout contains the daily developer-practice app, real browser SQL/Python labs, a redesigned workspace, and an original interactive system design lab. It is an alpha with local browser progress. The immediate goal is a dependable app someone can use for two hours a day while building independent SQL, coding, debugging, and system-design skills.
+This checkout contains the daily developer-practice app, real browser SQL/Python labs, a redesigned workspace, and an original interactive system design lab. It is an alpha with local browser progress and an optional GitHub-authenticated Node/SQLite progress API. The account UI supports explicit sync and complete backup review; static hosting still uses local mode. The immediate goal is a dependable app someone can use for two hours a day while building independent SQL, coding, debugging, and system-design skills.
 
 ## Start here
 
@@ -59,8 +59,8 @@ Read [SYSTEM_DESIGN_LAB.md](SYSTEM_DESIGN_LAB.md) for the learner and authoring 
 | SQL | Real disposable SQLite execution and fresh-fixture checks; not a managed MySQL server |
 | Python | Real CPython in a browser worker after a pinned runtime download; not a full desktop environment |
 | System design | Editable graph and deterministic capacity/flow estimates with changed workload checks; not a real deployment simulator |
-| Progress | Three browser-local stores with separate backup behavior; no cross-device synchronization |
-| Login | A local display name is not authentication; hosting access and application progress ownership are separate |
+| Progress | Three local stores, complete backups/recovery, and optional account snapshots with explicit conflict review |
+| Login | Optional GitHub OAuth with server-managed sessions; requires an operator OAuth app and persistent server volume. A local display name is still a preference |
 | Java/MySQL project work | Assigned in the curriculum and performed in a separate local backend project |
 | AI tutor | Not implemented; no paid model, voice, or execution service is required |
 
@@ -74,9 +74,9 @@ Before adding features, reproduce the current tests and inspect the reported gap
 
 Acceptance: a learner can start a session, complete an actual SQL/Python attempt, edit and check a design, export all relevant work, reload, and recover the same drafts. Edits clear stale results. Keyboard and table controls provide the same meaningful operations as the canvas.
 
-### 2. Add authenticated, durable progress
+### 2. Verify configured account deployment and deepen sync
 
-This is the highest-value missing product capability for “log in every day.” Keep the working local mode and define the user-owned data model before adding a backend. Select a supported identity flow and storage integration for the chosen host; keep provider secrets server-side.
+The source now implements optional GitHub sign-in, owner-scoped SQLite snapshots, transactional revision checks, exports, deletion, and local recovery. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for setup and exact boundaries. Live GitHub consent and hosted durable-volume restoration still need configured verification. Preserve explicit sync review and local mode. Do not infer a configured backend from the private static Site URL.
 
 Separate at least: user identity, content revision, draft workspace, attempt snapshot, assistance events, explanation, review state, and journal entry. Persist the runtime/model version with checked attempts. Define conflict behavior for two devices instead of silently overwriting newer work.
 
@@ -112,7 +112,7 @@ Training and system-design exports are separate. A design backup uses `tracecraf
 
 ## Repository and hosting continuity
 
-The existing repository is `Bembaby/tracecraft`. The working branch used for this increment is `feature/daily-developer-practice`. Inspect `git status`, current branch, and remotes before committing, pushing, or opening a PR; local changes and a downloadable source archive do not establish that GitHub already contains the changes.
+The existing repository is `Bembaby/tracecraft`. The earlier increment used `feature/daily-developer-practice`. The account/progress increment uses `codex/authenticated-progress` from current `main`. Inspect `git status`, current branch, and remotes before committing, pushing, or opening a PR; local changes and a downloadable source archive do not establish that GitHub already contains the changes.
 
 An earlier October 28, 2026 GitHub upload attempt returned HTTP 403 before the `Bembaby` GitHub App installation was connected. This was a historical access issue, not an ongoing constraint. The v0.3 changes were then prepared for a normal pull request into `main`. Check GitHub for the current merged commit and any newer work before starting. The downloadable archive is a source snapshot, not a substitute for checking the current GitHub branch.
 

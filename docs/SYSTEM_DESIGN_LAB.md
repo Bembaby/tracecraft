@@ -80,14 +80,14 @@ During the systems weeks, use the 25-minute project/debug block for one focused 
 
 | Minutes | Work |
 |---|---|
-| 0–5 | State the requirement and predict the baseline bottleneck |
-| 5–15 | Change one design decision and inspect a failure case |
-| 15–20 | Check the authored fixtures; repair one failed requirement |
-| 20–25 | Save an explanation and a question to test in real code |
+| 0-5 | State the requirement and predict the baseline bottleneck |
+| 5-15 | Change one design decision and inspect a failure case |
+| 15-20 | Check the authored fixtures; repair one failed requirement |
+| 20-25 | Save an explanation and a question to test in real code |
 
 Use the existing ten-minute explanation block to defend the decision aloud. Keep the SQL/Python writing block in the routine when those fundamentals still need practice. A diagram is additional practice; it does not replace writing and debugging working code.
 
-For a longer 30–35 minute challenge, spread it across two sessions or explicitly reallocate part of the main practice block. The daily plan still totals 120 minutes, including the ten-minute break.
+For a longer 30-35 minute challenge, spread it across two sessions or explicitly reallocate part of the main practice block. The daily plan still totals 120 minutes, including the ten-minute break.
 
 ## Bridge the model to a real backend
 

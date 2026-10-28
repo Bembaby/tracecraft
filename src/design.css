@@ -545,3 +545,30 @@ dialog::backdrop { background: #080b0bd9; backdrop-filter: blur(4px); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+/* Account review extends the existing charcoal and lime workspace. */
+.progress-wrap { max-width: 1020px; margin-inline: auto; }
+.progress-wrap .panel { margin-bottom: 24px; }
+.backend-practice { margin-block: 24px; }
+.backend-practice ul { padding-left: 20px; line-height: 2.2; }
+.progress-wrap .section-intro h1 { margin-top: 0; }
+.progress-wrap p { max-width: 72ch; }
+.sync-account { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; }
+.sync-account > div:first-child { flex: 1 1 420px; }
+.sync-account .small-note { flex-basis: 100%; margin-bottom: 0; }
+.sync-message { min-height: 1.5em; color: var(--text); overflow-wrap: anywhere; }
+.sync-copies { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
+.sync-copies > section { min-width: 0; }
+.sync-copies button { margin: 8px 8px 0 0; }
+.sync-summary { margin: 16px 0; font-variant-numeric: tabular-nums; }
+.sync-summary > div { display: flex; gap: 16px; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.sync-summary dd { margin: 0; font-weight: 600; }
+.sync-delete input { display: block; width: min(100%,240px); margin: 8px 0 16px; }
+.progress-wrap button, .progress-wrap input { min-height: 44px; }
+.progress-wrap button:disabled { opacity: .5; cursor: not-allowed; }
+.progress-wrap button:focus-visible, .progress-wrap input:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+@media (max-width: 640px) {
+  .sync-copies { grid-template-columns: 1fr; gap: 24px; }
+  .sync-copies > section + section { border-top: 1px solid var(--line); padding-top: 24px; }
+  .sync-account .training-actions, .progress-wrap .training-actions { width: 100%; }
+  .sync-account form, .sync-account form button { width: 100%; }
+}

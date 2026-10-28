@@ -1,3 +1,4 @@
+import { CONTENT_REVISION, RUNTIME_VERSIONS } from './practice-versions.mjs';
 import { NODE_TYPES, simulateDesign } from './system-design-engine.mjs';
 import { DESIGN_CHALLENGES, checkDesignChallenge } from './system-design-content.mjs';
 import { DESIGN_STORAGE_KEY, freshDesignWorkspace, validateDesignWorkspace, sanitizeDesign, sanitizeSettings, designBackup, parseDesignBackup } from './system-design-state.mjs';
@@ -195,7 +196,7 @@ function runCheck() {
   staleCheck=false;
   check=checkDesignChallenge(entry().graph,challenge());
   simulation=simulateDesign(entry().graph,entry().settings);
-  workspace.attempts.push({challengeId:challenge().id,at:new Date().toISOString(),passed:check.passed,
+  workspace.attempts.push({challengeId:challenge().id,at:new Date().toISOString(),passed:check.passed,contentRevision:CONTENT_REVISION,runtimeVersion:RUNTIME_VERSIONS.design,
     passedChecks:check.checks.filter(c=>c.passed).length,totalChecks:check.checks.length,helpLevel:entry().helpLevel,
     graph:clone(entry().graph),settings:clone(entry().settings),notes:entry().notes});
   workspace.attempts=workspace.attempts.slice(-100);persist();paint({inspector:true});

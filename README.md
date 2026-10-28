@@ -1,13 +1,13 @@
 # TraceCraft
 ### Learn it. Write it. Test it. Explain it.
 
-TraceCraft is a local-first developer-practice **alpha**. Version 0.3 adds an interactive system design lab and a redesigned workspace to the working two-hour routine, real SQL/Python practice, eight-week developer path, and architecture discussions.
+TraceCraft is a local-first developer-practice **alpha**. The next alpha increment adds optional GitHub sign-in with durable progress snapshots, a reviewed sync/backup workspace, and four backend-focused SQL/Python exercises. The two-hour routine, full SQL/Python labs, developer path, and interactive system design simulator remain available.
 
 The learning loop is **attempt → run → inspect → explain → retry**. Progress distinguishes a passing check from a self-reported completed day, and records when the app supplied a hint or solution. These are practice records, not a certification or a hiring prediction.
 
 ## Start locally
 
-Requires Node.js 22 or newer. There are **no npm packages to install** to start or build the app.
+Requires Node.js 22.13 or newer. There are **no npm packages to install** to start or build the app.
 
 ```bash
 npm start
@@ -26,21 +26,21 @@ Stop an already running server before starting another on the same port. The ser
 
 **Serve the complete directory over HTTP(S).** The build copies `index.html`, `src/`, and `public/` into `dist/`. It preserves `dist/tracecraft-preview.html` as a second HTML entry, but that file is **no longer a self-contained preview**. Worker scripts, modules, and WebAssembly assets must remain beside it. Opening the HTML through `file://` or sharing only that one file does not provide the complete application.
 
-## What version 0.3 includes
+## What the current source includes
 
 | Area | Implemented behavior |
 |---|---|
 | Workspace redesign | Charcoal surfaces, restrained lime accents, grouped navigation, a more direct daily assignment, compact session controls, and consistent workbench typography |
 | Daily session | 120-minute session: 110 minutes of work and a 10-minute break; seven check-in blocks; evidence notes; next assignment; timer pauses when the tab is hidden |
 | Developer path | 56 concrete assignments over eight suggested weeks, with a deliverable and competency gate; the schedule can be repeated or slowed |
-| SQL lab | Ten original exercises executed by local SQLite in a worker: schemas/constraints, filters, joins, grouping, NULL/absence, windows, updates, rollback, indexes, and actual query plans |
+| SQL lab | Twelve original exercises executed by local SQLite in a worker: schemas/constraints, filters, joins, grouping, NULL/absence, windows, updates, rollback, indexes, and actual query plans |
 | SQL checks | Fresh databases for changed fixtures, query-result or state checks, preserved duplicates, constraint probes, deliberate bugs, hints, and explanations |
-| Python lab | Six original full-Python drills covering instance state, slices, append/mutation, dictionaries, functions/boundaries, and exceptions; public assertions and source-linked traces |
+| Python lab | Eight original full-Python drills covering instance state, slices, append/mutation, dictionaries, functions/boundaries, and exceptions; public assertions and source-linked traces |
 | System design | Editable component graph, directed connections, traffic/read-mix controls, component failures, numerical flow results, canvas/table views, keyboard editing, undo/redo, and saved drafts |
 | Design challenges | Six original challenges with capacity budgets, actual-topology checks, 19 baseline/changed-workload cases, hints, reference graphs, deliberate bugs, and explanations |
 | Design discussions | Six separate scenarios covering monolith/service choice, timeouts, duplicate requests, outbox delivery, stale caches, and data ownership; written attempts before worked explanations |
 | Evidence and review | Saved drafts, explanations, checked attempts, in-app help use, and suggested retries after 1, 3, 7, and 14 days; same-day repeated passes do not advance the interval |
-| Portability | Local browser progress and separate JSON backups for daily training, system design, and original tools; design import includes a concrete replacement review |
+| Portability and account sync | Optional GitHub sign-in, user-owned SQLite snapshots, revision-checked saves, reviewed restore, complete backup export/import, local recovery, and account-data deletion; separate workspace backups remain |
 | Original tools | Eight Mini-Python visual exercises, line-block reordering, three systems demos, four interview prompts, the 13-stage topic map, reading room, and optional visual/audio enhancements remain available |
 
 ### SQL and Python runtime boundaries
@@ -67,7 +67,7 @@ Use the [two-hour plan](docs/DAILY_PLAN.md) for the daily loop and the [develope
 
 ## Progress, accounts, and hosting
 
-Progress is stored in this browser and origin. It is **not synchronized between devices**. Export the relevant backups before changing devices or clearing browser data. These files contain your code, diagrams, and personal notes.
+Progress is local by default. **Progress sync** can save all three workspaces to an optional account server after GitHub sign-in and an explicit review. Sync is manual and rejects stale writes. Complete exports and local recovery also work without an account. These files contain code, diagrams, and personal notes. See [account setup and boundaries](docs/PROGRESS_SYNC.md).
 
 | Workspace | Storage key | Backup location |
 |---|---|---|
@@ -77,7 +77,7 @@ Progress is stored in this browser and origin. It is **not synchronized between 
 
 Importing one workspace does not replace the other stores. System design imports use a 2 MB limit and show a review before replacement. A local display name is a profile preference, not an authenticated account.
 
-There is no custom account API or cloud progress database. Hosting-level private access is separate from application data synchronization. No paid runtime/API service is required for this version.
+The optional Node account API stores progress in a private durable SQLite file. Configure an OAuth app and a persistent server volume to enable it. No paid infrastructure was provisioned, and live GitHub sign-in is not claimed without that setup. A static Site deployment alone does not supply the account API. Hosting-level private access remains separate from application ownership.
 
 **v0.3 publication:** The app was published privately on October 28, 2026 at [tracecraft-daily.belal919.chatgpt.site](https://tracecraft-daily.belal919.chatgpt.site). The hosting service confirmed a successful deployment. Access uses the existing owner-only audience; application progress still stays in the browser. Local test/build evidence is recorded in [QA](docs/QA.md). GitHub branch saving and remote CI are separate from hosting.
 
@@ -95,6 +95,7 @@ The `publish:github` script is for publishing a **new fork/copy** under an authe
 - [Python runtime](docs/PYTHON_RUNTIME.md): loading consent, CPython behavior, traces, cancellation, and test scope.
 - [System design lab](docs/SYSTEM_DESIGN_LAB.md): controls, six challenges, practice routine, backups, and authoring contract.
 - [Simulation model](docs/SIMULATION_MODEL.md): exact flow arithmetic, assumptions, limits, and requirement evaluator.
+- [Progress sync](docs/PROGRESS_SYNC.md): optional GitHub account setup, durable storage, conflicts, backups, and deletion.
 - [Codex handoff](docs/CODEX_HANDOFF.md): code map, startup commands, existing Site identity, and focused next implementation gates.
 - [Architecture](docs/ARCHITECTURE.md): implemented boundaries and future server responsibilities.
 - [Roadmap](docs/ROADMAP.md): shipped work, remaining acceptance gates, and later milestones.
@@ -110,7 +111,7 @@ The app does not provide AI grading, an LLM tutor, paid voice APIs, production d
 
 ## Privacy, accessibility, and licenses
 
-No analytics or tracking scripts are installed. Browser storage is not encrypted cloud storage. Optional browser speech recognition may send audio to the browser vendor; the existing consent flow remains device dependent. Optional visual libraries and the enabled Python runtime contact jsDelivr. The app does not ask for API keys, account passwords, or session cookies.
+No analytics or tracking scripts are installed. Browser storage is not encrypted cloud storage. Optional browser speech recognition may send audio to the browser vendor; the existing consent flow remains device dependent. Optional visual libraries and the enabled Python runtime contact jsDelivr. The browser does not ask for API keys, account passwords, or pasted session cookies. Optional GitHub sign-in uses a server-managed HttpOnly app session; credentials never enter browser progress.
 
 Keyboard navigation, text equivalents, responsive layouts, and reduced-motion behavior remain design requirements. See QA for what was actually checked; no accessibility certification or production security audit is claimed.
 

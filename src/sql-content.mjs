@@ -1,3 +1,4 @@
+import { SQL_BACKEND_LABS } from './backend-content.mjs';
 // Original SQL practice material. Fixtures are intentionally visible: this is
 // learning evidence, not a secure examination or a production database.
 export const SQL_SEED = `
@@ -199,7 +200,8 @@ SELECT order_id, amount_cents FROM orders WHERE order_id IN (101, 103) ORDER BY 
     explanation:'The index groups entries by customer, then date. This can support a customer lookup followed by ordered retrieval. EXPLAIN QUERY PLAN exposes SQLite’s chosen access path, not a universal plan across engines. Indexes require storage and work on inserts/updates, and plan output can change with versions and data.',
     complexity:'An index can reduce a full-table search to a range lookup plus matching-row traversal, but actual gains depend on selectivity and the planner. Creating the index itself scans and organizes existing entries.',sources:[{title:'SQLite EXPLAIN QUERY PLAN',url:'https://sqlite.org/eqp.html'},{title:'SQLite query planner',url:'https://sqlite.org/queryplanner.html'}],
     fixtures:[fixture('Index columns in the requested order',SQL_SEED,['name'],[['customer_id'],['ordered_at']],{inspectSql:"SELECT name FROM pragma_index_info('idx_orders_customer_date') ORDER BY seqno;"}),fixture('Same index contract on changed data',VARIANT_SEED,['name'],[['customer_id'],['ordered_at']],{inspectSql:"SELECT name FROM pragma_index_info('idx_orders_customer_date') ORDER BY seqno;"})]
-  }
+  },
+  ...SQL_BACKEND_LABS
 ];
 
 export function sqlLab(id) {

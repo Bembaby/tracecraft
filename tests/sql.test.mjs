@@ -1,11 +1,12 @@
 import test, {before} from 'node:test';
 import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';
 import initSqlJs from '../public/vendor/sqljs/sql-wasm.js';
 import {SQL_LABS, SQL_SEED, sqlLab} from '../src/sql-content.mjs';
 import {SQL_LIMITS, createSqlDatabase, executeSql, checkSqlSolution, sameSqlResults, SqlRuntime} from '../src/sql-runtime.mjs';
 
 let SQL;
-before(async () => { SQL = await initSqlJs({locateFile:filename => new URL('../public/vendor/sqljs/'+filename,import.meta.url).pathname}); });
+before(async () => { SQL = await initSqlJs({locateFile:filename => fileURLToPath(new URL('../public/vendor/sqljs/'+filename,import.meta.url))}); });
 
 test('SQL curriculum has complete original lesson contracts and variant fixtures', () => {
   assert.equal(new Set(SQL_LABS.map(lab=>lab.id)).size,SQL_LABS.length);

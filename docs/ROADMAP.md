@@ -1,83 +1,109 @@
 # Build roadmap with acceptance gates
 
-This roadmap describes implementation scope, not guaranteed delivery dates. “Complete” below means implemented in this source package. No remote repository, deployment, or provider account has been provisioned by the preparation environment.
+Updated October 28, 2026 for the **v0.3 alpha**. This roadmap distinguishes implemented source, observed verification, and proposed work. The public [Bembaby/tracecraft](https://github.com/Bembaby/tracecraft) repository exists. A source change, a saved hosting version, a successful deployment, and a passing remote CI run are separate events; none should be inferred from another.
 
-## Milestone 0 — Useful local alpha: implemented
+## Milestone 0: Original visual learning alpha: retained
 
-Eight original numeric Python-like exercises; a bounded interpreter; real post-operation traces; visible public tests; deliberate bugs; line-block reordering; original explanation notes; 13-stage curriculum specification; three systems concept demos; 12 linked readings; four self-practice prompts; optional browser voice; local progress; responsive styling; optional Three.js/Anime.js code; automated core tests; documentation.
+Eight original numeric Mini-Python exercises, public fixtures and deliberate bugs, source-linked post-operation traces, line-block reordering, 13-stage topic map, three systems concept demos, reading links, four interview prompts, optional browser voice, optional visual libraries, and original local progress remain available under separate navigation links.
 
-Acceptance: run the source without dependency downloads, alter code and observe a matching trace, catch every deliberate bug with a public test, navigate the map without implying planned content exists, and keep the core usable without remote libraries. See QA.md for actual checks and limitations.
+These tools keep their existing limits. Mini-Python is a teaching subset, the retrieval demo is keyword matching without generation, and the old relational-filtering demo applies a JavaScript predicate. The new SQL and Python labs are distinct implementations.
 
-## Milestone 1 — Reliable real-Python learning loop: next priority
+## Milestone 1: Daily developer practice: implemented in v0.2
 
-**P1.1 Runtime adapter and cancellation.** Implement a full Python runtime with a documented choice between browser-contained practice and isolated server execution. Run it off the UI thread. Enforce cancellation and output/trace bounds. No network or secret access is assumed safe without a threat model.
+### Daily work and evidence
 
-**P1.2 Trace contract.** Preserve call frames, object identity, references, mutation, exceptions, and source mapping. Build fixtures for recursion, aliasing, branching, empty inputs, errors, and limits. Every displayed frame must correspond to actual execution.
+- A 120-minute session with 110 minutes of work and a 10-minute break.
+- Seven check-in blocks, a concrete assignment, evidence notes, and an explicit next step.
+- A 56-day path covering SQL, Python fundamentals, local database ownership, a Java/Spring feature, tests, debugging, deployment rehearsal, distributed-system behavior, and interviews.
+- Suggested competency gates and repeated independent attempts rather than a promise of mastery on a date.
+- Drafts, explanations, checked attempts, recorded in-app assistance, and retries scheduled at 1, 3, 7, and 14 days.
+- Validated JSON export/import for training state, retaining the original visual-lab state separately.
 
-**P1.3 Accessible editor.** Add a real editor with language support, keyboard instructions, indentation help, and a plain-text fallback. Keep controls usable at 200% zoom. Do not trap Tab unexpectedly. Add interactive block construction via a reviewed block editor when its semantics can be mapped accurately.
+### Real SQL
 
-**P1.4 Lesson schema and validators.** Separate versioned content from UI. Require objectives, prerequisites, source records, hints, contracts, independent tasks, bugs, rubrics, and tests. Reject missing attribution, broken prerequisite links, invalid expected outputs, and unsupported visual claims.
+Ten original exercises run against SQLite through a vendored sql.js worker. Tasks cover schema/constraints, filtering, inner/left joins, grouping, NULL/absence, window queries, updates, rollback, and indexes/query plans. Checks use changed fresh fixtures and inspect query results or database state. Source/output bounds, cancellation, and worker deadlines are implemented.
 
-**P1.5 First coherent course.** Author a compact, reviewed Python course covering variables through functions, lists/dicts, errors, tests, and one small project. A target lesson count is a planning estimate, not a quality metric. Do not generate hundreds of unreviewed pages just to fill the map.
+### Real Python
 
-Gate: a learner can complete one entire topic sequence, an unfamiliar variation, a delayed explanation, and a project step using real Python without a tutor doing the work for them.
+Six original exercises run through a pinned, explicitly enabled Pyodide module worker. Classes, functions, strings, collections, slicing, and exceptions use CPython semantics. Assertion checks and source-linked traces record actual execution; the controller bounds startup, execution, output, and traces. Local CPython harness verification and browser CDN/WASM verification are separate checks.
 
-## Milestone 2 — Accounts and durable evidence
+### Design conversations
 
-**P2.1 Authentication and authorization.** Add supported login, authenticated APIs, organization scopes where needed, and cross-user denial tests. No anonymous writable shared database.
+Six original architecture scenarios require an initial written answer before viewing a comparison. Rubrics address concrete boundaries, operational costs, compatibility, timeouts, retries, duplicate delivery, data ownership, and failure recovery. They remain self-assessed, not AI-graded.
 
-**P2.2 Progress synchronization and portability.** Persist attempts, hint use, lesson/runtime versions, explanations, and explicit consent. Support export, import with strict validation, and deletion. Preserve local-only mode.
+**Acceptance gate:** a learner can open the daily task, write and run code, inspect a failure, use help with an honest record, explain the result, export progress, and return for a changed or delayed attempt. [QA.md](QA.md) records which parts have been observed and which remain to verify.
 
-**P2.3 Review scheduling.** Track independent versus assisted evidence, schedule related but not identical review tasks, and make recommendations understandable. A scheduling algorithm is not proof of learning improvement; evaluate it.
+## Milestone 2: A clearer workspace and interactive system design: implemented in v0.3
 
-**P2.4 Authoring and review.** Add draft/review/publish status, version history, semantic tests, source records, and accessibility review. Publish the actual supported lesson count and coverage status.
+The shared workspace has grouped navigation, neutral charcoal surfaces, restrained lime accents, more consistent type, and a daily page centered on the next assignment and session. Existing SQL/Python tools and original learning features remain available.
 
-Gate: progress survives devices; users cannot access one another’s private work; content can be revised without silently invalidating prior evidence.
+The system-design lab adds:
 
-## Milestone 3 — Interview preparation with real projects
+- Editable components and directed connections, drag/keyboard positioning, inspector controls, canvas/table views, and session undo/redo.
+- Traffic, read/write mix, duration, and component-failure controls that affect a deterministic calculation over the current graph.
+- Distinct completed, rejected, failed, and pending rates, plus configured-path mean latency estimates.
+- Six original challenges covering caches, failover, admission limits, finite queues, changed write load, and a simple end-to-end request.
+- Nineteen baseline and changed-workload cases, public behavior/configuration checks, reference designs, and deliberate failures.
+- Saved design drafts, self-assessed explanations, recorded assistance, bounded recent checks, and a separate validated backup with import review.
 
-**P3.1 Algorithms.** Add arrays/hash maps, two pointers, sliding windows, searching, stacks/queues, trees, graphs, recursion, and a carefully selected DP path. Include proofs, visual state, counterexamples, and varied difficulty.
+The model's limits are deliberate. It does not benchmark infrastructure, calculate p99 latency, validate data ownership, prove durability, or grade production readiness. A separate queue phase, cache freshness, retries, idempotency, and richer service semantics remain future work. Use [SYSTEM_DESIGN_LAB.md](SYSTEM_DESIGN_LAB.md) and [SIMULATION_MODEL.md](SIMULATION_MODEL.md) as the current contracts.
 
-**P3.2 SQL.** Isolated database workspaces, original datasets, query tests, NULL behavior, joins, indexes, transactions, and query plans. Keep the plan visualization faithful to the actual engine/version.
+**Acceptance gate:** edit a connection or capacity, observe the calculated consequence, introduce a failure, check changed workloads, explain the limitation, and restore a saved design. Automated model checks and observed UI coverage are recorded separately in [QA.md](QA.md).
 
-**P3.3 Java.** Versioned compiler/runtime integration, real test execution, language-specific lessons, and trace semantics. Start with a Java service project; do not present Python behavior as equivalent by renaming variables.
+## Release verification: Private publication
 
-**P3.4 Portfolio track.** Build an application with requirements, Git history, tests, authorization, documentation, deployment, a failure investigation, and an honest case study. Integrate project evidence into interview practice.
+Use the existing private Site identity for publication. A live URL, successful deployment, and a remote CI result each require their own confirming operation; consult the deployment record and final delivery result.
 
-**P3.5 Mock interviews.** Timed and untimed formats, visible rubrics, self/human/AI assessor distinctions, consented recordings, and feedback grounded in observed work. No fabricated hiring probabilities.
+Use the latest QA observations to identify the remaining release work; earlier SQL/Python browser checks are retained historical evidence, not proof of the redesigned version on every device. Verify graph/table and keyboard operations, narrow-screen layout, persistence and backup replacement, and final checks/builds. Validate hosted asset paths and worker behavior when publication is available. Preserve the existing/private audience and keep progress backups and personal notes out of source control.
 
-Gate: a target-role preparation path produces reproducible evidence, not just a streak and a list of solved examples.
+The static directory must be served over HTTP(S). The retained `tracecraft-preview.html` is an alternate entry into that directory, not a portable single-file application.
 
-## Milestone 4 — Source-grounded voice tutor
+## Next milestone: Reliable continued practice
 
-**P4.1 Provider adapter.** Implement one provider first with supported authentication, explicit billing, server-side secrets, short-lived browser credentials where available, cancellation, and budgets.
+1. **Runtime/browser coverage.** Exercise startup failure, cancellation, retry, output truncation, tab navigation, and loading recovery in supported desktop and mobile browsers. Verify native storage behavior rather than relying only on in-memory test doubles.
+2. **Better evidence portability.** Review backup replacement UX, partial recovery, schema versions, and deletion behavior across the separate legacy, training, and system-design stores. Keep export understandable and validate imports strictly.
+3. **Lesson authoring contract.** Formalize content revisions and validators for prerequisites, exact input/output contracts, original explanations, fixture coverage, deliberate bugs, sources, and execution support. The present reviewed exercises do not imply hundreds of completed lessons.
+4. **Teaching based on errors.** Add a small number of useful task variations where observed attempts show a need. Preserve the distinction between answer exposure, passing checks, later independent work, and self-assessed explanations.
+5. **Accessible editor and traces.** Improve source selection, keyboard instructions, text zoom, and trace navigation while retaining a plain-text fallback. Object identity and full call-stack/heap visualization remain further work; current Python traces use bounded summaries.
 
-**P4.2 Private evidence retrieval.** Index only licensed original/approved materials. Apply permissions before retrieval. Maintain source and lesson versions; test deletion and stale data.
+**Gate:** a learner can resume after interruptions, recover from runtime errors, move progress with a tested backup, and complete an unfamiliar variation without the prior answer visible.
 
-**P4.3 Evaluations.** Build a held-out set containing ordinary, ambiguous, misleading, and unsupported questions. Evaluate retrieval relevance separately from answer grounding and citation support. Add prompt-injection and cross-user access cases.
+## Next product milestone: Accounts and durable progress
 
-**P4.4 Conversation UX.** Turn-taking, interruptions, mute, captions, transcript review, typed fallback, consent controls, and progressive hints. Link feedback to actual code state when available.
+Private hosting access does not itself synchronize learning data. A custom account/progress service is **not implemented** in v0.3. This is the next product capability needed to carry the same daily workspace across devices.
 
-Gate: observed lessons and approved sources support feedback; the tutor abstains when appropriate; session teardown stops charges; no long-lived secret appears in client artifacts.
+- Add a supported authentication flow only with a clear data model and authorization boundary.
+- Persist attempts, assistance, explanations, reviews, and content/runtime versions under the correct owner.
+- Test cross-user denial, export, deletion, synchronization conflicts, and local-only use.
+- Avoid an anonymous writable shared database.
+- Keep provider configuration and any secrets server-side; never request browser session cookies or save API credentials in localStorage.
 
-## Milestone 5 — Systems and advanced specializations
+**Gate:** progress survives device changes, concurrent updates have defined behavior, and users cannot read or mutate one another’s private records. Choose any paid provider, region, and budget explicitly before enabling charges.
 
-Replace the toy models with carefully scoped, instrumented labs: API request flow, cache invalidation, queue retries, database isolation, load balancing, replication, and source-permission failures in RAG. Label simulations and assumptions explicitly.
+The [Codex handoff](CODEX_HANDOFF.md) contains the source map, current storage boundaries, existing hosting identity, and focused implementation prompts for continuing this work.
 
-Advanced paths include interpreters/compilers, database internals, distributed systems, performance, security, ML systems evaluation, and technical design reviews. Expertise requires open-ended work and maintained systems; no finite checkbox list certifies expertise in everything.
+## Later milestone: Deeper backend and systems labs
 
-Gate: each lab ties an observation to a reproducible experiment, clear assumptions, and a trade-off explanation.
+The current path assigns real local MySQL and Java/Spring work; the browser does not execute or certify those project steps. Add instrumented labs only where they produce observable behavior:
 
-## Milestone 6 — Community, project events, and commercialization
+- Database migrations, constraints, concurrent transactions, query plans, backup and verified restore.
+- A complete API feature with validation, authorization, persistence, tests, and an investigated failure.
+- Cache freshness, bounded retries, idempotency, queues, event delivery, and compatible service contracts.
+- A Java runtime or isolated execution adapter with its own semantics and limits, if target-role needs justify it.
+- Original algorithm exercises and changed constraints after fundamental coding fluency is established.
 
-Add optional code review, cooperative debugging, mentorship, project jams, and judged events only after moderation, anti-abuse, accessibility, contest rules, eligibility, and data-sharing controls exist. Discovery of third-party hackathons requires current event verification; do not silently register or submit on a user’s behalf.
+**Gate:** each claimed skill is supported by a reproducible experiment or code change, relevant tests, an explanation, and a limitation. A checklist or architecture diagram alone does not meet it.
 
-Commercialization decisions include a useful free core, paid hosted compute or reviewed mentorship, and explicit provider usage limits. Do not promise unlimited voice without measured unit costs. Paid content and all imported assets need documented rights. Keep cancel/export/delete paths available.
+## Later milestone: Optional source-grounded tutor
 
-Gate: measured learner value, transparent costs, safety/moderation readiness, reviewed terms, and a sustainable operating model—not just a polished landing page.
+A real tutor/voice integration remains proposed. Start with one approved provider and licensed/original lesson sources. Filter permissions before retrieval, preserve source versions, distinguish retrieval quality from answer quality, and evaluate ordinary, unsupported, contradictory, and malicious inputs. Label human/self/AI feedback separately and ground it in the learner’s actual attempt.
 
-## Publication and deployment checklist
+Use supported credentials, short-lived browser authorization where applicable, cancellation, quotas, retention rules, and explicit budgets. Consumer subscriptions are not general API credentials. No paid provider, live voice service, or RAG claim is added by v0.3.
 
-Create the new public repository with the included script or the GitHub UI. Review committed contents and CI. Resolve the working project name before a commercial launch. Configure an explicit static preview deployment without exposing private artifacts. No paid service should be activated until the owner approves provider, region, budget, and secret handling.
+**Gate:** feedback can point to the observed attempt and relevant sources, unsupported answers are handled explicitly, authorization holds, and usage/cost controls work under failure.
 
-CI configuration is included, but no GitHub Actions run is claimed before a repository exists. Review current action versions and pin reviewed commit SHAs before enabling production workflows with broader permissions.
+## Longer-term work
+
+Community review, collaborative debugging, project events, specialist courses, and commercialization require demonstrated learner value plus appropriate moderation, content rights, privacy, accessibility, and operating controls. They should not displace the small daily loop that is useful now.
+
+The roadmap is a sequence of engineering decisions and acceptance gates. It does not certify expertise, predict hiring outcomes, or claim work has been deployed merely because its source exists.

@@ -2,6 +2,8 @@
 
 Read README.md, docs/ROADMAP.md, docs/ARCHITECTURE.md, and docs/QA.md first.
 
+- Never use em dash characters (U+2014) in user-facing copy, titles, documentation, comments, or responses. Use periods, commas, colons, or parentheses instead.
+
 - Preserve truthful status labels: alpha, prototype, planned, self-assessment.
 - Never claim the mini interpreter is full Python or the keyword demo is a full RAG system.
 - Do not execute submitted programs inside the application API process. Do not add eval/Function for user code.
@@ -14,4 +16,4 @@ Read README.md, docs/ROADMAP.md, docs/ARCHITECTURE.md, and docs/QA.md first.
 - Verify current provider terms, dependency versions, and licensing before integrating new services.
 - Run npm run check, npm test, npm run build; then inspect desktop and narrow-screen views.
 - Ask before provisioning paid infrastructure, enabling charges, publishing private data, or modifying unrelated repositories.
-- Keep the next increment small: first full Python execution + tracing + a verified lesson-authoring contract; then authentication and persistence.
+- Preserve existing full Python/SQL and system design. Complete the remaining daily-use verification gates, then add supported authentication and durable user-owned progress.

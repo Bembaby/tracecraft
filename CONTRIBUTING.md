@@ -6,11 +6,11 @@ Use Node 22+. No npm dependency install is needed for the current core. Run thes
 
 ```bash
 npm run check   # JavaScript syntax checks
-npm test        # Interpreter and exercise tests
-npm run build   # Static build and portable HTML preview
+npm test        # Runtime, exercise, model, and progress tests
+npm run build   # Complete static directory build
 ```
 
-Browser tests require Python Playwright and Chromium; see the [QA reproduction instructions](docs/QA.md#reproduce) for setup and the test command.
+Serve the entire app directory over HTTP(S) for browser QA. The HTML file alone cannot load the SQL/Python workers or WASM assets. See [QA](docs/QA.md) for current observations and reproduction steps; the old single-file browser smoke script is historical.
 
 For an exercise, supply: original prompt; prerequisites; input/output contract; worked explanation; an invariant where relevant; trace interpretation; at least one revealing edge case; deliberate failing implementation; reference implementation; complexity; explanation rubric; source links and license status. All public tests must pass on the reference and at least one must fail on the deliberate bug.
 

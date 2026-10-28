@@ -2,7 +2,7 @@
 
 **Reviewed: September 8, 2026. Scope: 28 public-source platform/learning-system reviews.**
 
-This is a broad, selected landscape review—not an exhaustive inventory of every learning site, a hands-on audit of paid accounts, a full reading of every textbook, or proof that TraceCraft outperforms established products. Sources are official product, course, documentation, or author-hosted pages. Descriptions below concern observable product patterns; adaptation columns are original product proposals. Prices, exact catalog sizes, user counts, placement rates, and vendor self-comparisons are deliberately not used as evidence of quality.
+This broad, selected landscape review is limited to public source material. It excludes an exhaustive inventory of learning sites, hands-on audits of paid accounts, full readings of textbooks, and claims that TraceCraft outperforms established products. Sources are official product, course, documentation, or author-hosted pages. Descriptions below concern observable product patterns; adaptation columns are original product proposals. Prices, exact catalog sizes, user counts, placement rates, and vendor self-comparisons are deliberately not used as evidence of quality.
 
 ## Main conclusion
 
@@ -25,7 +25,7 @@ The opportunity is not simply “put coding, AI, games, and courses in one websi
 | 11 | [Scrimba](https://scrimba.com/) | Interactive coding instruction, including editable learning experiences. | Let learners alter examples and immediately observe consequences. Source-synchronized lesson playback is a later feature, not implemented in this alpha. |
 | 12 | [Codecademy career paths](https://www.codecademy.com/career-center) | Role-oriented learning paths and structured skill development. | Let a target role narrow the full map. Show prerequisites and portfolio evidence, not a universal checklist for every software job. |
 | 13 | [freeCodeCamp](https://www.freecodecamp.org/learn/) | Broad curriculum access and project-based learning. | Keep a useful core learning path available and make project completion inspectable. A certificate is not an employment guarantee. |
-| 14 | [The Odin Project paths](https://www.theodinproject.com/paths) | Structured web development paths connecting readings and projects. | Teach real environment setup, debugging, Git, and project autonomy—not only in-browser puzzles. Preserve external sources instead of republishing them. |
+| 14 | [The Odin Project paths](https://www.theodinproject.com/paths) | Structured web development paths connecting readings and projects. | Teach real environment setup, debugging, Git, and project autonomy alongside browser exercises. Preserve external sources instead of republishing them. |
 | 15 | [Harvard CS50x](https://cs50.harvard.edu/x/) | Foundational computer-science teaching and problem sets. | Introduce computational thinking and memory/reasoning foundations before narrow interview tricks. Do not import course solutions or imply affiliation. |
 | 16 | [roadmap.sh](https://roadmap.sh/roadmaps) | Many navigable technology and role roadmaps. | Show where a concept fits, but constrain today’s task to one useful step. A map with many nodes is not equivalent to a finished curriculum. |
 | 17 | [Boot.dev](https://www.boot.dev/), [training](https://www.boot.dev/training), [RAG course](https://www.boot.dev/courses/learn-retrieval-augmented-generation) | Structured engineering learning, gamified practice, revisit mechanisms, and substantial RAG coverage. | Study pacing and retention patterns. Differentiate through trace/evidence/explanation integration, not by pretending backend, games, or RAG are absent elsewhere. |
@@ -79,7 +79,7 @@ The alpha’s design is original: no competitor screenshot, logo, frontend code,
 
 Run a pilot comparing complete learning tasks, not homepage impressions. Predefine the concept and assessment. Observe time to a correct mental model, performance on an unfamiliar variant, delayed recall, quality of explanation, accessibility failures, and willingness to return. Compare similar learner groups and report the actual methods and uncertainty. Collect consent and minimize personal data.
 
-Until such evidence exists, “better than all the platforms” is an ambition. The current deliverable establishes a differentiated direction and a testable prototype—not market leadership.
+Until such evidence exists, “better than all the platforms” is an ambition. The current deliverable establishes a differentiated direction and a testable prototype. Market leadership remains unproven.
 
 ## Research gaps and next review
 

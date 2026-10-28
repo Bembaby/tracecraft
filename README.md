@@ -80,7 +80,9 @@ Importing one workspace does not replace the other stores. System design imports
 
 Vercel serves the browser app and same-origin account function. Better Auth verifies a single-use email code, Resend sends it from the dedicated sending domain, and Neon Postgres stores accounts and progress. Codes expire after five minutes; sessions use HttpOnly cookies. Hosted snapshots are limited to 4 MB. No learner programs execute in the account API. Plain `npm start` retains local practice; the older GitHub/SQLite server is a separate opt-in adapter. A static Site alone does not supply hosted accounts.
 
-**v0.3 publication:** The app was published privately on October 28, 2026 at [tracecraft-daily.belal919.chatgpt.site](https://tracecraft-daily.belal919.chatgpt.site). The hosting service confirmed a successful deployment. Access uses the existing owner-only audience; application progress still stays in the browser. Local test/build evidence is recorded in [QA](docs/QA.md). GitHub branch saving and remote CI are separate from hosting.
+**Current deployment:** [tracecraft.dev](https://tracecraft.dev) runs the app and account API on Vercel from the unmerged feature branch. DNS, HTTPS, database health, provider-test email-code sign-in and reviewed save/restore were observed on October 28, 2026. Both Ubuntu and Windows CI passed. Real-recipient inbox placement and operational database-backup restoration remain separate checks. See [QA](docs/QA.md).
+
+**Earlier v0.3 publication:** [tracecraft-daily.belal919.chatgpt.site](https://tracecraft-daily.belal919.chatgpt.site) remains the prior owner-only static Site, with browser-local progress. It is separate from the public Vercel edition.
 
 ## Repository and development
 

@@ -8,7 +8,15 @@ An explicit `scripts/verify-postgres.mjs` run passed against the provisioned Neo
 
 Local browser observations: requested a synthetic code through the normal form, verified it, observed the verified account and sync controls, changed to week 6, saved a self-check and note, reloaded and recovered both. At 390px, document client/scroll widths were both 375px and the new mobile menu exposed all core workspaces. Desktop and narrow curriculum layouts were inspected. The design detector found no regex findings in the five changed UI files; parsed-page contrast rules did not run, so that is not a full accessibility pass.
 
-Domain registration, DNS attachment, sending-domain verification and a passing local check do not establish a successful live deployment or real-recipient inbox delivery. The live deployment evidence will be recorded after observation. Screen-reader studies, a full device matrix, provider-backup restoration, sustained load and adversarial security qualification remain separate gates.
+## Observed Vercel deployment
+
+The production deployment at [tracecraft.dev](https://tracecraft.dev) reached READY from feature commit `b1579c3`. Vercel reported the domain verified with correct DNS; HTTPS returned the app publicly. Registrar contact verification is confirmed. `/api/health` read the actual database successfully, `/api/session` reported email-code accounts, and anonymous progress returned 401. Responses included the intended security headers and private API responses used `no-store`. Ubuntu/Node 22 and Windows/Node 24 CI passed for this commit.
+
+Using Resend's official labeled test recipient, the browser requested a real code through the public API. The provider reported delivered test status. Entering that code created a verified account and a working session. A milestone note and self-check saved as revision 1; after changing local text, reviewed restore reloaded the original saved evidence. The synthetic account was isolated from learner data and removed after verification. This is a provider delivery simulation, not evidence of a real recipient's inbox placement.
+
+The deployed SQLite 3.54.0 worker passed all three retry-safe-insert fixtures. The full Python worker loaded under the production CSP, passed owner-scoped-read assertions and produced 36 actual trace frames without console errors. At 390px the design starter completed 300/1,000 requests per second; editing cache hits to 80% completed 1,000/1,000 and passed 57/57 modeled checks. Account review and design had equal 375px client/scroll widths. The daily timer changed to Pause session while running, then returned to Start / resume at 119:59 after navigating away and back, without recording a completed day. Desktop and narrow review screenshots contain only a synthetic identity: [desktop](screenshots/tracecraft-live-sync-desktop.jpg), [narrow](screenshots/tracecraft-live-sync-narrow.jpg).
+
+Screen-reader studies, a full device matrix, provider-backup restoration, sustained load and adversarial security qualification remain separate gates. The final follow-up changes only loading copy and documentation; production release metadata is recorded in the handoff.
 
 ## Earlier increment: optional GitHub sync and backend practice
 

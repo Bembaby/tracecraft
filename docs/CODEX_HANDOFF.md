@@ -118,6 +118,8 @@ Training and system-design exports are separate. A design backup uses `tracecraf
 
 ## Repository and hosting continuity
 
+The current public edition is [tracecraft.dev](https://tracecraft.dev), deployed on Vercel from `codex/authenticated-progress`. The linked project is `tracecraft` in the existing `belal-embabys-projects` team. Neon free Postgres is connected, schemas migrated, and `mail.tracecraft.dev` is verified for sending through a restricted Resend key. Secrets live in Vercel and ignored local environment files. The domain is registered for one year with auto-renew off; registrant contact verification is confirmed. Keep PR #2 open and unmerged. The prior private Site below is historical and was not changed by this deployment.
+
 The existing repository is `Bembaby/tracecraft`. The earlier increment used `feature/daily-developer-practice`. The account/progress increment uses `codex/authenticated-progress` from current `main`. Inspect `git status`, current branch, and remotes before committing, pushing, or opening a PR; local changes and a downloadable source archive do not establish that GitHub already contains the changes.
 
 An earlier October 28, 2026 GitHub upload attempt returned HTTP 403 before the `Bembaby` GitHub App installation was connected. This was a historical access issue, not an ongoing constraint. The v0.3 changes were then prepared for a normal pull request into `main`. Check GitHub for the current merged commit and any newer work before starting. The downloadable archive is a source snapshot, not a substitute for checking the current GitHub branch.

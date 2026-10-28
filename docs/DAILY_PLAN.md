@@ -1,55 +1,79 @@
-# A 30-minute path toward interview-ready evidence
+# The two-hour developer practice session
 
-This is a suggested routine, not an employment forecast. At 30 minutes each day, seven days add up to 3.5 hours; 90 days add up to 45 hours. That is meaningful practice time, but not a promise to become an expert across every topic or get hired within a deadline.
+Use one recurring session to write code, test it, explain it, and revisit a weakness. The target is independent performance and recovery when a problem is unfamiliar. A timer, a streak, or a viewed solution cannot establish that on its own.
 
-## Each session
+This plan schedules **120 minutes, including a 10-minute break**. The eight-week route has 56 suggested sessions and 112 scheduled hours; it is a planning scaffold rather than a deadline for expertise. Repeat a difficult gate and reduce new content when needed. The detailed assignments are in [DEVELOPER_PATH.md](DEVELOPER_PATH.md), with the same structured content in `src/training-content.mjs`.
 
-| Minutes | Activity | Evidence |
+## The daily loop
+
+| Minutes | Activity | Evidence to leave behind |
 |---|---|---|
-| 0–3 | Recall yesterday without notes | One prediction or definition written from memory |
-| 3–10 | Read one small concept and predict an example | Expected output plus a reason |
-| 10–22 | Write or repair code; trace; test a boundary | A saved attempt and one revealing test |
-| 22–27 | Explain aloud or in text | Input, state/invariant, edge case, complexity or trade-off |
-| 27–30 | Reflect and choose tomorrow | One misconception corrected and a next action |
+| 0–10 | Recall yesterday without notes | A fresh query or function, predicted output, and the exact point of uncertainty |
+| 10–25 | Learn one small concept | Three sentences: what it is, why it is needed, how it works |
+| 25–70 | Write and test | A first attempt, a normal input, an edge case, and a repaired failure |
+| 70–80 | Break | Step away; these minutes are not counted as coding |
+| 80–105 | Build a project step or investigate a failure | A runnable change, test, migration, or short investigation note |
+| 105–115 | Explain your decision | A concise explanation with a trade-off and a follow-up answer |
+| 115–120 | Log evidence and the next retry | Assistance used, one corrected mistake, and tomorrow’s exact starting task |
 
-On a difficult day, do a smaller complete loop rather than pretend a rushed hour of passive reading is equivalent. Do not use a timer or streak to conceal whether you understood anything.
+Start the timer when ready to work and pause it when interrupted. Keep a session note when your main task is in a terminal, IDE, or database tool outside TraceCraft. Never interpret elapsed time alone as an independently completed task.
 
-## First seven sessions: use the shipped alpha
+## How to use answers and AI during practice
 
-**Day 1 — Variables.** Open “Price the tickets.” Predict the output before tracing. Change an input. Explain why assigning a value does not create a live spreadsheet formula.
+1. Read the requirement, state the input/output contract, and predict a tiny example.
+2. Save an attempt before viewing a hint. Spend about ten minutes making a useful first attempt; do not spend the whole session staring at a blank editor.
+3. If stuck, ask for one diagnostic question or a small hint. Keep ownership of the next line of code.
+4. Run the code and inspect the actual result. Add an input that would expose your mistaken assumption.
+5. After a full solution view, mark that attempt assisted. Close it, use changed data, and try again later.
+6. For independent assessment, use no answer-generating assistance. For ordinary project work, use documentation and tools deliberately, and explain what you accepted and verified.
 
-**Day 2 — Accumulation.** Open “The running total.” Predict the value after each iteration. Load the deliberate bug and explain why it loses earlier values. Test empty input.
+The difference between an assisted solution and an independent retry is useful information, not a moral judgment. A result check proves only the tested behavior. A later attempt on changed data and an explanation provide different evidence.
 
-**Day 3 — Conditions.** Open “Count the alerts.” Focus on the exact threshold boundary. Write a test that distinguishes `>` from `>=`.
+## The first three sessions
 
-**Day 4 — Invariants.** Open “Find the highest reading.” Use all-negative input. Explain why initialization is part of correctness and why the non-empty contract matters.
+### Session 1: a valid schema and a join
 
-**Day 5 — Indexing.** Open “Weight the scores.” Explain how positions connect two lists and what validation a production program needs. Distinguish the miniature `range` implementation from real Python.
+Start the SQL lab from a blank editor. Create a parent table and child table with a real foreign key. Include one parent with no children and one with two children. Insert only valid child references. Write an INNER JOIN, predict the rows, and run it. Change to a LEFT JOIN and explain the added row.
 
-**Day 6 — A changed problem.** Open “Keep every running total.” Explain the output list and the cost of repeated list concatenation. The example is intentionally not the optimal real-Python `append` implementation.
+In the project block, write the relationship between `users` and `workouts` for a small learning project. Close the answer and reconstruct the query using new names. Finish by explaining the join key, result cardinality, and a constraint failure.
 
-**Day 7 — Explain and reflect.** Use the loop prompt in Interview studio. Save an explanation, identify one gap, and revise it. Compare your explanation to the actual trace rather than reading the solution aloud.
+### Session 2: Python object state and sequence operations
 
-Other available exercises—parity and capacity checks—are useful variants, not a mandate to finish every item in a fixed week.
+Use the full Python drills or a local Python 3 interpreter. Implement `Workout.__init__`, create two instances, and prove that each owns a different list. Practice append, indexing, and slices with an exclusive stop. Write assertions for an empty list, a short list, and no accidental input mutation.
 
-## The next learning route
+The original Mini-Python practice lab cannot run these class/function/string exercises. It remains useful for its supported numeric tracing exercises; do not interpret a mini-runtime limitation as a Python language rule.
 
-These phases are ordered by dependency, not promised completion dates. Most of this curriculum is not implemented yet; use the linked primary sources and real local projects while it is built.
+### Session 3: combine skills under a small time limit
 
-**Phase A: real Python foundations.** Functions, strings, dictionaries, sets, exceptions, files, modules, environments, tests, and debugging. Deliver a command-line application with original requirements and a reproducible test command. Keep a short explanation of one failed design and its repair.
+Attempt a new two-table query for 15 minutes, a short Python function for 20 minutes, and a three-minute architecture explanation. Save the initial work before review. Spend the remaining practice and project blocks repairing the weakest part and adding a revealing test.
 
-**Phase B: interview patterns.** Arrays/hash maps, two pointers, sliding windows, binary search, stacks/queues, trees, graph traversal, recursion, and selected dynamic programming. Learn a pattern by proving an invariant and handling a changed constraint, not recognizing a title. Mix delayed attempts with new tasks. The current mini interpreter is not sufficient for this entire phase.
+When you cannot recall something, use a concrete recovery sentence: “I’ll make a tiny example, identify the relationship, and write the smallest correct step.” Begin with table names, a function signature, or one expected row. The objective is useful progress while uncertain.
 
-**Phase C: SQL and an API.** Model a small domain, use keys and constraints, write joins/aggregations, explain an index, implement CRUD with authorization and validation, and add API tests. Build a job-application tracker or learning journal. Document error behavior, setup, and one trade-off.
+## What gets logged
 
-**Phase D: deployment and infrastructure.** Follow one real request from browser to API to database. Add structured logging, a health check, basic load testing, a queue when needed, and a simple failure drill. Explain where secrets belong and why code execution needs isolation.
+- The requirement and the code/query you wrote.
+- Whether you needed a hint, documentation, or a full answer.
+- Actual results and one edge case.
+- What you changed after a failed attempt, and why.
+- Your explanation: what, why, how, trade-off, failure case.
+- A later independent attempt using changed data.
 
-**Phase E: relevant specialty.** For Java-oriented roles, implement a tested service and explain types, equality, collections, exceptions, and JVM basics. For AI/backend roles, build a permission-aware retrieval project with source citations, a keyword baseline, held-out evaluation questions, and an explicit unsupported-answer policy. Do not merely wrap a chatbot and claim a measured RAG system.
+Project tasks may use a local MySQL database, Java/Spring project, terminal, or IDE. Check them off only after producing the stated deliverable. These are self-assessments unless a separate observed check is explicitly identified.
 
-**Phase F: interviews and applications alongside learning.** Practice a project walkthrough, a coding explanation, a system trade-off, and a behavioral story grounded in your actual work. Apply to suitable roles when you can demonstrate relevant foundations and a project; do not wait to master every advanced branch. Tailor evidence honestly and reflect on feedback after each interview.
+## Weekly check
 
-## Weekly review
+Choose an unfamiliar variation, a previous error, and an explanation. Attempt them with the old answer hidden. Ask whether the tests would reject your earlier incorrect approach. Demonstrate a concrete behavior rather than reporting that a tutorial felt familiar.
 
-Select one unseen variation, one previous error, and one explanation. Ask: Can I solve this without reading the old answer? Can I state the input contract? Does my test distinguish correct from incorrect behavior? Can I explain a meaningful trade-off? What artifact would show another engineer that I actually did this work?
+If an entire two-hour session is impossible, do one short complete loop: ten minutes of recall, fifteen minutes of writing/testing, and five minutes of explanation. Record it as a shorter session. Resume the normal plan the next day without trying to manufacture a perfect streak.
 
-A useful portfolio case study contains a problem statement, repository, setup instructions, tests, a architecture sketch, a decision record, an observed result with a reproducible measurement, and a limitation. Building TraceCraft can itself become such a project—but understand and maintain the generated code rather than presenting it as work you have not reviewed.
+## Environments and references
+
+The SQL lab uses SQLite in the browser. MySQL transaction, query-plan, migration, backup, and account-management tasks require a separate local MySQL instance with synthetic data. Python exercises need full Python 3. Java/Spring assignments run in a local learning project. Completing browser queries alone does not verify database administration or production operations.
+
+- [Python tutorial: sequences](https://docs.python.org/3/tutorial/introduction.html)
+- [Python tutorial: classes](https://docs.python.org/3/tutorial/classes.html)
+- [MySQL tutorial](https://dev.mysql.com/doc/refman/8.4/en/tutorial.html)
+- [Spring JDBC guide](https://spring.io/guides/gs/relational-data-access/)
+- [Microservices architecture trade-offs](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices)
+
+The exercises and plan are original TraceCraft assignments. The linked primary documentation supports language and platform behavior; it is not evidence that a fixed schedule guarantees a learning or hiring outcome.

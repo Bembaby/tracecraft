@@ -4,7 +4,7 @@ Research date: September 8, 2026. Product decisions below are proposals, not mea
 
 ## The job to be done
 
-A learner can often recognize a familiar solution but struggles to produce or explain it under a new constraint. TraceCraft should help the learner build a mental model, use it to write code, test it against a counterexample, and communicate its limits. The product should serve both a beginner asking what assignment does and an engineer explaining a retrieval failure—but not pretend those needs are the same lesson.
+A learner can often recognize a familiar solution but struggles to produce or explain it under a new constraint. TraceCraft should help the learner build a mental model, use it to write code, test it against a counterexample, and communicate its limits. The product should serve both a beginner asking what assignment does and an engineer explaining a retrieval failure, with lessons tailored to those different needs.
 
 The initial audience is a Python-first learner preparing for entry-level software/backend interviews. Java is a second language track, not a parallel prerequisite on day one. The full map supports web, database, systems, and AI specialties later. A role selector should narrow the map rather than dump every technology into today’s to-do list.
 

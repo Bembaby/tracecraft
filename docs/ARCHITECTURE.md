@@ -1,125 +1,134 @@
-# Architecture: prototype now, production boundaries next
+# Architecture: the v0.3 practice app and its boundaries
 
-## Implemented alpha
+TraceCraft remains a static, local-first **alpha**. Version 0.3 adds an editable system-design graph, deterministic flow checks, and a redesigned workspace to the real browser SQL/Python execution and daily learning routine. It does not add an application server, cloud progress synchronization, or a custom account API.
 
-```text
-Browser
-  ├─ original lesson data and UI
-  ├─ bounded Mini-Python parser/interpreter
-  │    └─ snapshots → source line / variables / output
-  ├─ public fixture evaluator
-  ├─ toy systems models
-  └─ local progress storage
-       optional: browser speech service
-       optional: jsDelivr → Three.js / Anime.js
+## Implemented system
 
-Node static server: serves assets only; does not run submitted code
+```mermaid
+flowchart TD
+    Assets["HTTP asset server"] --> UI["Browser application"]
+    UI --> State["Local progress and backups"]
+    UI --> SQL["SQL worker"]
+    UI --> Python["Python worker"]
+    UI --> Mini["Mini-Python visual debugger"]
+    UI --> Design["Editable design graph and flow model"]
+    SQL --> SQLite["Vendored SQLite WASM"]
+    Python --> CDN["Pinned Pyodide assets on enable and run"]
 ```
 
-The app has no database, account system, cloud execution, LLM inference, or secret store. The build is a copy/inlining operation, not a production bundler. The client modules and single-file preview use the same source. A dependency-free baseline is useful for inspection and reproducible starter behavior, not a long-term argument against frameworks.
+The Node server serves files; it never executes learner Python or SQL. SQLite runs inside a browser worker using vendored assets. The full-Python worker loads a pinned Pyodide distribution after explicit UI enablement and a run/check action. The original Mini-Python interpreter stays available as a separate, clearly labeled teaching model.
 
-### Mini-Python contract
+| Source | Responsibility |
+|---|---|
+| `src/app.mjs` | Shared navigation/shell and original visual lab, topic map, demos, studio, reading, and settings |
+| `src/design.css` / `src/system-design.css` | Redesigned shared workspace and system-design canvas/inspector/table layouts |
+| `src/training.mjs` | Daily workspace, SQL/Python editors and worker lifecycle, architecture prompts, evidence UI, backup controls |
+| `src/training-state.mjs` | State validation, day keys, help records, checked attempts, and review scheduling |
+| `src/training-content.mjs` | Versioned-in-Git session blocks, 56 assignments, six Python drills, six architecture scenarios |
+| `src/sql-content.mjs` | Ten SQL exercises, seeds, changed fixtures, contracts, reference solutions, and deliberate bugs |
+| `src/sql-runtime.mjs` / `src/sql-worker.js` | SQL controller deadlines, worker protocol, disposable databases, execution and fixture checks |
+| `src/python-runtime.mjs` / `src/python-worker.js` | Python controller, Pyodide initialization, CPython harness, assertions, traces and cancellation |
+| `src/system-design.mjs` | Graph editing, inspector, canvas/table views, simulation controls, checks, assistance, notes, and import review |
+| `src/system-design-state.mjs` | Validated design drafts, settings, help records, recent check history, and backup serialization |
+| `src/system-design-engine.mjs` | Pure bounded graph validation, deterministic flow calculation, and public requirement evaluation |
+| `src/system-design-content.mjs` | Six original challenge contracts, baseline and changed workloads, reference graphs, and deliberate bugs |
+| `public/vendor/sqljs/` | Pinned sql.js/SQLite distribution and license |
+| `scripts/serve.mjs` / `scripts/build.mjs` | Local static serving and directory build; neither runs learner submissions |
 
-The parser accepts numeric/boolean expressions, flat lists, assignments, selected compound assignments, `for`, `if/else`, and `print`. Built-ins are a bounded subset of `range`, `len`, `sum`, `min`, and `max`. Four-space indentation is required. There is no string/object/module/class/function API, no `eval`, and no conversion into arbitrary JavaScript source.
+## Execution boundaries
 
-Limits: 12,000 source characters; 160 lines; 500 trace frames; 50,000 counted operations; 200 list/range items; finite numeric magnitude at most 1e12. Nested lists are rejected, including in fixture overrides, to avoid explosive snapshot structures. Snapshots are post-operation copies. Frames include the original source line. An empty loop records that its body was skipped.
+### SQL
 
-This is a numeric teaching model, not full Python semantics: JavaScript numbers are used, no distinction between arbitrary-precision Python integers and floating representation is preserved, `range` is materialized, and output formatting is simplified. Do not use it to teach precise CPython heap layouts or evaluate arbitrary interview submissions. Large or unsupported input must yield a visible error rather than a fictional trace.
+The runtime pins sql.js 1.15.2 and displays `sqlite_version()` from the actual engine. Each lab starts from an empty database or its seed, with foreign keys enabled before seeding. **Run** changes the current practice database. **Check** executes the submission in separate fresh databases for each public fixture. Query checks compare results; mutation exercises inspect actual schema/data state. Duplicate result rows remain meaningful, and ordering is checked only where the contract requires it.
 
-Public fixtures replace the first direct assignment to designated input names. A malicious learner can inspect or bypass these tests. That is acceptable for an explicitly local practice tool, not for ranked contests, certificates, or paid entitlement enforcement.
+Leaving the lab, resetting, cancelling, or terminating its worker discards the in-memory database. Saved SQL editor text and attempt records are a separate progress concern. Checks do not mutate the Run workspace. Multi-statement scripts are not automatically made atomic; explicit transactions and partial failure are part of the learning behavior.
 
-## Proposed production architecture
+A main-thread watchdog terminates long-running work. Source length, statement/result counts, materialized output, SQLite heap, and initial database-page limits bound ordinary practice. These controls do not certify the runtime as safe for adversarial public grading. Full constants, provenance, and test coverage are in [SQL_LAB.md](SQL_LAB.md).
 
-```text
-Web app / accessible editor
-       │ authenticated HTTPS
-Application API ── authorization ── PostgreSQL
-       │                               ├─ lessons / revisions / sources
-       │                               ├─ attempts / concept evidence
-       │                               └─ sessions / entitlements
-       ├─ job queue → runner control plane
-       │                └─ ephemeral isolated execution environments
-       │                      Python / Java / SQL
-       ├─ tutor orchestrator → approved source retrieval → model adapters
-       └─ short-lived voice-session credential → browser realtime channel
+This is **SQLite**, not a MySQL/PostgreSQL server. The local database-management assignments intentionally use a separate real database process for accounts, concurrent sessions, engine-specific isolation, migrations, backup/restore, and operations.
+
+### Full Python
+
+The new lab pins Pyodide 314.0.7, a CPython WebAssembly distribution. Constructing the controller does not fetch it. After enablement, a run or check initializes a module worker and downloads runtime assets from the pinned jsDelivr base. TraceCraft has no remote code execution endpoint and does not upload the learner’s source as part of that loading flow. The CDN receives normal asset-request metadata.
+
+Each run creates a fresh learner namespace; the interpreter and imported module cache can be reused until the worker is disposed. A fresh namespace is not a fully reset machine. The harness compiles learner source with a fixed filename, executes it in CPython, and optionally executes public assertion source. Python functions, classes, dictionaries, strings, slices, and integers come from that runtime, not a JavaScript approximation.
+
+The harness records actual `sys.settrace` events for learner code. A `line` event describes state **before** that line runs; return and exception events describe those actual events. Trace frames distinguish initial program execution from learner functions invoked by the checks. Values are bounded text snapshots, not a full object-identity graph. The UI escapes source, output, errors, and local values.
+
+Startup and execution deadlines terminate the worker; output and trace sizes are bounded. There is no independent hard memory quota and no guarantee that all desktop Python packages or operating-system features work. An empty JavaScript globals bridge reduces accidental exposure but does not establish network isolation. Browser runtime loading/CSP checks are separate from local CPython harness tests. See [PYTHON_RUNTIME.md](PYTHON_RUNTIME.md).
+
+### Original Mini-Python
+
+The Visual debugger still uses the original bounded interpreter: numeric/boolean expressions, flat lists, assignments, selected compound assignments, `for`, `if/else`, `print`, and selected built-ins. It has no functions, classes, strings, imports, or general JavaScript execution. Its JavaScript numeric representation and materialized `range` differ from CPython.
+
+Limits remain 12,000 source characters, 160 lines, 500 trace frames, 50,000 counted operations, 200 list/range items, and finite numeric magnitude at most 1e12. Its snapshots show state **after** an operation. That differs deliberately from the new Python lab’s `line` event convention; the interfaces label their timing.
+
+The old systems row-filtering model is a JavaScript demo, and the retrieval model is keyword matching without generation. Neither becomes a SQL engine or a complete RAG system merely because a new runtime exists elsewhere in the application.
+
+### System design
+
+The system-design engine is a pure local calculation over a bounded graph. It starts no server processes and sends no simulated requests over the network. One traffic source supplies a fixed average read/write rate. Directed connections determine where that traffic travels; only load balancers split a stream, avoiding accidental request duplication.
+
+Cache/CDN hits complete only the read portion of traffic. Databases are terminal completion points. Processing overload and broken routes produce failed work; rate limiting is counted separately as deliberate rejection. A supported asynchronous branch may contain one finite queue, whose unfinished writes remain pending up to the buffer limit. The graph must be acyclic, and queued work cannot merge with a synchronous branch.
+
+Each valid simulation conserves offered work across completed, rejected, failed, and pending rates. Estimated mean completion latency is a completed-flow-weighted sum of configured service times. It excludes queue waiting, congestion, jitter, network distance, and tail percentiles. Capacity, hit rate, and service time are editable assumptions, not observed infrastructure performance. See [SIMULATION_MODEL.md](SIMULATION_MODEL.md) for exact fields, bounds, and queue arithmetic.
+
+Challenge checks evaluate the submitted graph against an authored baseline and changed fixtures, independently of exploratory settings. Requirements inspect flow, named paths, and configuration budgets. Reference solutions and deliberate failures are regression-tested. These checks do not grade business boundaries, consistency, authorization, or architectural suitability; explanations remain self-assessed.
+
+The UI displays the same calculated results on its diagram and tables. Pointer dragging and keyboard movement update node positions. Inspector and table controls provide connection operations without drawing. Functional changes invalidate prior check results; layout-only changes do not alter simulation meaning. Undo/redo history is bounded and session-local.
+
+## Progress and assessment model
+
+Training progress uses `tracecraft:training:v1`; the original visual/studio state remains under `tracecraft:v1`. System-design work has its own `tracecraft:system-design:v1` record. These stores preserve their separate schemas and are not encrypted services or cross-device synchronization systems.
+
+Training records include the selected assignment, self-reported block/day completion, drafts, explanations, help views, checked attempts with source text and time, review state, reflection notes, and remaining session time. Validation bounds imported fields and collections. Export produces a JSON training backup; validated import replaces that training workspace while preserving the original visual/studio store. SQL database bytes and the Python interpreter state are not part of the backup.
+
+The two-hour countdown is a planning aid: 110 work minutes plus a 10-minute break. It pauses when the page is hidden or closed and never marks a lesson complete merely because time elapsed. Work in an IDE or database client should be documented as evidence; the browser timer is not an external activity monitor.
+
+In-app hint/solution views and deliberate-bug loads mark assistance for that exercise/day. A passing check with no recorded in-app help is labeled independent, but the app cannot detect outside notes, another AI tool, or prior exposure to a solution. This is honest personal practice data, not proctored assessment.
+
+A checked attempt schedules review. Independent passes on later days extend the suggested interval through 1, 3, 7, and 14 days; repeated same-day passes do not advance it. Failed or assisted checks return the task to a one-day retry. This deterministic schedule is not evidence of measured learning effectiveness.
+
+Architecture explanations and project gates are self-assessed. Public fixtures and assertion source are inspectable and can be bypassed by a determined user. Do not use client-side completion for certification, contest ranking, entitlement enforcement, or hiring predictions.
+
+System-design state includes per-challenge diagrams, exploratory settings, notes, in-app help level, and the latest 100 checks with diagram snapshots. JSON exports use `tracecraft-system-design`, version 1. Imports validate the supported structure, enforce a 2 MB cap, and display a replacement review before overwriting the design workspace. They do not replace training or original-tool state. Undo/redo history is not a durable backup.
+
+## Serving, builds, and access
+
+The build copies the source and assets into `dist/` without installing npm dependencies. `dist/tracecraft-preview.html` remains a second HTML entry referencing that directory; it is no longer an inlined, standalone app. Worker/module/WASM loading requires HTTP(S), correct MIME types, and an appropriate Content Security Policy. The default local server accepts `--host`, `--port`, and `--dist`.
+
+The generated `_headers` file expresses intended static-host security headers, but whether a host applies it must be verified on the deployed site. WebAssembly requires the appropriate WASM CSP permission; it does not require general JavaScript `unsafe-eval`. Hosting policy and worker responses are part of browser QA.
+
+A local display name is not authentication. A private hosting access gate, when deployed and verified, controls who can load that hosted app; it does not create a cloud progress database. The Sites deployment record is the authority for the current private publication state. No paid infrastructure or provider account is required for this version.
+
+## Future server architecture: not implemented
+
+A future durable progress service can begin as a modular application. Separate the security boundary for server-side untrusted execution from the beginning rather than running submissions inside an API process.
+
+```mermaid
+flowchart TD
+    Client["Web app"] --> API["Authenticated application API"]
+    API --> Records["Authorized relational progress store"]
+    API --> Queue["Opaque execution jobs"]
+    Queue --> Control["Execution control plane"]
+    Control --> Runner["Disposable isolated runtimes"]
+    API --> Tutor["Optional source-grounded tutor"]
+    Tutor --> Sources["Permission-filtered lesson sources"]
 ```
 
-Start with a modular application, not a microservice for every noun. Separate the **execution security boundary**, however, from the beginning. A web/API deployment platform can host the UI and control plane; it must not be assumed suitable for arbitrary untrusted programs merely because it can run server code.
+The candidate data model includes users, lessons/revisions, exercises/test cases, attempts, assistance events, explanations, review records, project evidence, and source permissions. Keep runtime and content versions with attempts so results can be interpreted after updates. Authentication identifies the visitor; every data operation still needs authorization, retention, export, and deletion behavior.
 
-A TypeScript application and component framework can organize complex lab state, streaming results, authoring, and account flows. Next.js is a candidate rather than an already implemented dependency. PostgreSQL holds relational progress and source metadata; use vector indexing only once a measured retrieval baseline justifies it. The queue carries opaque job identifiers rather than raw credentials. Object storage holds bounded artifacts with short-lived, authorization-checked download access.
+If server execution is introduced, require disposable environments, denied networking by default, no application secrets or host sockets, explicit resource/output bounds, cancellation, quota enforcement, validated artifacts, and adversarial cross-user tests. A normal application container or a browser worker is not sufficient evidence for hostile multi-tenant isolation. This is a future engineering gate, not a property claimed by v0.3.
 
-### Identity and data isolation
+A future tutor must retrieve only authorized, licensed content, preserve source/version identifiers, test answer grounding separately from retrieval, and handle unsupported questions. An AI-generated explanation or score must be labeled by assessor type and grounded in observed attempts. Provider billing requires separate explicit configuration and budgets; there is no such integration in this release.
 
-Use an established identity provider with a supported GitHub/OIDC login flow. Authentication answers who the user is; authorization decides which attempts, documents, classrooms, and billing entitlements they may access. Test both. Keep private progress private by default. Sharing is explicit and revocable.
+## Primary references
 
-Suggested entities:
+- [SQLite SQL and transactions](https://sqlite.org/lang.html)
+- [sql.js documentation](https://sql.js.org/documentation/database/)
+- [Pyodide worker architecture](https://pyodide.org/en/314.0.7/usage/webworker.html)
+- [Python trace-event semantics](https://docs.python.org/3.14/library/sys.html#sys.settrace)
+- [MySQL reference manual](https://dev.mysql.com/doc/refman/8.4/en/)
+- [Microservices architecture trade-offs](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices)
 
-- `users`, `profiles`, `organizations`, `memberships`.
-- `concepts`, `concept_prerequisites`, `lessons`, `lesson_revisions`, `exercises`, `exercise_versions`, `test_cases`.
-- `attempts`, `run_jobs`, `trace_artifacts`, `hint_events`, `explanation_attempts`, `concept_evidence`, `review_schedule`.
-- `projects`, `project_evidence`, `mock_sessions`, `self_assessments`, `assessor_reviews`.
-- `sources`, `source_versions`, `source_permissions`, `document_chunks`, `ingestion_jobs`.
-- `provider_connections`, `usage_ledger`, `plan_entitlements`, `consent_events`.
-
-Persist exercise revision, runtime image digest, input seed, outcome, help mode, and rubric version with an attempt. A result without its version context is difficult to reproduce. Treat traces and voice transcripts as user data with explicit retention, export, and deletion rules.
-
-### Untrusted code execution
-
-These are design requirements, not an implemented or audited security system:
-
-1. The API validates and queues a job. It never runs user Python/Java inline.
-2. A dedicated control plane starts a disposable sandbox with a pinned runtime image. Prefer a hardened isolation technology appropriate for adversarial multi-tenancy; evaluate microVMs or a syscall-sandboxed runtime rather than relying on an ordinary container alone.
-3. Deny external networking by default. Do not mount host sockets, metadata services, credentials, home directories, or the production filesystem.
-4. Use non-root execution, read-only base images, a small disposable work directory, and explicit CPU, memory, process, wall-time, file-count, output-byte, and artifact-byte limits.
-5. Kill work that exceeds limits. Cap retries and handle cancellation, queue backpressure, and duplicate jobs with idempotency.
-6. Keep judge fixtures in the appropriate server-side evaluation boundary. Separate trusted harness code from submitted source. Validate and sanitize result artifacts before rendering them.
-7. Patch and scan runtime images, inspect dependency supply chains, isolate tenants, record audit events, and run adversarial tests before public launch.
-
-A browser WASM runtime can support convenient local practice, but host capabilities and browser APIs still define its security boundary. A Web Worker is helpful for responsiveness and termination, not a universal security proof. A public grader cannot trust a score computed entirely by the client.
-
-### Trace protocol proposal
-
-```ts
-type TraceEvent = {
-  runId: string;
-  sequence: number;
-  phase: 'before' | 'after';
-  source: { file: string; line: number; column?: number };
-  kind: 'assign' | 'branch' | 'call' | 'return' | 'iteration' | 'output' | 'error';
-  frames: Array<{ id: string; functionName: string; locals: Record<string, ValueRef> }>;
-  objects: Record<string, { type: string; summary: string; children?: ValueRef[] }>;
-  stdoutDelta?: string;
-  explanationKey?: string;
-};
-type ValueRef = { primitive: string | number | boolean | null } | { objectId: string };
-```
-
-This future representation preserves object identity and call frames, unlike the miniature snapshot dictionary. Stable sequence numbers allow pause/step/replay and discarded duplicate events. All text is escaped, snapshots are size-bounded, and errors are structured. The lesson specifies whether a highlighted frame is before or after an operation; never mix conventions silently.
-
-Full-Python tracing can use controlled instrumentation within the isolated runtime. Java requires a separate versioned instrumentation/debugging strategy. Both need semantic regression tests for aliasing, mutation, recursion, exceptions, and output. Deterministic replay has limits with threads, randomness, wall-clock input, and external I/O; explain or disable unsupported nondeterminism.
-
-### Real RAG tutor
-
-Begin with the original lesson corpus and a keyword baseline. Build a small held-out query set with annotated relevant sources and unsupported questions. Compare lexical, vector, hybrid, and reranked retrieval; measure relevant-source coverage, ranking, latency, and cost separately from answer quality.
-
-Apply identity and document permissions before candidate text reaches the model. Preserve source/edition/chunk identifiers. Retrieved content is untrusted data, not an instruction to reveal secrets or change policy. Generation must cite supporting passages, identify missing evidence, and abstain when necessary. A citation is not automatically a factual guarantee: verify that it actually supports the answer.
-
-Test stale versions, deleted documents, ambiguous questions, low recall, contradictory sources, malicious source instructions, and cross-user access. Deletion must remove raw files, chunks, indexes, caches, and derived artifacts according to policy. See CONTENT_POLICY.md.
-
-### Quality and cost controls
-
-Instrument errors and performance without logging raw private code or voice by default. Use a request ID and explicit retention. Budget per run, lesson, voice session, and user. Store a usage ledger with idempotent accounting; quotas belong server-side. A daily app budget must stop provider calls even if the client UI is modified.
-
-No pricing or uptime target is promised here. Benchmark actual runtime startup, compilation, trace size, provider latency, and mobile behavior before choosing infrastructure tiers. The strongest initial optimization is keeping a lesson comprehensible and the default path inexpensive.
-
-## Primary technical references
-
-- Python tutorial and semantics: https://docs.python.org/3/tutorial/ and https://docs.python.org/3/reference/
-- Java language, collections, JVM, and tooling: https://dev.java/learn/
-- PostgreSQL tutorial and manual: https://www.postgresql.org/docs/current/tutorial.html
-- Pyodide worker architecture (verify current initialization API before implementation): https://pyodide.org/en/stable/usage/webworker.html
-- Three.js rendering: https://threejs.org/docs/pages/WebGLRenderer.html
-- Anime.js API: https://animejs.com/documentation/
-- OpenAI realtime browser connection: https://developers.openai.com/api/docs/guides/realtime-webrtc
-
-The security architecture above is a proposed set of engineering constraints, not a vendor certification or a claim that one linked tool provides them all.
+For observed verification and remaining limits, use [QA.md](QA.md), not the presence of an architectural requirement in this document.

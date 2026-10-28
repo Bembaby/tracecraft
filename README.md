@@ -1,100 +1,117 @@
 # TraceCraft
-### Don’t just code. See it happen.
+### Learn it. Write it. Test it. Explain it.
 
-A local-first visual learning and interview-practice **alpha**, designed around one useful loop:
+TraceCraft is a local-first developer-practice **alpha**. Version 0.3 adds an interactive system design lab and a redesigned workspace to the working two-hour routine, real SQL/Python practice, eight-week developer path, and architecture discussions.
 
-**Predict → learn → code → visualize → test → explain → revisit.**
+The learning loop is **attempt → run → inspect → explain → retry**. Progress distinguishes a passing check from a self-reported completed day, and records when the app supplied a hint or solution. These are practice records, not a certification or a hiring prediction.
 
-The ambition is a beginner-to-specialist curriculum that connects programming, algorithms, databases, infrastructure, and AI systems. The current implementation is a small, working starting point—not a complete LeetCode replacement or a guarantee of employment.
+## Start locally
 
-The next increment focuses on real Python execution and tracing, plus a verified lesson-authoring contract.
-
-## Start in one command
-
-Requires Node.js 22 or newer. There are **no npm dependencies to download**.
+Requires Node.js 22 or newer. There are **no npm packages to install** to start or build the app.
 
 ```bash
 npm start
 ```
 
-Open `http://127.0.0.1:3000`. Then try **Practice lab → Run & trace → Repair a bug → Check tests → Explain it**.
+Open `http://127.0.0.1:3000`. Begin with **Daily session** for the day's assignment, **SQL lab** to write actual queries, or **System design** to edit a diagram and investigate a bottleneck. See [START_HERE.md](START_HERE.md) for the first three steps and [the Codex handoff](docs/CODEX_HANDOFF.md) to continue development.
 
 ```bash
-npm run check   # JavaScript syntax checks
-npm test        # Node test suite, including all exercise fixtures
-npm run build   # Static dist/ plus a portable single-file HTML preview
+npm run check
+npm test
+npm run build
+npm start -- --dist --host 127.0.0.1 --port 3000
 ```
 
-The portable `dist/tracecraft-preview.html` can be opened in a browser. Some file viewers, browser privacy settings, speech APIs, and local-storage policies may restrict features; localhost is the recommended development path. Mobile attachment previews may show a static preview instead of running JavaScript.
+Stop an already running server before starting another on the same port. The server also accepts `HOST` and `PORT` environment variables. The Python contract tests use a local `python3` executable, or `TRACECRAFT_PYTHON`; checks that require CPython explicitly skip when it is unavailable.
 
-## What actually works
+**Serve the complete directory over HTTP(S).** The build copies `index.html`, `src/`, and `public/` into `dist/`. It preserves `dist/tracecraft-preview.html` as a second HTML entry, but that file is **no longer a self-contained preview**. Worker scripts, modules, and WebAssembly assets must remain beside it. Opening the HTML through `file://` or sharing only that one file does not provide the complete application.
 
-| Area | Included in this alpha |
+## What version 0.3 includes
+
+| Area | Implemented behavior |
 |---|---|
-| Practice | 8 original exercises, 29 public input fixtures, deliberately broken variants, hints, original teaching notes |
-| Execution | Bounded Mini-Python interpreter; editable code; source-line stepping; memory snapshots; output; replay |
-| Code blocks | Keyboard-operable line reordering with indentation preserved; not full Blockly |
-| Learning map | 13 stages with prerequisites, topics, outcomes, and project gates; future content explicitly marked planned |
-| Systems | Original five-passage keyword retrieval demo; toy cache/capacity calculator; local row-filtering concept demo |
-| Interview studio | 4 prompts, typed explanations, self-assessment; optional browser dictation and text-to-speech |
-| Daily practice | 30-minute focus timer, local practice days, one-time practice XP, saved drafts, progress export |
-| Reading | 12 source links; no scraped textbooks or copied question banks |
-| Visual design | Responsive dark interface, original SVG illustration, visible focus states, reduced-motion preferences |
-| Optional enhancement | Three.js scene and Anime.js entrance animation, loaded from a pinned CDN only after consent |
+| Workspace redesign | Charcoal surfaces, restrained lime accents, grouped navigation, a more direct daily assignment, compact session controls, and consistent workbench typography |
+| Daily session | 120-minute session: 110 minutes of work and a 10-minute break; seven check-in blocks; evidence notes; next assignment; timer pauses when the tab is hidden |
+| Developer path | 56 concrete assignments over eight suggested weeks, with a deliverable and competency gate; the schedule can be repeated or slowed |
+| SQL lab | Ten original exercises executed by local SQLite in a worker: schemas/constraints, filters, joins, grouping, NULL/absence, windows, updates, rollback, indexes, and actual query plans |
+| SQL checks | Fresh databases for changed fixtures, query-result or state checks, preserved duplicates, constraint probes, deliberate bugs, hints, and explanations |
+| Python lab | Six original full-Python drills covering instance state, slices, append/mutation, dictionaries, functions/boundaries, and exceptions; public assertions and source-linked traces |
+| System design | Editable component graph, directed connections, traffic/read-mix controls, component failures, numerical flow results, canvas/table views, keyboard editing, undo/redo, and saved drafts |
+| Design challenges | Six original challenges with capacity budgets, actual-topology checks, 19 baseline/changed-workload cases, hints, reference graphs, deliberate bugs, and explanations |
+| Design discussions | Six separate scenarios covering monolith/service choice, timeouts, duplicate requests, outbox delivery, stale caches, and data ownership; written attempts before worked explanations |
+| Evidence and review | Saved drafts, explanations, checked attempts, in-app help use, and suggested retries after 1, 3, 7, and 14 days; same-day repeated passes do not advance the interval |
+| Portability | Local browser progress and separate JSON backups for daily training, system design, and original tools; design import includes a concrete replacement review |
+| Original tools | Eight Mini-Python visual exercises, line-block reordering, three systems demos, four interview prompts, the 13-stage topic map, reading room, and optional visual/audio enhancements remain available |
 
-### What is deliberately not claimed
+### SQL and Python runtime boundaries
 
-Mini-Python is **not CPython**. It supports bounded numbers/booleans, flat lists, assignments, arithmetic, comparisons, `for`, `if/else`, and selected built-ins. It has no imports, strings, functions, classes, real Python packages, or arbitrary JavaScript execution. Numbers use JavaScript’s numeric representation, and the teaching runtime materializes `range`. Trace memory is not the real Python heap.
+The SQL lab uses **vendored sql.js 1.15.2**. The actual SQLite version is displayed by the running engine. Assets are served with the app, and queries run in a disposable browser database. Running SQL changes that workspace; checking uses separate fresh databases. Leaving or resetting the lab discards its database, while editor drafts and practice records are saved separately. See [SQL lab](docs/SQL_LAB.md).
 
-Tests are public pedagogical examples. Passing them earns **practice** credit, not a verified mastery score; the working example is intentionally available. The roadmap is a specification, not hundreds of finished lessons. The RAG demo is **keyword retrieval without generation**. The SQL-looking example is a visualization, not an SQL engine. The studio does not grade with AI or predict interview outcomes.
+The Python lab uses **Pyodide 314.0.7**, providing CPython in a browser worker. Enable Python and then run or check a program to download the pinned runtime from jsDelivr. An internet connection is needed for the initial download. The CDN receives ordinary asset-request metadata; TraceCraft does not send code to a remote execution service. Browser loading/CSP verification is reported separately from local CPython tests in [QA](docs/QA.md). See [Python runtime](docs/PYTHON_RUNTIME.md) for exact bounds and limitations.
 
-There is no account system, synchronization, production backend, real code judge, Java runtime, subscription billing, provider-backed AI voice, multiplayer arena, hackathon marketplace, or live deployment yet. Three.js/Anime.js and actual microphone services require a connected environment and device-specific verification. See [QA](docs/QA.md).
+Both runners have execution deadlines and bounded results. They support personal practice; they are not audited hostile-code sandboxes or tamper-resistant grading services. There is no Java runtime or server-side code execution.
 
-## Public GitHub repository
+### System design model boundaries
 
-This project is published at [github.com/Bembaby/tracecraft](https://github.com/Bembaby/tracecraft). The repository is public and the default branch is `main`.
+Build a directed graph from clients, a CDN, an API gateway, a rate limiter, a load balancer, application servers, a cache, a database, a queue, and workers. Change a component's assumptions or take it offline to see its effect on actual connected paths. Challenge checks use fixed public workloads and configuration budgets; changing the exploratory traffic slider does not change the requirements.
 
-To publish a fork or a new copy under another authenticated GitHub account:
+The engine keeps **completed, deliberately rejected, failed, and pending work separate**. Read-cache hits do not complete writes. A load balancer shares traffic among its available direct targets. A finite queue distinguishes acceptance from completion and exposes pending messages. A broken connection has a consequence; merely adding a component does not make it handle traffic.
 
-On your own computer, install and authenticate GitHub CLI, then run:
+All capacities and service times are **authored educational assumptions**. This is a deterministic flow model, not a benchmark or a real infrastructure deployment. Its estimated mean completion latency excludes congestion, queue waiting, jitter, and percentiles. It does not simulate cache freshness, transaction isolation, service ownership, retry safety, or exactly-once effects. Use [the lab guide](docs/SYSTEM_DESIGN_LAB.md) and [the exact model contract](docs/SIMULATION_MODEL.md) to understand what a result proves.
 
-```bash
-gh auth login
-npm run publish:github
-```
+## Follow the path without confusing a checklist with a skill
 
-The script creates `YOUR_AUTHENTICATED_ACCOUNT/tracecraft` with `--public`, runs checks first, and stops if that repository or an `origin` remote already exists. To choose another repository name:
+The first sessions focus on writing a valid schema and join from a blank editor, refreshing Python fundamentals, and explaining a small design clearly. Later tasks require a **separate local MySQL database and Java/Spring learning project**: migrations, concurrent connections, backups/restores, authorization, API tests, debugging, and failure experiments. Selecting or checking off those assignments does not perform that work automatically.
 
-```bash
-bash scripts/publish-github.sh my-project-name
-```
+Use the [two-hour plan](docs/DAILY_PLAN.md) for the daily loop and the [developer path](docs/DEVELOPER_PATH.md) for all 56 assignments. Eight weeks is a suggested sequence, not a promise of expertise. Retry a gate with changed data and record assistance honestly.
 
-Inspect the files before publishing. Do not add exported personal progress, credentials, customer data, or private documents. Git must have an author configured to make a commit. The package's `"private": true` setting prevents accidental **npm package publication**; it does not make the GitHub repository private.
+## Progress, accounts, and hosting
 
-No paid hosting or AI account is provisioned. A static build can be hosted after publication. Choose deployment settings explicitly; CI currently checks source, tests, and build only.
+Progress is stored in this browser and origin. It is **not synchronized between devices**. Export the relevant backups before changing devices or clearing browser data. These files contain your code, diagrams, and personal notes.
 
-## Repository guide
+| Workspace | Storage key | Backup location |
+|---|---|---|
+| Daily training, SQL/Python, reviews | `tracecraft:training:v1` | Daily session; latest 500 checks retained |
+| System design graphs, notes, and checks | `tracecraft:system-design:v1` | System design; latest 100 checks retained |
+| Original visual/debugging/interview tools | `tracecraft:v1` | Settings |
 
-- [Research and competitive synthesis](docs/RESEARCH.md): 28 public-source platform reviews, design opportunities, limitations.
-- [Product brief](docs/PRODUCT.md): learning loop, information architecture, visual direction, success criteria.
-- [Curriculum](docs/CURRICULUM.md): stages, prerequisite graph, project outcomes, graduation rubrics.
-- [Architecture](docs/ARCHITECTURE.md): prototype boundaries, production data model, execution isolation, trace protocol.
-- [Voice and providers](docs/VOICE.md): legitimate integration paths, billing distinctions, privacy, cost controls.
-- [Content and licensing](docs/CONTENT_POLICY.md): original lessons, source registry, reading rights, private uploads.
-- [Build roadmap](docs/ROADMAP.md): phased implementation backlog with acceptance criteria.
-- [30-minute learning plan](docs/DAILY_PLAN.md): a Python-first route toward demonstrable interview skills.
-- [Quality report](docs/QA.md): completed checks and explicit untested areas.
+Importing one workspace does not replace the other stores. System design imports use a 2 MB limit and show a review before replacement. A local display name is a profile preference, not an authenticated account.
 
-## Technology decisions
+There is no custom account API or cloud progress database. Hosting-level private access is separate from application data synchronization. No paid runtime/API service is required for this version.
 
-The alpha is intentionally small: ES modules, semantic HTML, CSS, a hand-written teaching interpreter, and Node’s built-in server/test runner. Its core works without installing a framework. This makes the repository inspectable and useful immediately.
+**v0.3 publication:** The app was published privately on October 28, 2026 at [tracecraft-daily.belal919.chatgpt.site](https://tracecraft-daily.belal919.chatgpt.site). The hosting service confirmed a successful deployment. Access uses the existing owner-only audience; application progress still stays in the browser. Local test/build evidence is recorded in [QA](docs/QA.md). GitHub branch saving and remote CI are separate from hosting.
 
-The production plan adds TypeScript, a component-based application (Next.js is a candidate), an accessible code editor, real Python/Java runtimes, PostgreSQL, queues, isolated execution, authenticated progress, and approved model-provider adapters. It does not introduce every dependency before the first learning loop is validated.
+## Repository and development
+
+The existing public repository is [Bembaby/tracecraft](https://github.com/Bembaby/tracecraft), with `main` as its default branch. The current source can be developed and tested locally without provisioning a hosting account. A local passing check does not establish a GitHub Actions run or a deployed version.
+
+The `publish:github` script is for publishing a **new fork/copy** under an authenticated account; it stops if a repository or `origin` already exists. It is not the update workflow for this existing repository. Keep exported progress, credentials, customer data, and private documents out of commits. `package.json`’s `private: true` prevents accidental npm publication; it does not change GitHub visibility.
+
+## Documentation
+
+- [Daily plan](docs/DAILY_PLAN.md): the 120-minute loop and immediate three-session preparation track.
+- [Developer path](docs/DEVELOPER_PATH.md): eight weeks of assignments and observable gates.
+- [SQL lab](docs/SQL_LAB.md): engine, exercises, fixture checks, limits, and vendor provenance.
+- [Python runtime](docs/PYTHON_RUNTIME.md): loading consent, CPython behavior, traces, cancellation, and test scope.
+- [System design lab](docs/SYSTEM_DESIGN_LAB.md): controls, six challenges, practice routine, backups, and authoring contract.
+- [Simulation model](docs/SIMULATION_MODEL.md): exact flow arithmetic, assumptions, limits, and requirement evaluator.
+- [Codex handoff](docs/CODEX_HANDOFF.md): code map, startup commands, existing Site identity, and focused next implementation gates.
+- [Architecture](docs/ARCHITECTURE.md): implemented boundaries and future server responsibilities.
+- [Roadmap](docs/ROADMAP.md): shipped work, remaining acceptance gates, and later milestones.
+- [QA](docs/QA.md): current observations, historical evidence, and pending verification.
+- [Original curriculum](docs/CURRICULUM.md): the broader topic map; planned content remains planned.
+- [Research](docs/RESEARCH.md), [product brief](docs/PRODUCT.md), [voice plan](docs/VOICE.md), and [content policy](docs/CONTENT_POLICY.md): earlier design work and longer-term direction.
+
+## Retained prototype labels
+
+The **Visual debugger** runs Mini-Python, a bounded teaching subset. It remains distinct from the new full-Python lab. Its numeric representation, supported syntax, and memory snapshots are simplified; it is not CPython. The systems retrieval demo is keyword retrieval without generation, and the original row-filtering demo is a JavaScript visualization. The new SQL lab is the place to execute SQL.
+
+The app does not provide AI grading, an LLM tutor, paid voice APIs, production database administration, multiplayer contests, or a job-outcome score. The broader topic map describes future learning coverage as well as shipped exercises.
 
 ## Privacy, accessibility, and licenses
 
-No analytics or tracking scripts are installed. Progress is local browser storage, not encrypted cloud storage. Optional browser recognition may send audio to the browser vendor’s service; transcripts are saved only by explicit action. Optional visual libraries contact jsDelivr. The app never asks for API keys, passwords, or session cookies.
+No analytics or tracking scripts are installed. Browser storage is not encrypted cloud storage. Optional browser speech recognition may send audio to the browser vendor; the existing consent flow remains device dependent. Optional visual libraries and the enabled Python runtime contact jsDelivr. The app does not ask for API keys, account passwords, or session cookies.
 
-Keyboard use, readable text, small-screen layouts, and reduced-motion fallbacks are design requirements. The current tests are not a WCAG certification or a security audit.
+Keyboard navigation, text equivalents, responsive layouts, and reduced-motion behavior remain design requirements. See QA for what was actually checked; no accessibility certification or production security audit is claimed.
 
-Original code, examples, instructional notes, and design assets in this repository are under the [MIT license](LICENSE), unless explicitly stated otherwise. External resources retain their own copyrights and licenses; links are not a grant to redistribute. No affiliation with named learning platforms is implied. “TraceCraft” is a working name; availability and trademark clearance have not been established.
+Original code and teaching content are [MIT licensed](LICENSE). Vendored sql.js includes its own MIT notice; SQLite is public domain. Pyodide and its components retain their upstream licenses, including Pyodide’s MPL 2.0. Linked external materials retain their copyrights. “TraceCraft” remains a working name without a claim of trademark clearance.

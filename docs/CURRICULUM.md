@@ -414,17 +414,17 @@ Content depth is reviewed separately from catalog breadth. The roadmap can grow 
 
 ## Source companions
 
-- [Think Python, third edition](https://greenteapress.com/wp/think-python-3rd-edition/) — Allen B. Downey. Read for progressive explanations and small experiments. Link-only here; the listed license restricts commercial reuse.
-- [The Python Tutorial](https://docs.python.org/3/tutorial/) — Python documentation. The language reference companion: data structures, control flow, functions, modules, and errors.
-- [dev.java learning materials](https://dev.java/learn/) — Oracle / Java developer portal. Use the modern language and tooling documentation alongside a tested Java project.
-- [Operating Systems: Three Easy Pieces](https://pages.cs.wisc.edu/~remzi/OSTEP/) — Remzi and Andrea Arpaci-Dusseau. Read around virtualization, concurrency, and persistence. Free access is not blanket republishing permission.
-- [OpenDSA](https://opendsa-server.cs.vt.edu/) — OpenDSA / Virginia Tech. Compare an algorithm explanation with its interactive exercise. No third-party exercises are copied into this app.
-- [Composing Programs](https://composingprograms.com/) — John DeNero. Abstraction, program structure, and reasoning. Edition-specific licensing needs review before any adaptation.
-- [PostgreSQL Tutorial](https://www.postgresql.org/docs/current/tutorial.html) — PostgreSQL documentation. Pair SQL syntax with constraints, transactions, and query-plan experiments.
-- [CS50x](https://cs50.harvard.edu/x/) — Harvard CS50. A broader conceptual companion. Complete your own work; do not transplant course solutions.
-- [Retrieval Augmented Generation](https://www.deeplearning.ai/courses/retrieval-augmented-generation) — DeepLearning.AI. Extend retrieval intuition into an evaluated system. This catalog links to the course; it does not include paid content.
-- [Three.js manual](https://threejs.org/manual/) — Three.js contributors. Scene graphs, rendering, and performance for concept-driven 3D labs.
-- [Anime.js documentation](https://animejs.com/documentation/) — Anime.js contributors. Use motion to indicate a meaningful state change. Reduced-motion mode must retain the explanation.
-- [Software Carpentry lessons](https://swcarpentry.github.io/python-novice-images/license/) — The Carpentries. A useful example of explicit lesson and code licensing. Preserve attribution and review individual assets.
+- [Think Python, third edition](https://greenteapress.com/wp/think-python-3rd-edition/): Allen B. Downey. Read for progressive explanations and small experiments. Link-only here; the listed license restricts commercial reuse.
+- [The Python Tutorial](https://docs.python.org/3/tutorial/): Python documentation. The language reference companion: data structures, control flow, functions, modules, and errors.
+- [dev.java learning materials](https://dev.java/learn/): Oracle / Java developer portal. Use the modern language and tooling documentation alongside a tested Java project.
+- [Operating Systems: Three Easy Pieces](https://pages.cs.wisc.edu/~remzi/OSTEP/): Remzi and Andrea Arpaci-Dusseau. Read around virtualization, concurrency, and persistence. Free access is not blanket republishing permission.
+- [OpenDSA](https://opendsa-server.cs.vt.edu/): OpenDSA / Virginia Tech. Compare an algorithm explanation with its interactive exercise. No third-party exercises are copied into this app.
+- [Composing Programs](https://composingprograms.com/): John DeNero. Abstraction, program structure, and reasoning. Edition-specific licensing needs review before any adaptation.
+- [PostgreSQL Tutorial](https://www.postgresql.org/docs/current/tutorial.html): PostgreSQL documentation. Pair SQL syntax with constraints, transactions, and query-plan experiments.
+- [CS50x](https://cs50.harvard.edu/x/): Harvard CS50. A broader conceptual companion. Complete your own work; do not transplant course solutions.
+- [Retrieval Augmented Generation](https://www.deeplearning.ai/courses/retrieval-augmented-generation): DeepLearning.AI. Extend retrieval intuition into an evaluated system. This catalog links to the course; it does not include paid content.
+- [Three.js manual](https://threejs.org/manual/): Three.js contributors. Scene graphs, rendering, and performance for concept-driven 3D labs.
+- [Anime.js documentation](https://animejs.com/documentation/): Anime.js contributors. Use motion to indicate a meaningful state change. Reduced-motion mode must retain the explanation.
+- [Software Carpentry lessons](https://swcarpentry.github.io/python-novice-images/license/): The Carpentries. A useful example of explicit lesson and code licensing. Preserve attribution and review individual assets.
 
 The sources are reading companions and editorial references. This document is an original curriculum proposal, not a reproduction of their chapter text or an assertion that every linked work was read cover to cover.

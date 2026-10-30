@@ -8,7 +8,7 @@ const python=process.env.TRACECRAFT_PYTHON||(process.platform==='win32'?'python'
 const available=spawnSync(python,['--version'],{encoding:'utf8',timeout:5000}).status===0;
 function execute(runs){
   const script=PYTHON_HARNESS+'\n_runs = _tc_json.loads(_tc_sys.stdin.read())\nprint(_tc_json.dumps([_tc_json.loads(tracecraft_execute(_tc_json.dumps(run))) for run in _runs]))';
-  const result=spawnSync(python,['-c',script],{encoding:'utf8',input:JSON.stringify(runs),timeout:10000,maxBuffer:2*1024*1024});
+  const result=spawnSync(python,['-c',script],{encoding:'utf8',env:{...process.env,PYTHONUTF8:'1',PYTHONIOENCODING:'utf-8'},input:JSON.stringify(runs),timeout:10000,maxBuffer:2*1024*1024});
   assert.equal(result.status,0,result.stderr||result.error?.message);return JSON.parse(result.stdout);
 }
 

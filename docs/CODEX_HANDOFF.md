@@ -1,14 +1,49 @@
+# Current API adventure handoff
+
+October 29, 2026. The latest request explicitly authorizes **merge and deployment**, superseding older instructions below to keep PR #2 open. The new entry is `#apis`: nine tracks, 46 lessons, 138 questions, eight deterministic request models, one real health-response inspector, daily review and owner-scoped progress through the existing snapshot. Production is READY as `dpl_B4cgZQNKW9MkMMFV523gfBSQ7Piv` on tracecraft.dev, with all 131 public assets matching and health/auth boundaries passing. Required local gates pass with 656 tests and zero skips. Read [API_ADVENTURE.md](API_ADVENTURE.md), [API_PHONE_ROUNDS.md](API_PHONE_ROUNDS.md) and the latest [QA.md](QA.md) section first. Models remain labeled as models, writing and projects as self-assessment. Preserve all existing Python/SQL/Java, system design, coach and interview coursework. Older release details below describe earlier states.
+
+# TCS path
+
+October 29, 2026. The latest request adds `#tcs`, with 25 original lessons covering all 24 requested discussion topics, eight Python and two SQLite tasks. Total library: 51 Python, 40 SQL and ten browser Java tasks. `tcs-content.mjs`, `tcs-lab-content.mjs`, `tcs-state.mjs`, `tcs.mjs` and `tcs.css` own the path. Optional validated TCS state lives inside training progress and existing reviewed account backups. All 609 tests pass with zero skips, plus check/build and desktop/phone browser execution/save/restore checks. Read [TCS_PATH.md](TCS_PATH.md) and latest [QA.md](QA.md). The private source export was read only; its assessment text was not copied into the published curriculum. No push or merge. The prior completion heartbeat stays paused.
+
+# Connected practical learning extension
+
+Latest publication is TCS deployment `dpl_3qKscnQ9orEvMCCjdqN1Gfat5S8S` (READY), all 111 public assets matching, health/auth boundaries passing. The live path is `https://tracecraft.dev/#tcs`. Earlier deployment references below are historical.
+
+October 29, 2026. The latest user attachment is implemented through the core three phases in [PLATFORM_IMPLEMENTATION.md](PLATFORM_IMPLEMENTATION.md). Start at `#coach`. Totals: 43 Python, 38 SQLite and ten browser Java tasks; 35 additional authored scenarios; 62 skills and a six-part diagnostic. Private coach state migrates inside existing training/account backups. Check/test/build pass with 576 tests and zero skips. Authenticated synthetic loopback covers actual runners, diagnostic skip, notebook/profile reload, reviewed account restore, scenario retry and optional walking/clock controls at desktop/phone sizes. Read the latest [QA record](QA.md) before older release notes. Specialist full-project/inference work remains planned with a concrete continuation, and free writing remains self-assessment. No source push or PR merge. The previous completion heartbeat remains paused.
+
+Deployment `dpl_5fDuWFCf1QWG5fG2Ce2vKWkWMC5K` is READY on tracecraft.dev. All 106 public assets match the tested source; health and required-account boundaries pass. No production learner data or new external mail was used for this increment. The implementation retains private learner context in progress rather than public source.
+
+# Browser Java increment complete
+
+October 29, 2026. The additional user request is implemented locally: actual browser javac/TeaVM, ten Java tasks, ten coursework rounds, 402 passing tests with zero skips, and successful check/build. The source remains the uncommitted working tree on codex/authenticated-progress based on 3e0fdd5. No source push or PR merge is authorized by this increment. Deployment dpl_8Lk1DSoGrLJSjkjk78fnpKBZZPJr is READY at tracecraft.dev; all 97 public assets match and health/auth boundaries pass. Final critique/publication details are in [JAVA_COURSE_ROUNDS.md](JAVA_COURSE_ROUNDS.md); read that before treating the older status below as current. The completion heartbeat should be paused when this increment is published and verified.
+
 # TraceCraft: continue in Codex
 
-This checkout contains the daily developer-practice app, real browser SQL/Python labs, a redesigned workspace, and an original interactive system design lab. It is an alpha with local browser progress. The immediate goal is a dependable app someone can use for two hours a day while building independent SQL, coding, debugging, and system-design skills.
+This checkout contains the daily practice alpha, real browser SQL/Python labs, and interactive system design. The current feature branch adds Vercel email-code accounts with Better Auth, Resend and Neon Postgres, reviewed whole-snapshot sync, a mobile menu, and eight evidence-based curriculum milestones. The earlier local GitHub/SQLite adapter remains optional. The user requested deployment from the feature branch and explicitly said not to merge PR #2.
+
+## Current beginner overhaul deployment
+
+The 15-round beginner overhaul is live on tracecraft.dev as `dpl_HonJX6g9hVNJTLRK223hi9TVTVbA` (READY). All 310 local tests pass without skips with CPython and local authored Java checks available; all 66 public asset hashes match. Source remains the uncommitted working tree on `codex/authenticated-progress`, based on `3e0fdd5`. PR #2 was not merged and no source push occurred.
+
+Start at `#learn`, use `#beginner` for 25 lessons (12 Python, 6 SQL, 7 Java), or `#practice` for tools. There are 31 Python and 23 SQL tasks. Java has 7 recognition quests/21 questions and complete local JDK examples, without a submitted-Java runner. The full arcade has 25 quests/75 questions. Beginner state lives in training.learning under existing reviewed backups/sync. See [the round ledger](IMPROVEMENT_ROUNDS.md) and [QA](QA.md). The bounded-overhaul heartbeat should be paused on completion.
+
+## Earlier interview-course deployment
+
+The enriched course is live on tracecraft.dev as deployment `dpl_HbbRmd6j9ndCaU7t7nkRZq5AgsqC`, READY on October 28, 2026. This is the uncommitted working tree on `codex/authenticated-progress`, still based on `3e0fdd5`; no merge or source push occurred. All 283 local tests pass without skips. `#developer-path/course` contains 21 original lessons, links to all 22 Python and 18 SQL drills, and three rehearsals. The arcade now has 18 quests/54 questions. Focus defaults to both backend/general SWE and frontend/full-stack. Course state uses existing training/account snapshots; frontend project behavior is explicitly self-reported. See [INTERVIEW_COURSE.md](INTERVIEW_COURSE.md) and the current QA record. The original eight milestones and full Python/SQL/system design remain available.
+
+## Earlier arcade deployment
+
+The current working tree was deployed to tracecraft.dev on October 28, 2026. Deployment `dpl_Hf9eUkEJZKHoEFvyFuhHec2CtpY8` is READY. The deployment includes the uncommitted arcade/auth changes on top of `3e0fdd5`; no merge or source push was performed. Required email OTP entry, 18 beginner questions, mobile navigation and reviewed opt-in autosave are live. All 247 tests pass. Live browser checks covered 390px and 1440px viewports and provider-test sign-in; the separate live API check covered durable arcade progress and conflicts. See QA for limits and screenshots.
 
 ## Start here
 
 Read `AGENTS.md`, `README.md`, `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`, and `docs/QA.md` before editing. Preserve the existing SQL/Python behavior, original learning content, progress migration boundaries, keyboard access, and honest model labels.
 
-Requirements: Node.js 22 or newer. No npm dependency installation is needed for the current app.
+Requirements: Node.js 22.13 or newer and `npm ci`. Vercel uses Node 24. Plain local startup does not enable hosted accounts; follow [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for migrations and hosted configuration. Never print or commit `.env.local`.
 
 ```bash
+npm ci
 npm start
 ```
 
@@ -39,6 +74,11 @@ Stop an existing server on the same port first. The alternate `tracecraft-previe
 | `src/styles.css`, `src/design.css`, `src/system-design.css` | Existing component styles, redesigned workspace, and system-design canvas/inspector/table layouts |
 | `src/training.mjs`, `src/training-state.mjs` | Daily session, SQL/Python workbenches, reviews, help records, and training backup behavior |
 | `src/training-content.mjs` | 56-day sequence, full-Python drills, and architecture prompts |
+| `src/curriculum.mjs` | Eight milestone guides, prerequisites, evidence, reflection prompts and runnable lesson links |
+| `src/progress.mjs`, `src/email-signin.mjs` | Email-code forms, account review, explicit save/restore, complete backups and deletion |
+| `api/index.mjs`, `server/` | Vercel Web handler, verified sessions, bounded email delivery, owner-scoped Postgres snapshots |
+| `scripts/migrate-accounts.mjs`, `scripts/verify-postgres.mjs` | Explicit schema provisioning and disposable synthetic database verification; neither sends email |
+| `scripts/validate-content.mjs` | Executable lesson and curriculum authoring contract, also run by `npm run check` |
 | `src/sql-content.mjs`, `src/sql-runtime.mjs`, `src/sql-worker.js` | Real SQLite exercises, fixture checks, and worker lifecycle |
 | `src/python-runtime.mjs`, `src/python-worker.js` | Pinned Pyodide loading, real Python execution, assertions, traces, and cancellation |
 | `src/system-design.mjs` | Graph editing, controls, simulation presentation, challenge checks, explanations, and imports |
@@ -59,8 +99,8 @@ Read [SYSTEM_DESIGN_LAB.md](SYSTEM_DESIGN_LAB.md) for the learner and authoring 
 | SQL | Real disposable SQLite execution and fresh-fixture checks; not a managed MySQL server |
 | Python | Real CPython in a browser worker after a pinned runtime download; not a full desktop environment |
 | System design | Editable graph and deterministic capacity/flow estimates with changed workload checks; not a real deployment simulator |
-| Progress | Three browser-local stores with separate backup behavior; no cross-device synchronization |
-| Login | A local display name is not authentication; hosting access and application progress ownership are separate |
+| Progress | Three local stores, complete backups/recovery, and optional account snapshots with explicit conflict review |
+| Login | Hosted single-use email codes with verified inbox access and HttpOnly sessions. No OAuth provider needed. The local GitHub adapter remains separate. A display name is still a preference |
 | Java/MySQL project work | Assigned in the curriculum and performed in a separate local backend project |
 | AI tutor | Not implemented; no paid model, voice, or execution service is required |
 
@@ -74,9 +114,9 @@ Before adding features, reproduce the current tests and inspect the reported gap
 
 Acceptance: a learner can start a session, complete an actual SQL/Python attempt, edit and check a design, export all relevant work, reload, and recover the same drafts. Edits clear stale results. Keyboard and table controls provide the same meaningful operations as the canvas.
 
-### 2. Add authenticated, durable progress
+### 2. Verify configured account deployment and deepen sync
 
-This is the highest-value missing product capability for “log in every day.” Keep the working local mode and define the user-owned data model before adding a backend. Select a supported identity flow and storage integration for the chosen host; keep provider secrets server-side.
+The current hosted adapter implements verified email accounts and Postgres snapshots. Preserve explicit sync review and local mode. Follow [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for setup and exact boundaries. Operational database backup/restore and a real recipient's inbox placement remain separate release checks; synthetic delivery tests do not prove inbox placement. Keep the legacy local adapter's tests passing.
 
 Separate at least: user identity, content revision, draft workspace, attempt snapshot, assistance events, explanation, review state, and journal entry. Persist the runtime/model version with checked attempts. Define conflict behavior for two devices instead of silently overwriting newer work.
 
@@ -96,7 +136,7 @@ Acceptance: each new behavior changes calculated results for the right reason, c
 
 ### 5. Improve lesson authoring and review
 
-Add a content validator covering identifiers, prerequisites, source links, runtime compatibility, contracts, changed inputs, deliberate bugs, and worked explanations. Keep source material original or appropriately licensed. Version content so an old attempt can still be interpreted after a lesson changes.
+The current validator covers lesson identifiers, prerequisites, HTTPS primary-source links, contracts, fixtures, bugs, solutions and explanations. Runtime suites execute solutions and reject deliberate bugs. Extend this contract when adding new lesson types. Keep source material original or appropriately licensed and version content so an old attempt remains interpretable.
 
 Acceptance: every new exercise's solution passes, its bug fails for the intended reason, and delayed practice can hide an earlier answer without losing the attempt history.
 
@@ -112,7 +152,9 @@ Training and system-design exports are separate. A design backup uses `tracecraf
 
 ## Repository and hosting continuity
 
-The existing repository is `Bembaby/tracecraft`. The working branch used for this increment is `feature/daily-developer-practice`. Inspect `git status`, current branch, and remotes before committing, pushing, or opening a PR; local changes and a downloadable source archive do not establish that GitHub already contains the changes.
+The current public edition is [tracecraft.dev](https://tracecraft.dev), deployed on Vercel from `codex/authenticated-progress`. The linked project is `tracecraft` in the existing `belal-embabys-projects` team. Neon free Postgres is connected, schemas migrated, and `mail.tracecraft.dev` is verified for sending through a restricted Resend key. Secrets live in Vercel and ignored local environment files. The domain is registered for one year with auto-renew off; registrant contact verification is confirmed. Keep PR #2 open and unmerged. The prior private Site below is historical and was not changed by this deployment.
+
+The existing repository is `Bembaby/tracecraft`. The earlier increment used `feature/daily-developer-practice`. The account/progress increment uses `codex/authenticated-progress` from current `main`. Inspect `git status`, current branch, and remotes before committing, pushing, or opening a PR; local changes and a downloadable source archive do not establish that GitHub already contains the changes.
 
 An earlier October 28, 2026 GitHub upload attempt returned HTTP 403 before the `Bembaby` GitHub App installation was connected. This was a historical access issue, not an ongoing constraint. The v0.3 changes were then prepared for a normal pull request into `main`. Check GitHub for the current merged commit and any newer work before starting. The downloadable archive is a source snapshot, not a substitute for checking the current GitHub branch.
 

@@ -1,4 +1,5 @@
 import { NODE_TYPES } from './system-design-engine.mjs';
+import { attemptVersions } from './practice-versions.mjs';
 
 export const DESIGN_STORAGE_KEY = 'tracecraft:system-design:v1';
 export const DESIGN_BACKUP_FORMAT = 'tracecraft-system-design';
@@ -72,6 +73,7 @@ export function validateDesignWorkspace(value, challengeIds = []) {
   if (Array.isArray(value.attempts)) {
     workspace.attempts = value.attempts.slice(-100).filter(a => record(a) && known(a.challengeId) && typeof a.passed === 'boolean').map(a => ({
       challengeId: a.challengeId, at: text(a.at, 40), passed: a.passed,
+      ...attemptVersions(a),
       passedChecks: finite(a.passedChecks, 0, 0, 500), totalChecks: finite(a.totalChecks, 0, 0, 500),
       helpLevel: ['hint', 'solution', 'bug'].includes(a.helpLevel) ? a.helpLevel : 'none',
       notes: text(a.notes, 6000),

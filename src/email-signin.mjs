@@ -1,0 +1,9 @@
+const html=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export function emailSigninView({email='',sent=false,busy=false,cooldown=0,expired=false}={}) {
+  return `<div class="email-signin"><div><h2>${sent?'Check your inbox.':'A verified email. A workspace that follows you.'}</h2><p>${sent?`Enter the six-digit code sent to <strong>${html(email)}</strong>. It expires in five minutes.`:'Sign in or create an account with a one-time email code. No password to remember. Sign in to enter your learning workspace.'}</p></div><form data-progress-form="${sent?'verify-code':'send-code'}">
+    ${sent?'<label for="signin-code">Sign-in code</label><input id="signin-code" name="otp" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required placeholder="000000">':`<label for="signin-email">Email address</label><input id="signin-email" name="email" type="email" autocomplete="email" spellcheck="false" autocapitalize="off" maxlength="254" required placeholder="you@example.com" value="${html(email)}">`}
+    <button class="primary" type="submit" ${busy||expired?'disabled':''}>${busy?'Please wait…':expired?'Code expired':sent?'Verify email and continue':'Email me a sign-in code'}</button>
+    ${sent?`<div class="signin-secondary"><button type="button" class="text-btn" data-progress="resend-code" ${busy||cooldown>0?'disabled':''}>${cooldown>0?`Resend in ${cooldown}s`:'Send a new code'}</button><button type="button" class="text-btn" data-progress="change-email" ${busy?'disabled':''}>Use another email</button></div>`:''}
+    <p class="small-note">Email verification confirms inbox access. It does not certify identity or skill. We only send the sign-in email you request.</p>
+  </form></div>`;
+}

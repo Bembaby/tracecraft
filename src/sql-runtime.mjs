@@ -81,7 +81,7 @@ export function checkSqlSolution(SQL, lab, sql) {
       if (!passed) reasons.push('Returned columns or rows differ from the contract.');
       if (fixture.stateSql) {
         const state = executeSql(db,fixture.stateSql).results;
-        if (!sameSqlResults(state,fixture.stateExpected,true)) {passed = false; reasons.push('The database state after the script is incorrect.');}
+        if (!sameSqlResults(state,fixture.stateExpected,true)) {passed = false; reasons.push(lab.level==='beginner'?'The returned result alone is not enough: stored rows or the table structure changed. Use SELECT to read data. Reset restores the starting table and keeps your code draft.':'The database state after the script is incorrect.');}
       }
       // A savepoint isolates each intentionally invalid write. Rejection alone
       // is pedagogical evidence; the learner still explains the constraint.

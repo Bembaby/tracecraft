@@ -6,12 +6,24 @@ permissions:
   contents: read
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            node: '22'
+          - os: windows-latest
+            node: '24'
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: ${{ matrix.node }}
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6, MIT
+        with:
+          distribution: temurin
+          java-version: '25'
+      - run: npm ci
       - run: npm run check
       - run: npm test
       - run: npm run build

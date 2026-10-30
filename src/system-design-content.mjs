@@ -5,7 +5,7 @@ const node = (id, type, label, x, y, config) => ({ id, type, label, x, y, config
 const edges = (...pairs) => pairs.map(([from, to], index) => ({ id: `edge-${index + 1}`, from, to }));
 const metric = (id, label, name, min, max) => ({ id, label, kind: 'metric', metric: name, ...(min === undefined ? {} : { min }), ...(max === undefined ? {} : { max }) });
 const config = (id, field, min, max, label = `${id}: ${field} stays within the exercise budget`) => ({ id: `${id}-${field}`, label, kind: 'node-config', nodeId: id, field, ...(min === undefined ? {} : { min }), ...(max === undefined ? {} : { max }) });
-const count = (type, min, max = min) => ({ id: `count-${type}`, label: `${type}: ${min === max ? min : `${min}–${max}`} component${max === 1 ? '' : 's'}`, kind: 'type-count', type, min, max });
+const count = (type, min, max = min) => ({ id: `count-${type}`, label: `${type}: ${min === max ? min : `${min}-${max}`} component${max === 1 ? '' : 's'}`, kind: 'type-count', type, min, max });
 const path = (from, to) => ({ id: `path-${from}-${to}`, label: `Connected route from ${from} to ${to}`, kind: 'path', from, to });
 const maxNodes = value => ({ id: 'component-budget', label: `At most ${value} components`, kind: 'max-nodes', value });
 const cleanFlow = [metric('no-failures', 'No requests are lost to overload or a broken route', 'failurePercent', 0, 0.001), metric('no-pending', 'No synchronous work is left in a queue', 'backlogMessages', 0, 0.001)];

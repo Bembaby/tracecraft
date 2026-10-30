@@ -1,3 +1,8 @@
+import {TCS_PYTHON_DRILLS} from './tcs-lab-content.mjs';
+import {PRACTICAL_PYTHON_DRILLS} from './practical-python-content.mjs';
+import {BEGINNER_PYTHON_DRILLS} from './beginner-content.mjs';
+import { PYTHON_BACKEND_DRILLS } from './backend-content.mjs';
+import { INTERVIEW_PYTHON_DRILLS } from './interview-python-content.mjs';
 // Original practice assignments. A checked box is self-reported evidence, not certification.
 // Runtime-specific tasks identify their environment; the Mini-Python interpreter cannot run these Python drills.
 export const SESSION_BLOCKS = [
@@ -215,6 +220,7 @@ export const ARCHITECTURE_DRILLS = [
 ];
 
 export const PYTHON_DRILLS = [
+  ...BEGINNER_PYTHON_DRILLS,
   {
     id:'instance-state',title:'Initialize two independent workouts',
     prompt:'Define Workout(name). Each instance stores its name and its own empty minutes list. add_minutes(value) appends a nonnegative integer; total_minutes() returns the sum. Prove that changing one instance does not affect another.',
@@ -292,7 +298,11 @@ export const PYTHON_DRILLS = [
     complexity:'Parsing cost grows with the length and magnitude of the number; stripping also scans text. For ordinary short duration input this is small, but the algorithm is not constant-time for unbounded strings. Python may reject extremely long integer strings according to its configured limits.',
     fixtures:[{label:'Whitespace and sign',assertion:'" 25 " and "+7" parse successfully.'},{label:'Zero boundary',assertion:'"0" returns 0, not None.'},{label:'Invalid text',assertion:'Empty, decimal, and nonnumeric text return None.'}],
     sources:[pythonErrors]
-  }
+  },
+  ...PYTHON_BACKEND_DRILLS,
+  ...INTERVIEW_PYTHON_DRILLS,
+  ...PRACTICAL_PYTHON_DRILLS.map(task=>({...task,curriculum:'practical'})),
+  ...TCS_PYTHON_DRILLS.map(task=>({...task,curriculum:'practical'}))
 ];
 
 export const TRAINING_LIMITS = {

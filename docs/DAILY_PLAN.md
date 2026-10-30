@@ -8,13 +8,13 @@ This plan schedules **120 minutes, including a 10-minute break**. The eight-week
 
 | Minutes | Activity | Evidence to leave behind |
 |---|---|---|
-| 0–10 | Recall yesterday without notes | A fresh query or function, predicted output, and the exact point of uncertainty |
-| 10–25 | Learn one small concept | Three sentences: what it is, why it is needed, how it works |
-| 25–70 | Write and test | A first attempt, a normal input, an edge case, and a repaired failure |
-| 70–80 | Break | Step away; these minutes are not counted as coding |
-| 80–105 | Build a project step or investigate a failure | A runnable change, test, migration, or short investigation note |
-| 105–115 | Explain your decision | A concise explanation with a trade-off and a follow-up answer |
-| 115–120 | Log evidence and the next retry | Assistance used, one corrected mistake, and tomorrow’s exact starting task |
+| 0-10 | Recall yesterday without notes | A fresh query or function, predicted output, and the exact point of uncertainty |
+| 10-25 | Learn one small concept | Three sentences: what it is, why it is needed, how it works |
+| 25-70 | Write and test | A first attempt, a normal input, an edge case, and a repaired failure |
+| 70-80 | Break | Step away; these minutes are not counted as coding |
+| 80-105 | Build a project step or investigate a failure | A runnable change, test, migration, or short investigation note |
+| 105-115 | Explain your decision | A concise explanation with a trade-off and a follow-up answer |
+| 115-120 | Log evidence and the next retry | Assistance used, one corrected mistake, and tomorrow’s exact starting task |
 
 Start the timer when ready to work and pause it when interrupted. Keep a session note when your main task is in a terminal, IDE, or database tool outside TraceCraft. Never interpret elapsed time alone as an independently completed task.
 

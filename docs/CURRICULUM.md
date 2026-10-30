@@ -1,6 +1,6 @@
 # Curriculum: beginner to specialist depth
 
-A proposed 13-stage, 150-topic map. This is not a claim that all topics have lessons. Current coverage is 8 original starter exercises, three concept demos, four self-practice prompts, and 12 linked readings.
+A proposed 13-stage, 150-topic map. This is not a claim that all topics have lessons. The current shipped course is described in [INTERVIEW_COURSE.md](INTERVIEW_COURSE.md): 21 original lessons, 22 full-Python and 18 SQLite drills, 18 arcade quests with 54 recognition questions, and three rehearsals. The retained eight-milestone project path, system design lab, eight Mini-Python starter exercises, three concept demos, four self-practice prompts and linked readings remain available. The stage-level coverage labels below describe the earlier broad map; they are not an inventory of the new course.
 
 ## Choose a route, not every branch at once
 

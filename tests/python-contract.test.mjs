@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { PythonRuntime, PYTHON_HARNESS, PYTHON_LIMITS } from '../src/python-runtime.mjs';
 
-const pythonCommand = process.env.TRACECRAFT_PYTHON || 'python3';
+const pythonCommand = process.env.TRACECRAFT_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
 const probe = spawnSync(pythonCommand, ['--version'], { encoding: 'utf8' });
 const pythonAvailable = probe.status === 0;
 const pythonTest = (name, fn) => test(name, { skip: pythonAvailable ? false : 'Local CPython unavailable; set TRACECRAFT_PYTHON.' }, fn);

@@ -1,6 +1,56 @@
+# API adventure release
+
+October 29, 2026. The requested API learning extension adds 46 original lessons across nine tracks, deeper REST, 138 recognition questions, eight deterministic model labs, one actual HTTP inspector, five-question review, resumable six-step lessons and existing account/backup persistence. The complete video captions and selected chapter visuals informed the scope; primary-source corrections are documented in [API_ADVENTURE.md](API_ADVENTURE.md). [API_PHONE_ROUNDS.md](API_PHONE_ROUNDS.md) records the requested repeated phone simulation. Real provider integrations, physical-phone testing and independently assessed interview readiness remain separate from the models and self-assessment.
+
+The API course is live on tracecraft.dev as READY deployment `dpl_B4cgZQNKW9MkMMFV523gfBSQ7Piv`; all 131 public assets match the tested build. The owner now explicitly requests merging and deploying PR #2. This supersedes earlier keep-unmerged instructions recorded below. Current release verification is at the top of [QA.md](QA.md); older deployment entries are historical.
+
+# Arcade-everywhere game layer
+
+October 29, 2026. The whole app uses the arcade world, lessons play as step-by-step levels with a lesson map and reacting robot guide, and the shell shows level, practice XP and streak computed from real records. All 613 tests pass without skips (with the local JDK configured), plus check/build and loopback desktop/phone observations. Deployment `dpl_298MSpvRvx5Gn8H2mFMpb7J57zji` is READY on tracecraft.dev; all 117 public assets match and health/auth boundaries pass. See [QA.md](QA.md) and [DESIGN.md](../DESIGN.md).
+
+# TCS study path
+
+October 29, 2026. The TCS path covers the requested discussion topics through 25 original lessons in seven units. Eight new Python and two SQLite tasks run in existing workers. Predictions, notes, read marks, recognition, latest runnable checks and mixed review are saved separately in existing reviewed backups/account progress. All 609 tests pass without skips, plus check/build and authenticated loopback desktop/phone checks. [TCS_PATH.md](TCS_PATH.md) records scope; [QA.md](QA.md) records verification. Existing Java, system design, other coursework and private coach progress are preserved.
+
+# Connected practical learning platform
+
+The newer TCS path is live as READY deployment `dpl_3qKscnQ9orEvMCCjdqN1Gfat5S8S`, with all 111 public assets matching the tested working tree. Earlier release records below remain historical.
+
+October 29, 2026. The attached extension is implemented through phases 1 to 3: private context, resumable diagnostic, granular skill evidence, correction notebook, delayed/capped reviews, focused daily sessions, five help levels, real Python/fitness SQL packs, authored backend/auth/investigation/project questions and optional walking/interview clocks. All 576 tests pass without skips, plus check/build and authenticated desktop/phone loopback observations. Deployment `dpl_5fDuWFCf1QWG5fG2Ce2vKWkWMC5K` is READY on tracecraft.dev; all 106 public assets match and health/auth boundaries pass. Existing browser Java, full Python/SQL, system design and reviewed account progress remain intact. Read [PLATFORM_IMPLEMENTATION.md](PLATFORM_IMPLEMENTATION.md) for the implementation map, honest limits and concrete next specialist assignment. No new paid infrastructure, source push or PR merge is part of this increment.
+
+# Browser Java and ten additional coursework rounds
+
+October 29, 2026. The current source adds real javac/TeaVM browser compilation, ten Java tasks, 24 new SQL/Python teaching sections, prediction journals, two Java interview units and a fourth rehearsal. The latest full run passes 402 tests with zero skips, plus check/build. Desktop and 390px browser observations cover real edited-code execution, compiler diagnostics, cancellation, timeout and input persistence. All ten independent critiques are complete. Deployment dpl_8Lk1DSoGrLJSjkjk78fnpKBZZPJr is READY on tracecraft.dev, all 97 public assets match, and account-service health is verified. See [the ten-round ledger](JAVA_COURSE_ROUNDS.md) and [runtime bounds](JAVA_RUNTIME.md).
+
 # Build roadmap with acceptance gates
 
 Updated October 28, 2026 for the **v0.3 alpha**. This roadmap distinguishes implemented source, observed verification, and proposed work. The public [Bembaby/tracecraft](https://github.com/Bembaby/tracecraft) repository exists. A source change, a saved hosting version, a successful deployment, and a passing remote CI run are separate events; none should be inferred from another.
+
+## Beginner learning overhaul: deployed alpha
+
+The requested 15 improvement rounds add a clear default starting point, language tracks, 25 beginner lessons, 14 real Python/SQL tasks, Java reading practice and complete local examples, clearer question contracts, progress/resume records, and recovery guidance. Each round has a fresh independent agent critique recorded in [IMPROVEMENT_ROUNDS.md](IMPROVEMENT_ROUNDS.md).
+
+The current full run passed `npm run check`, `npm test`, and `npm run build`: 310 tests passed, none skipped. Local browser observations include a real first Python check, real SQL changed/empty fixture checks, cancellation, keyboard skip navigation, and Java reading completion at phone width. Deployment `dpl_HonJX6g9hVNJTLRK223hi9TVTVbA` is READY on tracecraft.dev, with all 66 public assets matching. Wider-device and authenticated-production-flow limits are recorded in QA; this is not an interview-readiness certification.
+
+## Interview course enrichment: current source
+
+The user selected both backend/general software engineering and frontend/full-stack preparation. The source now adds 21 original lessons with 63 teaching sections, linked work across 22 Python and 18 SQL exercises, 18 arcade quests with 54 recognition questions, and three mock interviews. Course reflections, read marks, explicit self-assessment and rehearsal debriefs use existing backups and reviewed account snapshots. Latest independent, assisted and failed code checks remain distinct from notes or read marks. Frontend/React models are recognition practice; real UI and project tests remain external work.
+
+All 283 tests pass with no skips, including actual CPython reference/bug checks, independent randomized algorithm oracles, vendored SQLite fixtures, authored JavaScript models, course link/prerequisite contracts and evidence/timer/backup validation. Browser-only loopback checks cover phone and desktop course views, note reload and reviewed account restore, actual CPython/SQLite, assisted rehearsal evidence, persisted clocks and the frontend question flow. The course increment is deployed to tracecraft.dev as `dpl_HbbRmd6j9ndCaU7t7nkRZq5AgsqC`; live public assets match the source, and provider-test OTP and phone/desktop course rendering were observed. Remaining limits are recorded in QA. No new dependency, paid infrastructure or learner-code execution service was introduced.
+
+## Beginner phone practice: previous deployed increment
+
+An arcade adventure adds six original quests with 18 multiple choice and fill-in-the-blank questions. Learners can tap code pieces or type, request a recorded hint, retry freely, and earn practice XP once per distinct question. A mobile dock and larger form controls support the new flow while retaining full Python/SQL and system design. Required email OTP sign-in gates the workspace, with five-minute single-use codes and seven-day HttpOnly sessions; reviewed opt-in autosave includes the arcade state and stops for revision or owner conflicts.
+
+Automated checks cover the original snippets with CPython/SQLite, edge cases, deliberate bugs, XP deduplication, backup portability, and account autosave. The arcade increment is now deployed to tracecraft.dev. Live browser observations cover 390px and 1440px layouts, provider-test OTP sign-in, question/retry/completion behavior and remembered sessions. A separate synthetic API check verified durable arcade progress and conflicts. Native-device testing, real-recipient inbox placement and broader accessibility work remain separate gates. See QA for the deployment record.
+
+## Current source increment: verified accounts and a mature backend path
+
+Implemented on the feature branch: verified email-code login, Better Auth HttpOnly sessions, owner-scoped Postgres snapshots, atomic revision conflicts, explicit save/restore, complete backups, recovery and deletion. Vercel hosts the API; Neon free storage and a verified Resend sending subdomain are provisioned. Local mode and the earlier GitHub/SQLite adapter remain available. Two SQL and two Python exercises add retry-safe writes, cursor pagination, payload validation and owner-scoped reads.
+
+Eight milestone guides add prerequisite evidence, explicit practice environments, linked executable lessons, 56 sessions, changed-requirement gates, saved notes and self-assessments. The authoring validator rejects incomplete runnable lesson contracts and broken curriculum links. The mobile menu makes core workspaces reachable without horizontal navigation.
+
+The local suite has 224 passing tests. A real Postgres check verifies ownership, concurrent-save conflicts, durable reads, atomic quotas and cascading deletion using disposable synthetic records. Deployment, delivery, desktop and narrow-screen observations are recorded separately in [QA.md](QA.md). Inbox access is not identity certification. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md).
 
 ## Milestone 0: Original visual learning alpha: retained
 
@@ -68,11 +118,11 @@ The static directory must be served over HTTP(S). The retained `tracecraft-previ
 
 **Gate:** a learner can resume after interruptions, recover from runtime errors, move progress with a tested backup, and complete an unfamiliar variation without the prior answer visible.
 
-## Next product milestone: Accounts and durable progress
+## Account milestone: implemented source, ongoing operations
 
-Private hosting access does not itself synchronize learning data. A custom account/progress service is **not implemented** in v0.3. This is the next product capability needed to carry the same daily workspace across devices.
+The current feature branch implements verified email accounts and durable reviewed progress. Preserve this boundary and finish operational qualification before broad public-service claims:
 
-- Add a supported authentication flow only with a clear data model and authorization boundary.
+- Keep a supported authentication flow with a clear data model and authorization boundary.
 - Persist attempts, assistance, explanations, reviews, and content/runtime versions under the correct owner.
 - Test cross-user denial, export, deletion, synchronization conflicts, and local-only use.
 - Avoid an anonymous writable shared database.

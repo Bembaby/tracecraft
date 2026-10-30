@@ -1,11 +1,12 @@
 import test, {before} from 'node:test';
 import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';
 import initSqlJs from '../public/vendor/sqljs/sql-wasm.js';
 import {SQL_LABS, SQL_SEED, sqlLab} from '../src/sql-content.mjs';
 import {SQL_LIMITS, createSqlDatabase, executeSql, checkSqlSolution, sameSqlResults, SqlRuntime} from '../src/sql-runtime.mjs';
 
 let SQL;
-before(async () => { SQL = await initSqlJs({locateFile:filename => new URL('../public/vendor/sqljs/'+filename,import.meta.url).pathname}); });
+before(async () => { SQL = await initSqlJs({locateFile:filename => fileURLToPath(new URL('../public/vendor/sqljs/'+filename,import.meta.url))}); });
 
 test('SQL curriculum has complete original lesson contracts and variant fixtures', () => {
   assert.equal(new Set(SQL_LABS.map(lab=>lab.id)).size,SQL_LABS.length);
@@ -170,4 +171,10 @@ test('the SQL index lesson returns a real explain plan, not a canned animation',
     assert.ok(result.columns.includes('detail'));
     assert.ok(result.values.some(row=>row.some(value=>typeof value==='string' && value.includes('idx_orders_customer_date'))));
   } finally {db.close();}
+});
+
+test('beginner SELECT checks reject row deletion and schema changes even with matching output',()=>{
+  const first=SQL_LABS.find(lab=>lab.id==='select-books');
+  assert.equal(checkSqlSolution(SQL,first,'CREATE TEMP TABLE copy AS SELECT * FROM books; DELETE FROM books; SELECT id, title FROM copy ORDER BY id;').passed,false);
+  for(const lab of SQL_LABS.filter(lab=>lab.level==='beginner'))assert.equal(checkSqlSolution(SQL,lab,'ALTER TABLE books ADD COLUMN hidden INTEGER; '+lab.solution).passed,false);
 });

@@ -4,7 +4,7 @@ The SQL lab runs SQLite inside a Web Worker, using the vendored **sql.js 1.15.2*
 
 ## Exercises
 
-Ten original exercises cover table creation and constraints, filtering and ordering, inner joins, left joins and zero counts, grouped spending, `NOT EXISTS` and `NULL`, latest-row window queries, targeted updates, transaction rollback, and index construction with a real query plan.
+Eighteen original exercises cover table creation and constraints, filtering and ordering, inner joins, left joins and zero counts, grouped spending, `NOT EXISTS` and `NULL`, latest-row window queries, targeted updates, transaction rollback, index construction with a real query plan, retry-safe writes, stable cursors, conditional aggregation, independent child summaries, tied ranks, deterministic running balances, second distinct values and exact signup-date windows. The [interview course](INTERVIEW_COURSE.md) links these exercises to their reasoning lessons.
 
 Each exercise includes a precise output or state contract, at least two public fixtures, progressive hints, an explanation, a deliberate bug, a reference solution, and primary documentation links. Changed fixtures include empty tables, duplicate names, tied dates, a guest order with a null customer key, and alternative starting amounts. A sample output that is simply hardcoded fails the changed-data checks.
 

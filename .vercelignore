@@ -2,6 +2,7 @@
 .env*
 .tracecraft
 .agents
+.impeccable
 skills-lock.json
 node_modules
 dist

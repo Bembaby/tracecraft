@@ -43,6 +43,7 @@ test('real Better Auth email code verifies ownership, keeps tokens out of JSON, 
     const verified=await f.verify('learner@example.test',f.emails[0].otp);assert.equal(verified.status,200,await verified.clone().text());
     assert.deepEqual(await verified.json(),{ok:true});
     const cookie=verified.headers.getSetCookie().map(value=>value.split(';')[0]).join('; ');assert.match(verified.headers.get('set-cookie'),/HttpOnly/);
+    assert.match(verified.headers.get('set-cookie'),/Max-Age=604800/i);
     const session=await(await f.request('/api/session',{cookie})).json();assert.equal(session.user.emailVerified,true);assert.equal(session.user.email,'learner@example.test');assert.equal(session.user.token,undefined);
     assert.equal((await f.request('/api/progress',{method:'PUT',cookie,data:{revision:0,snapshot}})).status,200);
     assert.equal((await f.request('/api/progress',{method:'PUT',cookie,data:{revision:0,snapshot}})).status,409);
@@ -50,6 +51,8 @@ test('real Better Auth email code verifies ownership, keeps tokens out of JSON, 
     assert.equal((await f.send('other@example.test','127.0.0.2')).status,200);const other=await f.verify('other@example.test',f.emails[1].otp,'127.0.0.2');
     const otherCookie=other.headers.getSetCookie().map(value=>value.split(';')[0]).join('; ');
     assert.equal((await(await f.request('/api/progress?user_id='+session.user.id,{cookie:otherCookie})).json()).snapshot,null);
+    assert.equal((await f.request('/api/progress',{method:'PUT',cookie:otherCookie,data:{revision:0,snapshot,expectedUserId:session.user.id}})).status,412);
+    assert.equal((await(await f.request('/api/progress',{cookie:otherCookie})).json()).snapshot,null);
     assert.equal((await f.request('/api/account',{method:'DELETE',cookie,data:{confirm:'DELETE'}})).status,200);
     assert.equal((await f.request('/api/progress',{cookie})).status,401);
     assert.equal((await f.request('/api/session',{cookie:otherCookie})).status,200);

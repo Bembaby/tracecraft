@@ -1,0 +1,565 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-29T18:44:50.905Z",
+  "title": "Design System: TraceCraft",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Practice Lime",
+        "tonalRamp": [
+          "oklch(15% 0.1178 125.54)",
+          "oklch(26% 0.1684 125.54)",
+          "oklch(37% 0.1684 125.54)",
+          "oklch(48% 0.1684 125.54)",
+          "oklch(59% 0.1684 125.54)",
+          "oklch(70% 0.1684 125.54)",
+          "oklch(81% 0.1684 125.54)",
+          "oklch(95% 0.0589 125.54)"
+        ]
+      },
+      "guidance": {
+        "role": "primary",
+        "displayName": "Lavender Guidance",
+        "tonalRamp": [
+          "oklch(15% 0.0801 294.43)",
+          "oklch(26% 0.1145 294.43)",
+          "oklch(37% 0.1145 294.43)",
+          "oklch(48% 0.1145 294.43)",
+          "oklch(59% 0.1145 294.43)",
+          "oklch(70% 0.1145 294.43)",
+          "oklch(81% 0.1145 294.43)",
+          "oklch(95% 0.0401 294.43)"
+        ]
+      },
+      "reward": {
+        "role": "secondary",
+        "displayName": "Honey Gold",
+        "tonalRamp": [
+          "oklch(15% 0.0799 86.97)",
+          "oklch(26% 0.1141 86.97)",
+          "oklch(37% 0.1141 86.97)",
+          "oklch(48% 0.1141 86.97)",
+          "oklch(59% 0.1141 86.97)",
+          "oklch(70% 0.1141 86.97)",
+          "oklch(81% 0.1141 86.97)",
+          "oklch(95% 0.0399 86.97)"
+        ]
+      },
+      "quest-rose": {
+        "role": "secondary",
+        "displayName": "Rose",
+        "tonalRamp": [
+          "oklch(15% 0.0617 350.22)",
+          "oklch(26% 0.0882 350.22)",
+          "oklch(37% 0.0882 350.22)",
+          "oklch(48% 0.0882 350.22)",
+          "oklch(59% 0.0882 350.22)",
+          "oklch(70% 0.0882 350.22)",
+          "oklch(81% 0.0882 350.22)",
+          "oklch(95% 0.0309 350.22)"
+        ]
+      },
+      "quest-sky": {
+        "role": "secondary",
+        "displayName": "Sky",
+        "tonalRamp": [
+          "oklch(15% 0.0567 243.88)",
+          "oklch(26% 0.0810 243.88)",
+          "oklch(37% 0.0810 243.88)",
+          "oklch(48% 0.0810 243.88)",
+          "oklch(59% 0.0810 243.88)",
+          "oklch(70% 0.0810 243.88)",
+          "oklch(81% 0.0810 243.88)",
+          "oklch(95% 0.0283 243.88)"
+        ]
+      },
+      "quest-apricot": {
+        "role": "secondary",
+        "displayName": "Apricot",
+        "tonalRamp": [
+          "oklch(15% 0.0682 59.42)",
+          "oklch(26% 0.0974 59.42)",
+          "oklch(37% 0.0974 59.42)",
+          "oklch(48% 0.0974 59.42)",
+          "oklch(59% 0.0974 59.42)",
+          "oklch(70% 0.0974 59.42)",
+          "oklch(81% 0.0974 59.42)",
+          "oklch(95% 0.0341 59.42)"
+        ]
+      },
+      "quest-lime-ground": {
+        "role": "secondary",
+        "displayName": "Lime Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0403 134.48)",
+          "oklch(26% 0.0576 134.48)",
+          "oklch(37% 0.0576 134.48)",
+          "oklch(48% 0.0576 134.48)",
+          "oklch(59% 0.0576 134.48)",
+          "oklch(70% 0.0576 134.48)",
+          "oklch(81% 0.0576 134.48)",
+          "oklch(95% 0.0202 134.48)"
+        ]
+      },
+      "quest-lavender-ground": {
+        "role": "secondary",
+        "displayName": "Lavender Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0462 300.09)",
+          "oklch(26% 0.0660 300.09)",
+          "oklch(37% 0.0660 300.09)",
+          "oklch(48% 0.0660 300.09)",
+          "oklch(59% 0.0660 300.09)",
+          "oklch(70% 0.0660 300.09)",
+          "oklch(81% 0.0660 300.09)",
+          "oklch(95% 0.0231 300.09)"
+        ]
+      },
+      "quest-gold-ground": {
+        "role": "secondary",
+        "displayName": "Gold Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0287 79.37)",
+          "oklch(26% 0.0409 79.37)",
+          "oklch(37% 0.0409 79.37)",
+          "oklch(48% 0.0409 79.37)",
+          "oklch(59% 0.0409 79.37)",
+          "oklch(70% 0.0409 79.37)",
+          "oklch(81% 0.0409 79.37)",
+          "oklch(95% 0.0143 79.37)"
+        ]
+      },
+      "quest-rose-ground": {
+        "role": "secondary",
+        "displayName": "Rose Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0352 339.39)",
+          "oklch(26% 0.0502 339.39)",
+          "oklch(37% 0.0502 339.39)",
+          "oklch(48% 0.0502 339.39)",
+          "oklch(59% 0.0502 339.39)",
+          "oklch(70% 0.0502 339.39)",
+          "oklch(81% 0.0502 339.39)",
+          "oklch(95% 0.0176 339.39)"
+        ]
+      },
+      "quest-sky-ground": {
+        "role": "secondary",
+        "displayName": "Sky Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0372 253.28)",
+          "oklch(26% 0.0532 253.28)",
+          "oklch(37% 0.0532 253.28)",
+          "oklch(48% 0.0532 253.28)",
+          "oklch(59% 0.0532 253.28)",
+          "oklch(70% 0.0532 253.28)",
+          "oklch(81% 0.0532 253.28)",
+          "oklch(95% 0.0186 253.28)"
+        ]
+      },
+      "quest-apricot-ground": {
+        "role": "secondary",
+        "displayName": "Apricot Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0244 52.24)",
+          "oklch(26% 0.0349 52.24)",
+          "oklch(37% 0.0349 52.24)",
+          "oklch(48% 0.0349 52.24)",
+          "oklch(59% 0.0349 52.24)",
+          "oklch(70% 0.0349 52.24)",
+          "oklch(81% 0.0349 52.24)",
+          "oklch(95% 0.0122 52.24)"
+        ]
+      },
+      "arcade-ground": {
+        "role": "neutral",
+        "displayName": "Midnight Navy",
+        "tonalRamp": [
+          "oklch(15% 0.0210 277.59)",
+          "oklch(26% 0.0300 277.59)",
+          "oklch(37% 0.0300 277.59)",
+          "oklch(48% 0.0300 277.59)",
+          "oklch(59% 0.0300 277.59)",
+          "oklch(70% 0.0300 277.59)",
+          "oklch(81% 0.0300 277.59)",
+          "oklch(95% 0.0105 277.59)"
+        ]
+      },
+      "arcade-surface": {
+        "role": "neutral",
+        "displayName": "Twilight Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0266 278.85)",
+          "oklch(26% 0.0380 278.85)",
+          "oklch(37% 0.0380 278.85)",
+          "oklch(48% 0.0380 278.85)",
+          "oklch(59% 0.0380 278.85)",
+          "oklch(70% 0.0380 278.85)",
+          "oklch(81% 0.0380 278.85)",
+          "oklch(95% 0.0133 278.85)"
+        ]
+      },
+      "arcade-raised": {
+        "role": "neutral",
+        "displayName": "Twilight Raised",
+        "tonalRamp": [
+          "oklch(15% 0.0295 279.56)",
+          "oklch(26% 0.0421 279.56)",
+          "oklch(37% 0.0421 279.56)",
+          "oklch(48% 0.0421 279.56)",
+          "oklch(59% 0.0421 279.56)",
+          "oklch(70% 0.0421 279.56)",
+          "oklch(81% 0.0421 279.56)",
+          "oklch(95% 0.0147 279.56)"
+        ]
+      },
+      "arcade-panel": {
+        "role": "neutral",
+        "displayName": "Twilight Panel",
+        "tonalRamp": [
+          "oklch(15% 0.0276 279.11)",
+          "oklch(26% 0.0394 279.11)",
+          "oklch(37% 0.0394 279.11)",
+          "oklch(48% 0.0394 279.11)",
+          "oklch(59% 0.0394 279.11)",
+          "oklch(70% 0.0394 279.11)",
+          "oklch(81% 0.0394 279.11)",
+          "oklch(95% 0.0138 279.11)"
+        ]
+      },
+      "arcade-line": {
+        "role": "neutral",
+        "displayName": "Slate Violet Line",
+        "tonalRamp": [
+          "oklch(15% 0.0341 278.89)",
+          "oklch(26% 0.0487 278.89)",
+          "oklch(37% 0.0487 278.89)",
+          "oklch(48% 0.0487 278.89)",
+          "oklch(59% 0.0487 278.89)",
+          "oklch(70% 0.0487 278.89)",
+          "oklch(81% 0.0487 278.89)",
+          "oklch(95% 0.0171 278.89)"
+        ]
+      },
+      "arcade-well": {
+        "role": "neutral",
+        "displayName": "Code Well",
+        "tonalRamp": [
+          "oklch(15% 0.0200 280.06)",
+          "oklch(26% 0.0286 280.06)",
+          "oklch(37% 0.0286 280.06)",
+          "oklch(48% 0.0286 280.06)",
+          "oklch(59% 0.0286 280.06)",
+          "oklch(70% 0.0286 280.06)",
+          "oklch(81% 0.0286 280.06)",
+          "oklch(95% 0.0100 280.06)"
+        ]
+      },
+      "arcade-shell": {
+        "role": "neutral",
+        "displayName": "Shell Navy",
+        "tonalRamp": [
+          "oklch(15% 0.0220 280.68)",
+          "oklch(26% 0.0314 280.68)",
+          "oklch(37% 0.0314 280.68)",
+          "oklch(48% 0.0314 280.68)",
+          "oklch(59% 0.0314 280.68)",
+          "oklch(70% 0.0314 280.68)",
+          "oklch(81% 0.0314 280.68)",
+          "oklch(95% 0.0110 280.68)"
+        ]
+      },
+      "arcade-text": {
+        "role": "neutral",
+        "displayName": "Soft White",
+        "tonalRamp": [
+          "oklch(15% 0.0131 292.61)",
+          "oklch(26% 0.0187 292.61)",
+          "oklch(37% 0.0187 292.61)",
+          "oklch(48% 0.0187 292.61)",
+          "oklch(59% 0.0187 292.61)",
+          "oklch(70% 0.0187 292.61)",
+          "oklch(81% 0.0187 292.61)",
+          "oklch(95% 0.0066 292.61)"
+        ]
+      },
+      "arcade-muted": {
+        "role": "neutral",
+        "displayName": "Lavender Gray",
+        "tonalRamp": [
+          "oklch(15% 0.0228 283.64)",
+          "oklch(26% 0.0325 283.64)",
+          "oklch(37% 0.0325 283.64)",
+          "oklch(48% 0.0325 283.64)",
+          "oklch(59% 0.0325 283.64)",
+          "oklch(70% 0.0325 283.64)",
+          "oklch(81% 0.0325 283.64)",
+          "oklch(95% 0.0114 283.64)"
+        ]
+      },
+      "arcade-label": {
+        "role": "neutral",
+        "displayName": "Label Lavender",
+        "tonalRamp": [
+          "oklch(15% 0.0481 287.47)",
+          "oklch(26% 0.0687 287.47)",
+          "oklch(37% 0.0687 287.47)",
+          "oklch(48% 0.0687 287.47)",
+          "oklch(59% 0.0687 287.47)",
+          "oklch(70% 0.0687 287.47)",
+          "oklch(81% 0.0687 287.47)",
+          "oklch(95% 0.0241 287.47)"
+        ]
+      },
+      "selected-ground": {
+        "role": "neutral",
+        "displayName": "Selected Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0401 289.57)",
+          "oklch(26% 0.0573 289.57)",
+          "oklch(37% 0.0573 289.57)",
+          "oklch(48% 0.0573 289.57)",
+          "oklch(59% 0.0573 289.57)",
+          "oklch(70% 0.0573 289.57)",
+          "oklch(81% 0.0573 289.57)",
+          "oklch(95% 0.0201 289.57)"
+        ]
+      },
+      "correct-ground": {
+        "role": "neutral",
+        "displayName": "Correct Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0283 141.94)",
+          "oklch(26% 0.0404 141.94)",
+          "oklch(37% 0.0404 141.94)",
+          "oklch(48% 0.0404 141.94)",
+          "oklch(59% 0.0404 141.94)",
+          "oklch(70% 0.0404 141.94)",
+          "oklch(81% 0.0404 141.94)",
+          "oklch(95% 0.0142 141.94)"
+        ]
+      },
+      "retry-ground": {
+        "role": "neutral",
+        "displayName": "Retry Ground",
+        "tonalRamp": [
+          "oklch(15% 0.0159 55.35)",
+          "oklch(26% 0.0227 55.35)",
+          "oklch(37% 0.0227 55.35)",
+          "oklch(48% 0.0227 55.35)",
+          "oklch(59% 0.0227 55.35)",
+          "oklch(70% 0.0227 55.35)",
+          "oklch(81% 0.0227 55.35)",
+          "oklch(95% 0.0080 55.35)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page and lesson titles."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The heading of the current stage card."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Quest and lesson card titles."
+      },
+      "reading": {
+        "displayName": "Reading",
+        "purpose": "Lesson prose, capped at 56ch (about 75 characters in Nunito)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Global interface copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Small sentence-case labels and HUD numerals."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Examples in recessed code wells."
+      }
+    },
+    "shadows": [
+      {
+        "name": "pressable-edge",
+        "value": "inset 0 -3px 0 <darker shade of the fill>",
+        "purpose": "Lower edge on pressable actions, quest tiles and stage nodes. Moves 2px on press."
+      },
+      {
+        "name": "action-ambient",
+        "value": "0 6px 14px -8px #05060f",
+        "purpose": "Soft separation under primary actions."
+      },
+      {
+        "name": "code-well",
+        "value": "inset 0 2px 0 #0a0b16",
+        "purpose": "Recess for code examples."
+      }
+    ],
+    "motion": [
+      {
+        "name": "stage-enter",
+        "value": "260ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "New stage card fades up 10px. Off under reduced motion."
+      },
+      {
+        "name": "action-press",
+        "value": "translateY(2px) 120ms",
+        "purpose": "Press response for buttons. Off under reduced motion."
+      },
+      {
+        "name": "guide-react",
+        "value": "750ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "Robot hop on correct, tilt on retry. Off under reduced motion."
+      },
+      {
+        "name": "confetti",
+        "value": "900 to 1150ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "22-piece burst from focused feedback on a correct result. Skipped under reduced motion."
+      },
+      {
+        "name": "hud-meter",
+        "value": "700ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "XP meter fill after progress changes."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "760px"
+      },
+      {
+        "name": "compact-shell",
+        "value": "1080px"
+      },
+      {
+        "name": "lesson-panel",
+        "value": "1280px"
+      },
+      {
+        "name": "course-panel",
+        "value": "1600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The next step: Continue, Check, Open practice.",
+      "html": "<button class=\"ds-primary\">Continue: Work through an example</button>",
+      "css": ".ds-primary{font-family:Nunito,'Segoe UI',sans-serif;display:inline-flex;align-items:center;min-height:52px;padding:12px 22px;border:0;border-radius:12px;background:#c4f26d;color:#1d2610;font-weight:850;font-size:16px;box-shadow:inset 0 -3px 0 #8db449,0 6px 14px -8px #05060f;cursor:pointer}.ds-primary:hover{background:#d4ff8a}.ds-primary:active{transform:translateY(2px);box-shadow:inset 0 -1px 0 #8db449}.ds-primary:focus-visible{outline:2px solid #c4f26d;outline-offset:3px}"
+    },
+    {
+      "name": "Ghost Action",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary actions such as Back.",
+      "html": "<button class=\"ds-ghost\">Back</button>",
+      "css": ".ds-ghost{font-family:Nunito,'Segoe UI',sans-serif;min-height:52px;padding:12px 20px;border:1px solid #3f4263;border-radius:12px;background:#2a2c46;color:#ecebff;font-weight:750;font-size:15px;box-shadow:inset 0 -2px 0 #1b1c30;cursor:pointer}.ds-ghost:hover{background:#33365a;border-color:#565a85}"
+    },
+    {
+      "name": "Finish Lesson",
+      "kind": "button",
+      "refersTo": "button-finish",
+      "description": "The last stage turns Continue honey gold.",
+      "html": "<button class=\"ds-finish\">Finish lesson</button>",
+      "css": ".ds-finish{font-family:Nunito,'Segoe UI',sans-serif;min-height:52px;padding:12px 22px;border:0;border-radius:12px;background:#f4cf78;color:#2b1f05;font-weight:850;font-size:16px;box-shadow:inset 0 -3px 0 #b8933d}"
+    },
+    {
+      "name": "Answer Card",
+      "kind": "input",
+      "refersTo": "answer-card",
+      "description": "A native radio inside a selectable card.",
+      "html": "<label class=\"ds-answer\"><input type=\"radio\" name=\"ds-a\"> The first item is replaced by the largest.</label><label class=\"ds-answer\"><input type=\"radio\" name=\"ds-a\" checked> max(values) reads the whole list and return exits.</label>",
+      "css": ".ds-answer{font-family:Nunito,'Segoe UI',sans-serif;display:flex;gap:12px;align-items:flex-start;margin:8px 0;padding:14px 16px;border:1px solid #3b3e59;border-radius:14px;background:#202237;color:#f3f1ff;font-weight:650;font-size:16px;cursor:pointer}.ds-answer input{accent-color:#c1aeff;width:18px;height:18px;margin-top:3px}.ds-answer:has(input:checked){border-color:#c1aeff;background:#2c2747;box-shadow:inset 0 -3px 0 #1f1a33}"
+    },
+    {
+      "name": "Stage Map",
+      "kind": "nav",
+      "refersTo": "stage-node",
+      "description": "Lesson map: numbered nodes colored by stage kind; current node is solid.",
+      "html": "<ol class=\"ds-map\"><li><button><span class=\"n\" style=\"--q:#a0d4ff;--g:#293f59\">1</span>Build the idea<small>Seen</small></button></li><li><button aria-current=\"step\"><span class=\"n cur\" style=\"--q:#ffc08e;--g:#4c382c\">2</span>Work through an example<small>Now</small></button></li><li><button><span class=\"n\" style=\"--q:#c1aeff;--g:#43355b\">3</span>Check one idea<small></small></button></li></ol>",
+      "css": ".ds-map{font-family:Nunito,'Segoe UI',sans-serif;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;max-width:300px}.ds-map button{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;width:100%;min-height:46px;padding:6px 10px 6px 6px;border:1px solid transparent;border-radius:12px;background:transparent;color:#c3c2dc;font:700 14px Nunito,sans-serif;text-align:left}.ds-map button[aria-current]{background:#26283f;border-color:#3f4263;color:#f3f1ff}.ds-map .n{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--g);color:var(--q);font-weight:900;box-shadow:inset 0 -3px 0 #0b0c1a55}.ds-map .n.cur{background:var(--q);color:#17181f}.ds-map small{font-size:12px;font-weight:800;color:#8f90b4}"
+    },
+    {
+      "name": "Heads-up Display",
+      "kind": "custom",
+      "refersTo": "hud",
+      "description": "Level, XP toward the next level, and the practice streak.",
+      "html": "<a class=\"ds-hud\" href=\"#\"><span class=\"lv\">Lv <b>2</b></span><span class=\"meter\"><span style=\"width:33%\"></span></span><span><svg class=\"ds-icon\" viewBox=\"0 0 24 24\" style=\"color:#f4cf78;fill:#f4cf78\"><path d=\"m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8L12 3Z\"/></svg> <b>80</b> XP</span><span class=\"st\"><svg class=\"ds-icon\" viewBox=\"0 0 24 24\"><path d=\"M12 22c4 0 7-2.8 7-6.8 0-3.1-1.8-5.3-3.4-7.1-.4 1.6-1.3 2.7-2.4 3.2.3-3.3-1-6.4-3.7-8.3.2 3-1.5 5-3.2 7C4.9 11.6 5 13.3 5 15.2 5 19.2 8 22 12 22Z\"/></svg> <b>3</b></span></a>",
+      "css": ".ds-icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.ds-hud{font-family:Nunito,'Segoe UI',sans-serif;display:inline-flex;align-items:center;gap:10px;min-height:36px;padding:4px 12px 4px 5px;border:1px solid #363955;border-radius:999px;background:#1d1f33;color:#f3f1ff;font-size:13px;font-weight:700;text-decoration:none}.ds-hud>span{display:inline-flex;align-items:center;gap:4px}.ds-hud .lv{padding:3px 10px;border-radius:999px;background:#c1aeff;color:#21182e;font-weight:850}.ds-hud .meter{width:72px;height:8px;border-radius:99px;background:#2e3150;overflow:hidden}.ds-hud .meter span{display:block;height:100%;background:#c4f26d}.ds-hud .st{color:#ffc08e}"
+    },
+    {
+      "name": "Code Well",
+      "kind": "card",
+      "refersTo": "code-well",
+      "description": "Recessed monospace example.",
+      "html": "<pre class=\"ds-well\">def summary(values):\n    if values is None:\n        return \"missing\"\n    return max(values)</pre>",
+      "css": ".ds-well{margin:0;padding:16px 18px;border:1px solid #2c2e4a;border-radius:14px;background:#10111f;color:#ebe8ff;font:15px/1.75 ui-monospace,Consolas,monospace;box-shadow:inset 0 2px 0 #0a0b16;white-space:pre}"
+    },
+    {
+      "name": "Guide Bubble",
+      "kind": "custom",
+      "refersTo": "guide-bubble",
+      "description": "The robot guide's speech; tints green on a correct answer and warm on a retry.",
+      "html": "<p class=\"ds-say\">Predict the output before you reveal it. Being wrong is useful.</p>",
+      "css": ".ds-say{font-family:Nunito,'Segoe UI',sans-serif;max-width:260px;margin:0;padding:11px 14px;border-radius:14px 14px 14px 4px;background:#2c2747;border:1px solid #4c4278;color:#f1ecff;font-size:14px;font-weight:700;line-height:1.45}"
+    },
+    {
+      "name": "Quest Tile",
+      "kind": "custom",
+      "refersTo": "quest-tile",
+      "description": "Numbered tile on quest boards, colored by unit.",
+      "html": "<span class=\"ds-tile\">7</span>",
+      "css": ".ds-tile{font-family:Nunito,'Segoe UI',sans-serif;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:13px;background:#354929;color:#c4f26d;font-size:17px;font-weight:900;box-shadow:inset 0 -3px 0 #0b0c1a55}"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Native fields on a dark inset ground.",
+      "html": "<input class=\"ds-input\" placeholder=\"Predict the result\">",
+      "css": ".ds-input{font-family:Nunito,'Segoe UI',sans-serif;min-height:48px;width:100%;max-width:360px;padding:12px;border:1px solid #3b3e59;border-radius:10px;background:#121325;color:#f3f1ff;font-size:15px}.ds-input:focus-visible{outline:2px solid #c4f26d;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Every lesson is a level",
+    "overview": "TraceCraft is one friendly coding arcade from sign-in to the system design canvas: midnight navy, lavender guidance, practice-lime actions and honey-gold rewards. Lessons play one stage at a time with a lesson map and a pixel robot guide who reacts to real answers. A HUD shows level, XP toward the next level and the practice streak, all computed from real records.",
+    "keyCharacteristics": [
+      "One stage at a time with Back, Continue and a clickable map; nothing locked.",
+      "Lime is the next action; lavender is selection and guidance; gold is reward and finish.",
+      "Quest colors distinguish topics and stage kinds, never correctness.",
+      "Every game number comes from real records.",
+      "Celebrations are short, sound is opt-in, motion respects reduced-motion."
+    ],
+    "rules": [
+      "The State Has Words Rule",
+      "The Type Floor Rule",
+      "The Code Stays Code Rule",
+      "The Room To Play Rule",
+      "The Pressable Edge Rule"
+    ],
+    "dos": [
+      "Use lime for the next action, lavender for selection, gold for reward.",
+      "Compute XP, level and streak from real records only.",
+      "Keep Show whole lesson, keyboard operation and reduced-motion behavior.",
+      "Pair every color state with words or a native control state.",
+      "Keep code in recessed monospace wells."
+    ],
+    "donts": [
+      "Lock lessons or stages.",
+      "Auto-mark lessons read or award XP for viewing.",
+      "Put uppercase tracked kickers above headings.",
+      "Play sound unless turned on, or animate under reduced motion.",
+      "Turn XP, levels or streaks into claims of mastery or hiring readiness."
+    ]
+  }
+}

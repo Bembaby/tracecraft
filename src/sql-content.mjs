@@ -1,4 +1,8 @@
+import {TCS_SQL_LABS} from './tcs-lab-content.mjs';
+import {FITNESS_SQL_LABS} from './fitness-sql-content.mjs';
 import { SQL_BACKEND_LABS } from './backend-content.mjs';
+import { BEGINNER_SQL_LABS } from './beginner-content.mjs';
+import { INTERVIEW_SQL_LABS } from './interview-sql-content.mjs';
 // Original SQL practice material. Fixtures are intentionally visible: this is
 // learning evidence, not a secure examination or a production database.
 export const SQL_SEED = `
@@ -39,6 +43,7 @@ const result = (columns, values) => ({columns, values});
 const fixture = (label, seedSql, columns, values, rest={}) => ({label,seedSql,expected:[result(columns,values)],...rest});
 
 export const SQL_LABS = [
+  ...BEGINNER_SQL_LABS,
   {
     id:'schema-join', title:'Build two related tables', topic:'Keys · constraints · INSERT · JOIN', minutes:25,
     prompt:'Start with an empty database. Create customers and orders, insert the sample records, and return every order with its customer name. A third customer must remain valid without an order.',
@@ -91,7 +96,7 @@ FROM customers c JOIN orders o ON o.customer_id = c.customer_id ORDER BY o.order
     fixtures:[fixture('Boundary and equal amounts',SQL_SEED,['order_id','customer_id','amount_cents'],[[103,2,5000],[105,4,5000]]),fixture('An added larger order',VARIANT_SEED,['order_id','customer_id','amount_cents'],[[108,1,7000],[103,2,5000],[105,4,5000]]),fixture('No orders',EMPTY_SEED,['order_id','customer_id','amount_cents'],[])]
   },
   {
-    id:'inner-join',title:'Join customers to orders',topic:'INNER JOIN · cardinality',minutes:20,
+    id:'inner-join',previewQuery:'SELECT * FROM customers ORDER BY customer_id; SELECT * FROM orders ORDER BY order_id;',title:'Join customers to orders',topic:'INNER JOIN · cardinality',minutes:20,
     prompt:'Show the customer name alongside every order with a registered customer. Keep multiple orders from the same customer.',
     contract:'Return customer_id, name, order_id, amount_cents. Any row order is accepted. Exclude guest orders; preserve distinct orders even if they share a customer or amount.',
     schema:SCHEMA,seedSql:SQL_SEED,starter:'-- Start with FROM, then decide the matching key.\n',ordered:false,
@@ -201,7 +206,10 @@ SELECT order_id, amount_cents FROM orders WHERE order_id IN (101, 103) ORDER BY 
     complexity:'An index can reduce a full-table search to a range lookup plus matching-row traversal, but actual gains depend on selectivity and the planner. Creating the index itself scans and organizes existing entries.',sources:[{title:'SQLite EXPLAIN QUERY PLAN',url:'https://sqlite.org/eqp.html'},{title:'SQLite query planner',url:'https://sqlite.org/queryplanner.html'}],
     fixtures:[fixture('Index columns in the requested order',SQL_SEED,['name'],[['customer_id'],['ordered_at']],{inspectSql:"SELECT name FROM pragma_index_info('idx_orders_customer_date') ORDER BY seqno;"}),fixture('Same index contract on changed data',VARIANT_SEED,['name'],[['customer_id'],['ordered_at']],{inspectSql:"SELECT name FROM pragma_index_info('idx_orders_customer_date') ORDER BY seqno;"})]
   },
-  ...SQL_BACKEND_LABS
+  ...SQL_BACKEND_LABS,
+  ...INTERVIEW_SQL_LABS,
+  ...FITNESS_SQL_LABS.map(task=>({...task,curriculum:'practical'})),
+  ...TCS_SQL_LABS.map(task=>({...task,curriculum:'practical'}))
 ];
 
 export function sqlLab(id) {

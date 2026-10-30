@@ -33,7 +33,13 @@ export function validateProgress(raw) {
 
 export function progressSummary(snapshot) {
   const w = snapshot?.workspaces || {};
-  return {days:w.training?.done?.length||0, checks:(w.training?.attempts?.length||0)+(w.design?.attempts?.length||0),
+  return {apiQuestions:Object.keys(w.training?.apis?.completed||{}).length,apiNotes:Object.values(w.training?.apis?.notes||{}).filter(text=>text.trim()).length,apiModelChecks:w.training?.apis?.labAttempts?.length||0,tcsRead:w.training?.tcs?.read?.length||0,tcsChecks:Object.values(w.training?.tcs?.answers||{}).filter(a=>a.checked).length,notebook:w.training?.coach?.notebook?.length||0, scenarioChecks:w.training?.coach?.attempts?.length||0, diagnosticParts:Object.keys(w.training?.coach?.diagnostic?.steps||{}).length,privateProfile:Boolean(w.training?.coach?.profile?.project||w.training?.coach?.profile?.tools||w.training?.coach?.profile?.roles),days:w.training?.done?.length||0, checks:(w.training?.attempts?.length||0)+(w.design?.attempts?.length||0),
+    beginnerRead:w.training?.learning?.read?.length||0,
+    beginnerNotes:Object.values(w.training?.learning?.notes||{}).filter(text=>text.trim()).length,
+    beginnerPredictions:Object.values(w.training?.learning?.predictions||{}).filter(text=>text.trim()).length,
+    questions:Object.keys(w.training?.arcade?.completed||{}).length,
+    courseNotes:Object.values(w.training?.course?.notes||{}).filter(text=>text.trim()).length,
+    rehearsals:w.training?.course?.history?.length||0,
     drafts:Object.keys(w.training?.drafts||{}).length+Object.keys(w.design?.drafts||{}).length+Object.keys(w.legacy?.drafts||{}).length,
     explanations:Object.keys(w.training?.explanations||{}).length+Object.keys(w.legacy?.transcripts||{}).length,
     journal:Object.keys(w.training?.notes||{}).length};

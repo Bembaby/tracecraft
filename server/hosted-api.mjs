@@ -35,7 +35,9 @@ export function createHostedHandler({auth,store,origin}) {
       if(!user)return json(401,{error:'Verify your email to access account progress. Local work is safe.'});
       if(path==='/api/progress'&&request.method==='GET')return json(200,await store.read(user.id));
       if(path==='/api/progress'&&request.method==='PUT') {
-        const data=await readBody(request),saved=await store.write(user.id,data.revision,data.snapshot);
+        const data=await readBody(request);
+        if(data.expectedUserId!==undefined && data.expectedUserId!==String(user.id))return json(412,{error:'The signed-in account changed. Review progress before saving.'});
+        const saved=await store.write(user.id,data.revision,data.snapshot);
         return saved?json(200,saved):json(409,{error:'Another browser saved a newer revision. Review both copies again.'});
       }
       if(path==='/api/account'&&request.method==='DELETE') {

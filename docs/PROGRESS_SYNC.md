@@ -1,3 +1,9 @@
+# Required email sign-in and reviewed autosave: current local source
+
+The browser now requires a server-confirmed verified email-code session before showing any workspace. There is no guest bypass. A missing or unreachable email service shows a connection screen. The retained GitHub adapter does not satisfy the email gate. Plain `npm start` cannot send email codes unless a same-origin email service is supplied; the hosted setup below provides it.
+
+The entry flow supports numeric mobile OTP autofill, a five-minute expiry countdown, disabled expired-code submission, and a sixty-second resend cooldown. The server remains authoritative for expiry and single use. Session credentials stay in HttpOnly cookies for up to seven days, with activity-based renewal. Logout, account deletion, revoked sessions and expected-owner mismatches immediately clear the browser's access state. Current source adds periodic session revalidation and owner-checked autosave. The new flow is deployed at tracecraft.dev. Browser verification covered provider-test OTP sign-in, the countdown, mobile quest practice, remembered sessions and sign-out; a separate synthetic API session verified durable arcade progress and conflicts. Real-recipient inbox placement and native-device testing remain separate checks. See QA for the exact evidence.
+
 # Verified accounts and reviewed progress sync
 
 TraceCraft is an alpha with local practice and optional accounts. The hosted edition uses Vercel Functions, Better Auth, Neon Postgres and Resend. Email codes verify inbox access. They do not certify legal identity or skill. The older local GitHub/SQLite adapter remains available separately.
@@ -35,7 +41,7 @@ Connect the web domain and verify the separate sending subdomain with DKIM and S
 1. Request a six-digit code in **Account & sync**.
 2. Enter it in the browser. The newest code expires after five minutes and works once. Three wrong guesses invalidate it.
 3. The server verifies the code and creates a verified account/session. Unverified accounts cannot access progress.
-4. Choose **Review sync** before saving or restoring work.
+4. Choose **Review saved progress**, then choose the browser or account copy to continue. The account-copy and browser-copy buttons enable autosave on this device after the reviewed operation succeeds.
 
 Passwords and OAuth are disabled in the hosted flow. The public auth gateway permits only code send, code sign-in and sign-out. It strips session tokens from JSON. Better Auth transports the opaque session through an HttpOnly cookie, Secure on HTTPS, with a seven-day lifetime. Browser progress and exports contain no credentials, codes or session tokens. Codes are hashed in the auth database. Sign-in email/code form state is memory-only and is cleared on route departure.
 
@@ -53,7 +59,7 @@ Attempts retain content/runtime versions. Historical imported attempts remain `h
 
 Hosted account requests/snapshots are bounded to 4 MB to fit the function request limit. Complete local backups retain the 16 MB contract; legacy importers keep their own documented limits. Export older histories when a hosted snapshot becomes too large. The complete local backup does not need an account.
 
-Sync is explicit. Sign-in and ordinary practice do not upload drafts. Saving replaces the whole account copy only if its reviewed revision is still current. The INSERT or UPDATE compares ownership and revision in the same database operation. A concurrent stale save gets HTTP 409 and requires another review. There is no automatic merge or background upload.
+Sign-in alone does not upload drafts. After choosing a reviewed starting copy, autosave checks for local changes every 2.5 seconds while the page is visible. It saves whole snapshots, including beginner arcade questions, hints and derived practice XP. A saved browser preference contains only the owner ID and last revision; authentication remains in the HttpOnly cookie. Autosave checks the session owner before writing, and both API adapters reject a changed expected owner with HTTP 412. Saving compares ownership and revision in the same database operation. A stale save gets HTTP 409 and requires another review. A network or storage error pauses autosave and leaves the local copy intact. Reconnection rechecks the session and remote revision. There is no automatic merge or silent restore. Use Pause autosave to return to device-only saving.
 
 Restoring rechecks the account revision and refuses if local work changed after review. It first keeps one validated local recovery copy, rolls back partial storage writes on error and reloads other tabs after success. If recovery cannot fit, replacement does not start. Export both copies before replacing them if they each contain useful work. Counts cannot identify identical text.
 
@@ -61,7 +67,7 @@ Restoring rechecks the account revision and refuses if local work changed after 
 
 Signing in shares an email address with the account service and its delivery provider. Saving shares the reviewed code, diagrams and personal notes with the hosted account database. Do not put production secrets or private customer data in practice work. No analytics or marketing mailing list is installed. Provider operational logs and database backups have their own retention; this alpha makes no guaranteed backup retention or forensic erasure claim.
 
-Signing out revokes the active session but keeps the local workspace. The next visitor to a shared browser can see that browser copy. Account switching never uploads it automatically. Export what you need, then clear this origin's site data yourself to remove all browser stores and recovery copies. The original Settings reset affects original tools only.
+Signing out revokes the active session but keeps the local workspace. The next visitor to a shared browser can see that browser copy. Switching accounts disables the previous account’s autosave preference. A different account must choose a reviewed starting copy before any upload. Export what you need, then clear this origin's site data yourself to remove all browser stores and recovery copies. The original Settings reset affects original tools only.
 
 **Delete account data** requires typing DELETE and removes the active account, progress and all sessions through database cascades. Other devices must verify again. Browser copies, downloaded exports, provider delivery history and operator backups are separate. Account deletion is not a provider-log purge.
 

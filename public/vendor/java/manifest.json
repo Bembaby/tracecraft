@@ -1,0 +1,75 @@
+{
+  "compilerRevision": "208d4c97a602ba0df055f16e6882059fb69d0122",
+  "teaVMVersion": "0.16.0",
+  "openJDKRevision": "6c48f4ed707bf0b15f9b6098de30db8aae6fa40f",
+  "files": {
+    "APACHE-2.0.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "ASM-LICENSE.txt": {
+      "bytes": 1678,
+      "sha256": "f8d2e8ab4f15bbbe95c24adae5310597c3a1151378d5e5beaae25d433a63d6ab"
+    },
+    "compile-classlib-teavm.bin": {
+      "bytes": 215262,
+      "sha256": "0fb15e2553072123664decb091302d486a7d3628ef8c84a3e51dc080996d2d8d"
+    },
+    "compiler.wasm": {
+      "bytes": 4707682,
+      "sha256": "21d09c0ad31d37f58858ca2b60fecf71157b55f17d44962bd0c30d64611100e4"
+    },
+    "corresponding-source.zip": {
+      "bytes": 9984709,
+      "sha256": "b7d4e875dbb21239d60aea59ffe8204ab0d51e6f3794eab437939ae013ed54ca"
+    },
+    "JODA-NOTICE.txt": {
+      "bytes": 317,
+      "sha256": "315d297e4ea0fb5b638854e4bfddb598e48d40944a9fa93fd0346a6e0e66b079"
+    },
+    "JZLIB-LICENSE.txt": {
+      "bytes": 1639,
+      "sha256": "9aa93e9bc58ae423a9e6476f608ee8f46063f5679e3bac0bc55f2f4b10d243ee"
+    },
+    "MPL-2.0.txt": {
+      "bytes": 16726,
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+    },
+    "NOTICE.txt": {
+      "bytes": 3070,
+      "sha256": "8f77d753a385de235ad8d74958bc1d5082c87c376b5712640e2f9012b4996100"
+    },
+    "OPENJDK-ADDITIONAL_LICENSE_INFO.txt": {
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "OPENJDK-ASSEMBLY_EXCEPTION.txt": {
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "OPENJDK-LICENSE.txt": {
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "RHINO-THIRD-PARTY-NOTICES.txt": {
+      "bytes": 3005,
+      "sha256": "03e1b06ed7fd670ca32ffab025585b9a3f4eb8aaa2f5cb1696554162ad4b93f1"
+    },
+    "runtime-classlib-teavm.bin": {
+      "bytes": 2300383,
+      "sha256": "0b0d7042fcb46cfff61cd93d36806688ba9a1be6b1ed785932e1164c700db2ac"
+    },
+    "runtime.mjs": {
+      "bytes": 16863,
+      "sha256": "7fcfab0f01c62bfb61ec6a86203eb3c2423668a3f820059a7f7b385cf2cfc5d6"
+    },
+    "TEAVM-NOTICE.txt": {
+      "bytes": 493,
+      "sha256": "6c2b3372a6beee7fbaad482248ac0f5ad2b099d92ff2a528c04261cc9c0636f4"
+    },
+    "UNICODE-LICENSE.txt": {
+      "bytes": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    }
+  }
+}

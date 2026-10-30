@@ -7,7 +7,7 @@ import { PYTHON_DRILLS } from '../src/training-content.mjs';
 import { freshTraining,validateTraining } from '../src/training-state.mjs';
 const ids=new Set([...SQL_LABS.map(lesson=>'sql:'+lesson.id),...PYTHON_DRILLS.map(lesson=>'python:'+lesson.id)]);
 test('every milestone links to runnable lessons and states environment, evidence and prerequisites',()=>{
-  assert.deepEqual(validateLessons(),{sql:12,python:8,milestones:8});
+  assert.deepEqual(validateLessons(),{sql:SQL_LABS.length,python:PYTHON_DRILLS.length,milestones:8});
   assert.equal(validateCurriculum(CURRICULUM_MODULES,ids),true);
 });
 test('authoring checks reject missing edge fixtures, solutions, broken links and cyclic prerequisites',()=>{

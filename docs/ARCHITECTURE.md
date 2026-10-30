@@ -1,6 +1,42 @@
 # Architecture: the v0.3 practice app and its boundaries
 
-TraceCraft remains a local-first **alpha**. Vercel serves the static browser app plus a same-origin Node account function. Better Auth verifies email codes; Resend delivers transactional sign-in messages; Neon Postgres stores verified users, sessions and reviewed progress. The separate Node/GitHub/SQLite adapter is retained for local operators. All learner SQL/Python execution remains in browser workers. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for the account contract.
+TraceCraft remains an **alpha** with on-device drafts and required verified email sign-in. `src/auth-gate.mjs` gates every workspace until the session endpoint confirms a verified email-code account. It provides five-minute code expiry and resend feedback; server checks remain authoritative. Vercel serves the static browser app plus a same-origin Node account function. Better Auth verifies email codes; Resend delivers transactional sign-in messages; Neon Postgres stores verified users, sessions and reviewed progress. The separate Node/GitHub/SQLite adapter is retained for local operators. All learner SQL/Python execution remains in browser workers. See [PROGRESS_SYNC.md](PROGRESS_SYNC.md) for the account contract.
+
+## API adventure
+
+`#apis` adds nine tracks with overview, track, lesson, daily-review, model-lab and track-checkpoint routes. `api-*-content.mjs` contains original course/question/source material; `api-course-state.mjs` validates optional versioned `training.apis` progress. `api-course.mjs` renders the six-step lesson and guided request controls. `api-rest-model.mjs` and `api-models.mjs` evaluate allowlisted synthetic inputs with generated messages and steps; they make no network requests. `api-live-http.mjs` permits only the explicit bounded same-origin health GET. Model evidence is separate from recognition, real worker execution and self-assessment. `arcade-icons.mjs` extracts the existing pure icon renderer to avoid an app-controller import cycle. Shared HUD statistics include first-correct API questions. Existing snapshot/backup/account boundaries include the new optional state without storing a new credential. See [API_ADVENTURE.md](API_ADVENTURE.md).
+
+## Connected practical learning
+
+`#tcs` is a named 25-lesson path with main/mobile navigation, Start here/library entry points and search indexing. `tcs-content.mjs` contains original teaching and authored recognition questions, `tcs-lab-content.mjs` supplies eight CPython/two SQLite tasks, `tcs-state.mjs` validates optional training state and `tcs.mjs` renders the overview/lesson/mixed-review routes. Notes and predictions are escaped and bounded. Recognition correctness is derived from canonical options and invalidated when edited or obsolete. Read marks and latest runnable checks remain separate. Existing training and account snapshots include the TCS state without a new credential or persistence system. See [TCS_PATH.md](TCS_PATH.md).
+
+`#coach` adds one private learning loop without replacing existing workspaces. `learning-coach-content.mjs` combines 91 executable tasks with 35 authored scenarios and 62 skill definitions. The practical packs add 12 Python fluency tasks and 15 fitness SQLite tasks; their solutions and deliberate bugs run through the retained workers. `practical-lab.mjs` adds prediction gating and explicit help levels. Learn mode records its conceptual nudge as assistance; documentation use is also retained separately.
+
+`learning-coach-state.mjs` validates the optional version-1 coach object within training progress: blank private profile fields, six diagnostic steps, scenario responses/checks, notebook drafts/entries, reasons and configurable review rules. It never derives correctness from free text or confidence. Notebook entries link actual attempts and bounded execution results where available. `coach-recommendations.mjs` prioritizes capped due reviews, unfinished diagnostics, relevant observed checks and selected goals without diagnosing a whole language from one failure. Snapshots pause clocks and include coach state in the existing reviewed account/backup contract. Old snapshots default safely.
+
+`learning-coach.mjs` renders daily, diagnostic, skills, notebook, question, walking and profile routes. Scenario checking resolves canonical versioned options; writing and rubric boxes remain self-assessment. Optional clocks pause on navigation, hiding and reload. Browser speech synthesis is explicit and cancellable; no microphone, transcription or remote AI provider is used. See [scope and continuation](PLATFORM_IMPLEMENTATION.md).
+
+## Beginner learning and navigation
+
+`#learn` is the default signed-in entry. `#beginner` groups 25 lessons into Python, SQL, and Java tracks, and `#practice` explains the available practice tools. Existing URLs, full Python/SQL, system design, project milestones, and the interview course remain available.
+
+`src/beginner*.mjs` contains original teaching, 9 new runnable Python tasks, 5 new runnable SQLite tasks and bridges to existing tasks. `src/beginner-java*.mjs` and `src/java-bridge-content.mjs` supply Java teaching and 21 optional recognition questions. `src/java-content.mjs` and `src/java-algorithms-content.mjs` supply ten editable checked tasks. `src/java-workbench.mjs` saves drafts, input values, explanations and practice evidence. Separate compiler and execution workers use vendored javac/TeaVM WebAssembly with strict import policy, bounded output and phase deadlines. Corresponding sources and licenses are served beside the assets. See [JAVA_RUNTIME.md](JAVA_RUNTIME.md).
+
+`src/beginner-state.mjs` validates known lesson IDs, a remembered lesson, self-reported read marks, and notes bounded at 3,000 characters each. These records live in the existing training workspace and are included in reviewed complete account snapshots and backups. Suggestions inspect the latest actual code check or completed recognition questions separately from read marks. Failed browser writes show a persistent failure message; credentials are not added to progress.
+
+## Beginner arcade and autosave
+
+`src/arcade-content.mjs` combines six foundation quests, six Python-pattern quests from `src/interview-arcade-content.mjs`, and six JavaScript/React models from `src/frontend-course-content.mjs`. Its 54 questions have fixed authored answers. `src/arcade.mjs` renders the collection filter, quest path and one-question flow; it never executes submitted code. `src/arcade-state.mjs` validates bounded answers, first completions, and hint use. XP is derived from distinct completions, never incremented per click. This recognition practice is distinct from executable lab passes. Its state lives inside the existing training workspace, so training backups and owner-scoped complete snapshots include it. Node tests execute only the authored JavaScript reference and deliberate-bug functions; no learner JavaScript interpreter was added.
+
+## Interview course and rehearsal evidence
+
+`#developer-path/course` extends the retained project milestones with 21 ordered lessons, each containing an outcome, prerequisite links, three teaching sections/examples/pitfalls, a reflection prompt, self-checks and a follow-up. `src/interview-course-content.mjs` owns the original material and three rehearsal presets. All 22 Python and 18 SQL exercises are linked. Frontend lessons point to recognition models and external project assignments; they do not imply a React runtime or automated project assessment.
+
+`src/interview-course.mjs` renders overview, lesson, mock and evidence views. `src/interview-course-state.mjs` validates bounded notes, known IDs, saved self-checks, one active rehearsal and the latest 30 debriefs. Starting a mock archives its linked drafts through the existing fresh-attempt mechanism. It preserves help already recorded that day. Evidence uses the latest check for an exercise, so a newer failure overrides a previous pass. Mock evidence counts only checks since the rehearsal started and freezes content/runtime revisions at debrief time. Read marks and notes never become code passes.
+
+The optional clock continues across lab navigation in the visible tab, pauses when hidden or gated, and never completes work. `trainingSnapshot` deducts elapsed time into a paused copy for storage, export and account snapshots without mutating the active clock. Restored clocks stay paused. Course state is part of the existing validated training workspace and revision-checked account snapshot; no new account store or credential handling is introduced.
+
+`src/account-sync.mjs` manages optional autosave after the learner chooses a reviewed starting copy. It checks current sessions, retains revision conflicts, pauses on errors, and sends an expected user ID that the API checks against its validated session. Only owner/revision preferences enter browser storage. It does not store tokens, silently merge snapshots, or restore remote data without review. Existing seven-day Better Auth sessions remain HttpOnly.
 
 ## Hosted account boundary
 
@@ -24,7 +60,7 @@ flowchart TD
     Python --> CDN["Pinned Pyodide assets on enable and run"]
 ```
 
-The Node server serves files; it never executes learner Python or SQL. SQLite runs inside a browser worker using vendored assets. The full-Python worker loads a pinned Pyodide distribution after explicit UI enablement and a run/check action. The original Mini-Python interpreter stays available as a separate, clearly labeled teaching model.
+The Node server serves files; it never executes learner Python, SQL or Java. SQLite runs inside a browser worker using vendored assets. The full-Python worker loads a pinned Pyodide distribution after explicit UI enablement and a run/check action. The original Mini-Python interpreter stays available as a separate, clearly labeled teaching model.
 
 | Source | Responsibility |
 |---|---|
@@ -32,10 +68,12 @@ The Node server serves files; it never executes learner Python or SQL. SQLite ru
 | `src/design.css` / `src/system-design.css` | Redesigned shared workspace and system-design canvas/inspector/table layouts |
 | `src/training.mjs` | Daily workspace, SQL/Python editors and worker lifecycle, architecture prompts, evidence UI, backup controls |
 | `src/training-state.mjs` | State validation, day keys, help records, checked attempts, and review scheduling |
-| `src/training-content.mjs`, `src/curriculum.mjs` | 56 assignments, eight Python drills, six architecture scenarios and eight milestone guides with saved self-assessment |
-| `src/sql-content.mjs` | Twelve SQL exercises, seeds, changed fixtures, contracts, reference solutions, and deliberate bugs |
+| `src/training-content.mjs`, `src/interview-python-content.mjs`, `src/curriculum.mjs` | 56 assignments, 22 Python drills, six architecture scenarios and eight milestone guides with saved self-assessment |
+| `src/sql-content.mjs`, `src/interview-sql-content.mjs` | 18 SQL exercises, seeds, changed fixtures, contracts, reference solutions, and deliberate bugs |
+| `src/interview-course*.mjs`, `src/interview-course.css` | Original interview lessons, route rendering, evidence derivation, rehearsal clocks, validation and responsive reading layout |
 | `src/sql-runtime.mjs` / `src/sql-worker.js` | SQL controller deadlines, worker protocol, disposable databases, execution and fixture checks |
 | `src/python-runtime.mjs` / `src/python-worker.js` | Python controller, Pyodide initialization, CPython harness, assertions, traces and cancellation |
+| `src/java-runtime.mjs`, `java-compile-worker.mjs`, `java-run-worker.mjs`, `java-program-policy.mjs` | Browser javac/TeaVM compilation, isolated program execution, typed import restrictions, watchdogs and cancellation |
 | `src/system-design.mjs` | Graph editing, inspector, canvas/table views, simulation controls, checks, assistance, notes, and import review |
 | `src/system-design-state.mjs` | Validated design drafts, settings, help records, recent check history, and backup serialization |
 | `src/system-design-engine.mjs` | Pure bounded graph validation, deterministic flow calculation, and public requirement evaluation |

@@ -172,3 +172,9 @@ test('the SQL index lesson returns a real explain plan, not a canned animation',
     assert.ok(result.values.some(row=>row.some(value=>typeof value==='string' && value.includes('idx_orders_customer_date'))));
   } finally {db.close();}
 });
+
+test('beginner SELECT checks reject row deletion and schema changes even with matching output',()=>{
+  const first=SQL_LABS.find(lab=>lab.id==='select-books');
+  assert.equal(checkSqlSolution(SQL,first,'CREATE TEMP TABLE copy AS SELECT * FROM books; DELETE FROM books; SELECT id, title FROM copy ORDER BY id;').passed,false);
+  for(const lab of SQL_LABS.filter(lab=>lab.level==='beginner'))assert.equal(checkSqlSolution(SQL,lab,'ALTER TABLE books ADD COLUMN hidden INTEGER; '+lab.solution).passed,false);
+});

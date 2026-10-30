@@ -68,7 +68,9 @@ export async function createProgressApi(config,{fetchProvider=fetch,store}={}) {
       if (url.pathname==='/api/logout' && req.method==='POST') {store.logout(cookies(req).tc_session);res.setHeader('Set-Cookie',cookie('tc_session','',0));json(res,200,{ok:true});return true;}
       if (url.pathname==='/api/progress' && req.method==='GET') {json(res,200,store.read(user.id));return true;}
       if (url.pathname==='/api/progress' && req.method==='PUT') {
-        const data=await body(req);const result=store.write(user.id,data.revision,data.snapshot);
+        const data=await body(req);
+        if(data.expectedUserId!==undefined && data.expectedUserId!==String(user.id)){json(res,412,{error:'The signed-in account changed. Review progress before saving.'});return true;}
+        const result=store.write(user.id,data.revision,data.snapshot);
         json(res,result?200:409,result||{error:'Another device saved a newer revision. Review both copies again.'});return true;
       }
       if (url.pathname==='/api/account' && req.method==='DELETE') {

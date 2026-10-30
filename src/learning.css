@@ -1,0 +1,69 @@
+.learning-home{max-width:1040px;margin:0 auto;font-size:16px;line-height:1.65}
+.learning-heading{margin:8px 0 30px;max-width:740px}
+.learning-heading h1{font-family:Nunito,'Segoe UI',sans-serif;font-size:clamp(30px,3.5vw,43px);font-weight:900;line-height:1.15;letter-spacing:-.025em;text-wrap:balance;margin:0 0 16px}
+.learning-heading p,.learning-home p{color:var(--muted,#a5a6bd);max-width:70ch}
+.learning-home h2{font-size:22px;line-height:1.3;margin:0 0 10px}
+.learning-home a:not(.primary){color:var(--accent,#c4f26d);text-underline-offset:4px}
+.learning-start{display:flex;align-items:center;justify-content:space-between;gap:28px;background:var(--surface,#191a2a);border:1px solid var(--line,#313247);border-radius:14px;padding:30px;margin:0 0 36px}
+.learning-start>div{max-width:65ch}.learning-start p{margin:12px 0 22px}.learning-start .primary{display:inline-flex;align-items:center;min-height:48px;padding:12px 20px}
+.learning-start small{display:block;margin-top:14px;color:var(--muted,#a5a6bd)}.learning-start img{object-fit:contain;flex-shrink:0}
+.learning-sequence-title{margin:36px 0 14px!important}
+.learning-sequence{list-style:none;padding:0;margin:0}
+.learning-sequence>li{display:flex;gap:22px;padding:26px 0;border-bottom:1px solid var(--line,#313247)}
+.learning-step-number{display:grid;place-items:center;flex-shrink:0;width:38px;height:38px;border:1px solid var(--line,#313247);border-radius:50%;color:var(--accent,#c4f26d);font-weight:700;font-variant-numeric:tabular-nums}
+.learning-sequence p{margin:8px 0 12px}.learning-sequence a,.practice-library a,.learning-extra a{display:inline-flex;align-items:center;min-height:44px}
+.learning-note{margin-top:36px;padding:26px 0}.learning-note dt{font-weight:700;margin-top:20px}.learning-note dd{margin:4px 0 16px;color:var(--muted,#a5a6bd);max-width:70ch}
+.practice-library{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 34px}.practice-library section{padding:26px 0;border-bottom:1px solid var(--line,#313247)}.practice-library section a{margin-right:18px}
+.learning-extra{margin-top:32px}.learning-extra summary{cursor:pointer;min-height:44px}.learning-extra a{display:flex}
+.learning-back{display:inline-flex;align-items:center;min-height:44px;margin-bottom:16px}
+.beginner-reading{max-width:760px;margin:0 auto;font-size:17px;line-height:1.75}.beginner-reading p{max-width:70ch;color:var(--muted,#a5a6bd)}
+.beginner-reading h1{font-family:Nunito,'Segoe UI',sans-serif}.beginner-reading h2{font-size:24px;line-height:1.3;margin:0 0 14px}.beginner-reading>section{margin:38px 0}
+.beginner-reading a,.beginner-home a{color:var(--accent,#c4f26d);text-underline-offset:4px}.beginner-reading a.primary{color:#202714;display:inline-flex;min-height:48px;align-items:center;padding:12px 20px}
+.beginner-location,.beginner-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.beginner-location a,.beginner-bottom a{display:inline-flex;align-items:center;min-height:44px}.beginner-location span{font-size:14px;color:var(--muted,#a5a6bd)}
+.beginner-example{background:var(--surface,#191a2a);border:1px solid var(--line,#313247);border-radius:12px;padding:20px;margin-top:20px}.beginner-example h3{font-size:14px;font-weight:600;margin:0 0 10px;color:var(--muted,#a5a6bd)}.beginner-example pre{font-size:16px;line-height:1.7;overflow:auto;margin:0 0 24px;white-space:pre}.beginner-example .beginner-expected{margin-bottom:0;color:var(--accent,#c4f26d)}
+.beginner-vocabulary dl,.beginner-language-guide dl{margin:0}.beginner-vocabulary dt,.beginner-language-guide dt{font-weight:700;margin-top:18px}.beginner-vocabulary dd,.beginner-language-guide dd{margin:4px 0 14px;color:var(--muted,#a5a6bd)}.beginner-language-guide{padding-bottom:32px}
+.beginner-lesson-list{padding:0;margin:20px 0;list-style:none}.beginner-lesson-list li{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line,#313247)}.beginner-lesson-list li>span{font-variant-numeric:tabular-nums;color:var(--muted,#a5a6bd)}.beginner-lesson-list a{font-weight:650;display:inline-flex;min-height:44px;align-items:center}.beginner-lesson-list p{margin:3px 0 0;font-size:15px}
+.beginner-try{padding:26px 0;border-top:1px solid var(--line,#313247);border-bottom:1px solid var(--line,#313247)}.beginner-bottom{margin-top:30px}.beginner-bottom a{max-width:100%}
+.beginner-lab-guide{font-size:16px;line-height:1.65;margin-bottom:24px;padding:22px;background:var(--surface,#191a2a);border:1px solid var(--line,#313247);border-radius:12px}.beginner-lab-guide h2{margin:14px 0 8px;font-size:22px}.beginner-lab-guide a{color:var(--accent,#c4f26d);display:inline-flex;align-items:center;min-height:44px}.beginner-lab-guide pre{overflow:auto;white-space:pre-wrap}
+.nav-group-label{letter-spacing:0!important;text-transform:none!important;font-size:12px!important}
+.nav a.active{font-weight:650}.nav-more summary{min-height:44px}
+@media(max-width:760px){.learning-home{font-size:16px}.learning-start{padding:22px;gap:0}.learning-start img{display:none}.learning-sequence>li{gap:14px;padding:24px 0}.learning-step-number{width:32px;height:32px}.learning-home h2{font-size:21px}.practice-library{grid-template-columns:1fr}.learning-heading{margin-top:6px}.learning-start .primary{width:100%;justify-content:center}.learning-note{margin-top:20px}.learning-heading h1{font-size:32px}}
+
+.beginner-task-next{display:flex;flex-direction:column;gap:8px;margin:18px 0}.beginner-task-next a{display:flex;align-items:center;min-height:44px;color:var(--accent,#c4f26d)}
+
+.beginner-java-runtime{padding:24px 0;border-block:1px solid var(--line,#313247)}.beginner-java-runtime pre{overflow:auto;font-size:15px}.beginner-java-runtime summary{min-height:44px;cursor:pointer}
+
+.beginner-tracks{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0}.beginner-tracks a{display:flex;align-items:center;padding:8px 16px;min-height:44px;border:1px solid var(--line,#313247);border-radius:8px}.beginner-tracks a[aria-current]{color:#202714;background:#c4f26d}.beginner-track-section{margin:34px 0}.beginner-view-track{min-height:44px;display:inline-flex;align-items:center}.beginner-course-bridge{border-top:1px solid var(--line,#313247);padding-top:28px}
+
+.input-contract h3{font-size:17px;margin:14px 0 10px}.practice-examples,.beginner-input-data{margin:18px 0}.practice-examples summary,.beginner-input-data summary{min-height:44px;cursor:pointer}.practice-examples li{margin-bottom:8px}.arcade-teaching{margin:22px 0 30px;padding:18px 0;border-block:1px solid var(--arcade-line,#3b3e59)}.arcade-teaching h2{font-size:20px;margin:0 0 8px}.arcade-lesson-heading [data-question-heading]{font-size:clamp(24px,3vw,32px);line-height:1.25;text-wrap:balance}.arcade-teaching a{display:inline-flex;min-height:44px;align-items:center;color:#c1aeff}
+
+.learning-resume{font-size:15px;margin-bottom:0!important}.beginner-reflection label{display:block;margin:22px 0 10px}.beginner-reflection textarea{width:100%;font:inherit;padding:12px;background:var(--surface,#191a2a);color:inherit;border:1px solid var(--line,#313247);border-radius:8px}.beginner-reflection small{display:block;color:var(--muted,#a5a6bd);margin-top:10px}.beginner-lesson-list small{display:block;color:var(--muted,#a5a6bd);font-size:13px;line-height:1.6}
+
+[data-question-heading],.arcade-finish h1{scroll-margin-top:100px}
+
+.learning-home a:not(.primary):not(.beginner-tracks a),.beginner-reading a:not(.primary){text-decoration:underline;text-underline-offset:4px}
+.learning-home a,.beginner-reading a,.beginner-reading button,.beginner-home button{scroll-margin-block:110px 110px}
+.learning-home button,.beginner-reading button,.beginner-home select{min-height:44px}
+.learning-home :is(h1,h2,h3,p,a,dt,dd),.beginner-reading :is(h1,h2,h3,p,a,dt,dd){overflow-wrap:anywhere}
+.learning-home ::selection,.beginner-reading ::selection{background:#c4f26d;color:#18200f}
+.beginner-reading textarea{caret-color:#c4f26d}
+.beginner-reading :is(pre,textarea){scrollbar-color:#697460 #191a2a}
+.beginner-reading .primary,.learning-home .primary{font-size:16px}
+.practice-error-details summary{min-height:44px;cursor:pointer}
+@media(max-width:760px){.content-learn,.content-beginner,.content-practice{padding-bottom:calc(112px + env(safe-area-inset-bottom))}.beginner-reading{font-size:16px}.beginner-reading .beginner-location{gap:8px}.beginner-reading .beginner-location span{font-size:14px}.beginner-reading h2{font-size:22px}.beginner-bottom{align-items:flex-start}.beginner-bottom a{padding-block:10px}.beginner-reading pre{max-width:100%;font-size:14px}.beginner-reflection button{font-size:16px;min-height:48px}.breadcrumb a{min-height:44px;display:inline-flex;align-items:center}}
+@media(prefers-reduced-motion:reduce){.learning-home *,.beginner-reading *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+.reduce-motion .learning-home *,.reduce-motion .beginner-reading *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+
+.training-guided .workbench-editor p,.training-guided .result-panel p,.training-guided .workbench-editor label{font-size:16px;line-height:1.65}.training-guided .workbench-code{font-size:16px;line-height:1.8}.training-guided .result-panel h2{scroll-margin-top:18px}.training-guided .input-contract{overflow-wrap:anywhere}.training-guided .training-actions button{min-height:44px}
+
+.beginner-reading [tabindex="0"]:focus-visible,.arcade-code-panel pre:focus-visible{outline:2px solid #c4f26d;outline-offset:4px}.arcade-hint-copy{scroll-margin-block:90px 112px}
+
+.learning-last-opened{display:flex!important;align-items:center;min-height:44px;margin-top:14px;font-size:15px}
+.java-workspace{min-width:0}.java-workspace p{max-width:72ch}.java-workspace :is(p,h1,h2,h3,summary,label,a){overflow-wrap:anywhere}.java-location{display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin:20px 0}.java-location a{min-height:44px;display:inline-flex;align-items:center}.java-location select{max-width:100%;min-height:44px}.java-workspace .training-actions button{min-height:44px}.java-workspace .workbench-code{font-size:16px;line-height:1.8;min-height:360px}.java-workspace :is(textarea,pre){max-width:100%;caret-color:#c4f26d;scrollbar-color:#697460 #191a2a}.java-workspace .result-panel{min-width:0}.java-boundaries{margin-block:20px}.java-boundaries summary{min-height:44px;cursor:pointer}.java-workspace .notice h2{margin-top:0}.java-workspace ::selection{background:#c4f26d;color:#18200f}.java-workspace #java-input{font-family:ui-monospace,Consolas,monospace}.java-workspace .input-contract p{font-size:16px;line-height:1.65}
+.java-scaffold{margin-block:24px}.java-scaffold summary{min-height:44px;cursor:pointer}.java-scaffold dt{margin-top:18px}.java-scaffold dd{margin:8px 0 18px;max-width:70ch}.java-empty-input{display:flex!important;align-items:flex-start;gap:12px;min-height:44px;font-size:14px!important;margin-top:12px}.java-empty-input input{width:20px!important;height:20px;flex-shrink:0;margin-top:2px}.java-workspace .practice-examples>div{padding-block:14px;border-bottom:1px solid #313247}.java-workspace .practice-examples button{min-height:44px}
+.java-technique summary{min-height:44px;cursor:pointer}.java-technique{margin-block:20px}.java-technique pre{max-height:360px;overflow:auto}.java-workspace pre[tabindex]:focus-visible{outline:2px solid #c4f26d;outline-offset:3px}.java-location,.java-location>*{min-width:0}.java-location select{width:min(100%,430px)}
+@media(max-width:760px){.java-location{grid-template-columns:minmax(0,1fr)}.java-location select{width:100%}}
+.java-continuation{gap:16px}.java-continuation a{min-height:44px;display:inline-flex;align-items:center}.java-continuation .primary{max-width:100%;white-space:normal}
+@media(max-width:760px){.java-continuation{align-items:stretch;flex-direction:column}.java-continuation a{width:100%}}
+.beginner-prediction{margin-block:20px}.beginner-prediction label,.beginner-prediction small{display:block;margin-block:10px}.beginner-prediction textarea{width:100%;min-height:100px;resize:vertical;font:inherit;line-height:1.65;padding:12px;background:#191a2a;color:#f0f1fd;border:1px solid #595a75;border-radius:8px}.beginner-prediction-result summary{min-height:44px;display:list-item;padding-block:12px;cursor:pointer}.sync-beginner-writing{margin-block:16px}.sync-beginner-writing summary{min-height:44px;cursor:pointer}.sync-beginner-writing pre{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:760px){.content-java{padding-bottom:calc(112px + env(safe-area-inset-bottom))}.java-location{display:grid;gap:10px}.java-workspace .workbench-code{min-height:300px}.java-workspace .training-actions{gap:10px}.java-workspace .training-actions button{flex-grow:1}}
